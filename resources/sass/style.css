@@ -1,0 +1,674 @@
+a {
+  text-decoration: none;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  background-color: #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 100px;
+}
+
+header > a {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+header > a > img {
+  width: 100%;
+}
+
+header > .action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header > .action > a.login, header > .action a.logout {
+  text-decoration: none;
+  border-radius: 4px;
+  display: block;
+  width: 120px;
+  height: 33px;
+  text-align: center;
+  line-height: 33px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#FEE958));
+  background: linear-gradient(to bottom, #fff, #FEE958);
+}
+
+header > .action > a.register {
+  text-decoration: none;
+  border-radius: 4px;
+  display: block;
+  width: 120px;
+  height: 33px;
+  text-align: center;
+  line-height: 33px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FC6A6D), to(#FD904D));
+  background: linear-gradient(to bottom, #FC6A6D, #FD904D);
+}
+
+nav {
+  width: 100%;
+  height: 60px;
+  background-color: #FFE850;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav > a {
+  width: 150px;
+  height: 60px;
+  display: block;
+  color: #000;
+  line-height: 60px;
+  text-align: center;
+  font-weight: 600;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+nav > a:hover {
+  background-color: #FFD700;
+  color: #000;
+}
+
+#home .banner {
+  width: 100%;
+}
+
+#home .banner > img {
+  width: 100%;
+}
+
+#loginPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 50px 0;
+  min-height: calc(100vh - 140px);
+  background-image: url("/images/loginbg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#loginPage > img.logintitle {
+  max-width: 400px;
+  width: 100%;
+}
+
+#loginPage .loginForm {
+  width: 100%;
+  max-width: 400px;
+}
+
+#loginPage .loginForm input[type="email"], #loginPage .loginForm input[type="password"] {
+  border-radius: 25px;
+  height: 45px;
+}
+
+#loginPage .loginForm .loginBtn {
+  width: 100%;
+  font-weight: 700;
+  border-radius: 25px;
+  height: 45px;
+}
+
+#registerPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 50px 0;
+  min-height: calc(100vh - 140px);
+  background-image: url("/images/registerbg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#registerPage > img.registertitle {
+  max-width: 300px;
+  width: 100%;
+}
+
+#registerPage .registerForm {
+  width: 100%;
+  max-width: 400px;
+}
+
+#registerPage .registerForm input {
+  border-radius: 25px;
+  height: 45px;
+}
+
+#registerPage .registerForm .registerBtn {
+  width: 100%;
+  font-weight: 700;
+  border-radius: 25px;
+  height: 45px;
+}
+
+#airplane {
+  width: 100%;
+  min-height: 100vh;
+}
+
+#airplane > .header {
+  width: 100%;
+  height: 80px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#06033A), color-stop(#492E9B), to(#06033A));
+  background-image: linear-gradient(to right, #06033A, #492E9B, #06033A);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 100px;
+  border-bottom: 4px #FFDD00 solid;
+}
+
+#airplane > .header > .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 80px;
+}
+
+#airplane > .header > .left > .userBox {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+#airplane > .header > .left > .userBox > img {
+  border: 3px #3DCCF3 solid;
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: -25%;
+  left: -20px;
+}
+
+#airplane > .header > .left > .userBox > .userNameBox {
+  width: 300px;
+  height: 40px;
+  border: 2px #3DCCF3 solid;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 35px;
+  padding: 0 20px;
+  background-color: #3A3A3A;
+  font-weight: 600;
+}
+
+#airplane > .header > .left > .moneyBox {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 25px;
+}
+
+#airplane > .header > .left > .moneyBox > img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 10px;
+}
+
+#airplane > .header > .left > .moneyBox > .dollerBox {
+  width: 200px;
+  height: 40px;
+  border: 2px #3DCCF3 solid;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 35px;
+  background-color: #3A3A3A;
+  padding: 0 20px;
+  font-weight: 600;
+}
+
+#airplane > .header > .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#airplane > .header > .right > .fpsBox {
+  width: 150px;
+  height: 40px;
+  border: 2px #3DCCF3 solid;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 35px;
+  padding: 0 20px;
+  background-color: #3A3A3A;
+  color: #fff;
+  font-weight: 600;
+  margin-right: 25px;
+}
+
+#airplane > .header > .right > i#bar {
+  font-size: 40px;
+  cursor: default;
+  color: #E43FD1;
+}
+
+#airplane > .content {
+  width: 100%;
+  min-height: calc(100vh - 84px);
+  background-image: url("/images/airplane/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 50px 0;
+}
+
+#airplane > .content > .playBox {
+  width: 400px;
+  height: 540px;
+  border: 6px #ED35D1 solid;
+  position: relative;
+}
+
+#airplane > .content > .playBox > .airplaneDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background-color: transparent;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > img.bg {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > img.bg.start {
+  -webkit-animation: bganim 10.3s linear;
+          animation: bganim 10.3s linear;
+}
+
+@-webkit-keyframes bganim {
+  0% {
+    -webkit-transform: translateY(-2800px);
+            transform: translateY(-2800px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes bganim {
+  0% {
+    -webkit-transform: translateY(-2800px);
+            transform: translateY(-2800px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air {
+  width: 38px;
+  -webkit-transform: translateY(-380px);
+          transform: translateY(-380px);
+  -webkit-transform: translateY(120px);
+          transform: translateY(120px);
+  -webkit-transform: translateY(340px);
+          transform: translateY(340px);
+  -webkit-transform: translateY(270px);
+          transform: translateY(270px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air > img.airImg {
+  width: 60px;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air > img.injection {
+  width: 10px;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air1 {
+  -webkit-animation: airNo1 10.13s linear;
+          animation: airNo1 10.13s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air2 {
+  -webkit-animation: airNo1 10.14s linear;
+          animation: airNo1 10.14s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air3 {
+  -webkit-animation: airNo1 10.12s linear;
+          animation: airNo1 10.12s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air4 {
+  -webkit-animation: airNo1 10.15s linear;
+          animation: airNo1 10.15s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air5 {
+  -webkit-animation: airNo1 10.1s linear;
+          animation: airNo1 10.1s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air6 {
+  -webkit-animation: airNo1 10s linear;
+          animation: airNo1 10s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air7 {
+  -webkit-animation: airNo1 10.17s linear;
+          animation: airNo1 10.17s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air8 {
+  -webkit-animation: airNo1 10.16s linear;
+          animation: airNo1 10.16s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air9 {
+  -webkit-animation: airNo1 10.19s linear;
+          animation: airNo1 10.19s linear;
+}
+
+#airplane > .content > .playBox > .airplaneDiv > .air.air10 {
+  -webkit-animation: airNo1 10.18s linear;
+          animation: airNo1 10.18s linear;
+}
+
+@-webkit-keyframes airNo1 {
+  0% {
+    -webkit-transform: translateY(270px);
+            transform: translateY(270px);
+  }
+  10% {
+    -webkit-transform: translateY(60px);
+            transform: translateY(60px);
+  }
+  20% {
+    -webkit-transform: translateY(150px);
+            transform: translateY(150px);
+  }
+  30% {
+    -webkit-transform: translateY(90px);
+            transform: translateY(90px);
+  }
+  40% {
+    -webkit-transform: translateY(170px);
+            transform: translateY(170px);
+  }
+  50% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  60% {
+    -webkit-transform: translateY(150px);
+            transform: translateY(150px);
+  }
+  70% {
+    -webkit-transform: translateY(70px);
+            transform: translateY(70px);
+  }
+  80% {
+    -webkit-transform: translateY(160px);
+            transform: translateY(160px);
+  }
+  90% {
+    -webkit-transform: translateY(90px);
+            transform: translateY(90px);
+  }
+  100% {
+    -webkit-transform: translateY(-380px);
+            transform: translateY(-380px);
+  }
+}
+
+@keyframes airNo1 {
+  0% {
+    -webkit-transform: translateY(270px);
+            transform: translateY(270px);
+  }
+  10% {
+    -webkit-transform: translateY(60px);
+            transform: translateY(60px);
+  }
+  20% {
+    -webkit-transform: translateY(150px);
+            transform: translateY(150px);
+  }
+  30% {
+    -webkit-transform: translateY(90px);
+            transform: translateY(90px);
+  }
+  40% {
+    -webkit-transform: translateY(170px);
+            transform: translateY(170px);
+  }
+  50% {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  60% {
+    -webkit-transform: translateY(150px);
+            transform: translateY(150px);
+  }
+  70% {
+    -webkit-transform: translateY(70px);
+            transform: translateY(70px);
+  }
+  80% {
+    -webkit-transform: translateY(160px);
+            transform: translateY(160px);
+  }
+  90% {
+    -webkit-transform: translateY(90px);
+            transform: translateY(90px);
+  }
+  100% {
+    -webkit-transform: translateY(-380px);
+            transform: translateY(-380px);
+  }
+}
+
+#airplane > .content > .playBox > .countdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+#airplane > .content > .playBox > .countdown p {
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+#airplane > .content > .playBox > .airTopThree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  opacity: 0;
+}
+
+#airplane > .content > .playBox > .airTopThree > p {
+  color: #fff;
+}
+
+#airplane > .content > .playBox > .airTopTen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  opacity: 0;
+}
+/*# sourceMappingURL=style.css.map */

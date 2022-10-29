@@ -247,4 +247,176 @@ nav > a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+#airplane > .content > .playBox {
+  width: 400px;
+  height: 540px;
+  border: 6px #ED35D1 solid;
+  position: relative;
+}
+#airplane > .content > .playBox > .airplaneDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background-color: transparent;
+}
+#airplane > .content > .playBox > .airplaneDiv > img.bg {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+#airplane > .content > .playBox > .airplaneDiv > img.bg.start {
+  animation: bganim 10.3s linear;
+}
+@keyframes bganim {
+  0% {
+    transform: translateY(-2800px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+#airplane > .content > .playBox > .airplaneDiv > .air {
+  width: 38px;
+  transform: translateY(-380px);
+  transform: translateY(120px);
+  transform: translateY(340px);
+  transform: translateY(270px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air > img.airImg {
+  width: 60px;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air > img.injection {
+  width: 10px;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air1 {
+  animation: airNo1 10.13s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air2 {
+  animation: airNo1 10.14s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air3 {
+  animation: airNo1 10.12s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air4 {
+  animation: airNo1 10.15s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air5 {
+  animation: airNo1 10.1s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air6 {
+  animation: airNo1 10s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air7 {
+  animation: airNo1 10.17s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air8 {
+  animation: airNo1 10.16s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air9 {
+  animation: airNo1 10.19s linear;
+}
+#airplane > .content > .playBox > .airplaneDiv > .air.air10 {
+  animation: airNo1 10.18s linear;
+}
+@keyframes airNo1 {
+  0% {
+    transform: translateY(270px);
+  }
+  10% {
+    transform: translateY(60px);
+  }
+  20% {
+    transform: translateY(150px);
+  }
+  30% {
+    transform: translateY(90px);
+  }
+  40% {
+    transform: translateY(170px);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  60% {
+    transform: translateY(150px);
+  }
+  70% {
+    transform: translateY(70px);
+  }
+  80% {
+    transform: translateY(160px);
+  }
+  90% {
+    transform: translateY(90px);
+  }
+  100% {
+    transform: translateY(-380px);
+  }
+}
+#airplane > .content > .playBox > .countdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#airplane > .content > .playBox > .countdown p {
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+#airplane > .content > .playBox > .airTopThree {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+#airplane > .content > .playBox > .airTopThree > p {
+  color: #fff;
+}
+#airplane > .content > .playBox > .airTopTen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  opacity: 0;
 }

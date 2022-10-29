@@ -242,8 +242,179 @@ nav{
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
         >.playBox{
-            
+            width:400px;
+            height: 540px;
+            border:6px #ED35D1 solid;
+            position: relative;
+            >.airplaneDiv{
+                position: absolute;
+                top: 0;
+                left:0;
+                width:100%;
+                height: 100%;
+                background-color: rgba(255,0,0,.5);
+                overflow: hidden;
+                display: flex;
+                align-items: flex-end;
+                background-color: transparent;
+                >img.bg{
+                    position: absolute;
+                    object-fit: cover;
+                    top:0 ;
+                    left:0;
+                    width:100%;
+                    height: auto;
+                    &.start{
+                        animation: bganim 10.3s linear;
+                        @keyframes bganim {
+                            0%{
+                                transform: translateY(-2800px);
+                            }
+                            100%{
+                                transform: translateY(0);
+                            }
+                        }
+                    }
+                }
+                >.air{
+                    width:38px;
+                    transform: translateY(-380px);
+                    transform: translateY(120px);
+                    transform: translateY(340px);
+                    transform: translateY(270px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    >img.airImg{
+                        width:60px;
+                    }
+                    >img.injection{
+                        width:10px;
+                    }
+                    &.air1{
+                        animation: airNo1 10.13s linear;
+                    }
+                    &.air2{
+                        animation: airNo1 10.14s linear;
+                    }
+                    &.air3{
+                        animation: airNo1 10.12s linear;
+                    }
+                    &.air4{
+                        animation: airNo1 10.15s linear;
+                    }
+                    &.air5{
+                        animation: airNo1 10.1s linear;
+                    }
+                    &.air6{
+                        animation: airNo1 10s linear;
+                    }
+                    &.air7{
+                        animation: airNo1 10.17s linear;
+                    }
+                    &.air8{
+                        animation: airNo1 10.16s linear;
+                    }
+
+                    &.air9{
+                        animation: airNo1 10.19s linear;
+                    }
+                    &.air10{
+                        animation: airNo1 10.18s linear;
+                    }
+                    @keyframes airNo1 {
+                        0%{
+                            transform: translateY(270px);
+                        }
+                        10%{
+                            transform: translateY(60px);
+                        }
+                        20%{
+                            transform: translateY(150px);
+                        }
+                        30%{
+                            transform: translateY(90px);
+                        }
+                        40%{
+                            transform: translateY(170px);
+                        }
+                        50%{
+                            transform: translateY(100px);
+                        }
+                        60%{
+                            transform: translateY(150px);
+                        }
+                        70%{
+                            transform: translateY(70px);
+                        }
+                        80%{
+                            transform: translateY(160px);
+                        }
+                        90%{
+                            transform: translateY(90px);
+                        }
+                        100%{
+                            transform: translateY(-380px);
+                        }
+                    }
+                    
+                }
+            }
+            >.countdown{
+                position: absolute;
+                top: 0;
+                left:0;
+                background-color: rgba(255,0,0,.5);
+                width:100%;
+                height: 100%;
+                color:#fff;
+                font-weight: 600;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                // opacity: 0;
+                p{
+                    font-size: 30px;
+                    letter-spacing: 2px;
+                }
+            }
+            >.airTopThree{
+                position: absolute;
+                top: 0;
+                left:0;
+                width:100%;
+                height: 100%;
+                background-color: rgba(255,0,0,.5);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                >p{
+                    color:#fff;
+                }
+            }
+            >.airTopTen{
+                position: absolute;
+                top: 0;
+                left:0;
+                width:100%;
+                height: 100%;
+                background-color: rgba(255,0,0,.5);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color:#fff;
+                opacity: 0;
+            }
         }
     }
 }

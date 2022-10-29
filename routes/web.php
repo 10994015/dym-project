@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Airplane;
+use App\Http\Livewire\Answer;
 use App\Http\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class);
 Route::get('/airplane', Airplane::class)->middleware('auth');
+Route::get('/answer', Answer::class)->middleware('auth');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
