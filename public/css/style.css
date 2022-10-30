@@ -269,25 +269,26 @@ nav > a:hover {
   display: flex;
   align-items: flex-end;
   background-color: transparent;
+  transition: 0.1s;
 }
-#airplane > .content > .playBox > .airplaneDiv > img.bg {
+#airplane > .content > .playBox > .airplaneDiv > img {
   position: absolute;
   -o-object-fit: cover;
      object-fit: cover;
-  top: 0;
+  top: -2800px;
   left: 0;
   width: 100%;
   height: auto;
 }
-#airplane > .content > .playBox > .airplaneDiv > img.bg.start {
+#airplane > .content > .playBox > .airplaneDiv > img.start {
   animation: bganim 10.3s linear;
 }
 @keyframes bganim {
   0% {
-    transform: translateY(-2800px);
+    top: -2800px;
   }
   100% {
-    transform: translateY(0);
+    top: 0;
   }
 }
 #airplane > .content > .playBox > .airplaneDiv > .air {
@@ -376,7 +377,7 @@ nav > a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: #000;
   width: 100%;
   height: 100%;
   color: #fff;
@@ -385,10 +386,21 @@ nav > a:hover {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  opacity: 1;
 }
 #airplane > .content > .playBox > .countdown p {
+  text-align: center;
   font-size: 30px;
   letter-spacing: 2px;
+}
+#airplane > .content > .playBox > .countdown p > img {
+  width: 150px;
+}
+#airplane > .content > .playBox > .countdown #fiveNumber {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
 }
 #airplane > .content > .playBox > .airTopThree {
   position: absolute;
@@ -396,7 +408,7 @@ nav > a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -412,11 +424,23 @@ nav > a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #fff;
   opacity: 0;
+}
+#airplane > .content > .playBox > .gameLoading {
+  display: flex;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  widtH: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }

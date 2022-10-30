@@ -1,4 +1,4 @@
-<div id="airplane">
+<div id="airplane" wire:ignore.self>
     <div class="header">
       <div class="left">
         <div class="userBox">
@@ -17,38 +17,44 @@
   </div>
   <div class="content">
     <div class="playBox">
-      <div class="airplaneDiv">
-        <img src="/images/airplane/bg2.png" class="bg start" id="airplaneDivBg">
+      <div class="airplaneDiv" id="airplaneDiv">
+        <img src="/images/airplane/bg2.png" class="bg" id="airplaneDivBg">
         @for($i=1;$i<=10;$i++)
-          <div class="air air{{$i}}">
+          <div class="air">
               <img src="/images/airplane/air{{$i}}.png" class="airImg">
               <img src="/images/airplane/injection.png" class="injection">
           </div>
         @endfor
       </div>
-      <div class="countdown">
+      <div class="countdown" id="countdown">
         <div>
-            <p>00:<span id="countdown">00</span></p>
+            <p id="countdownSec"> <img src="/images/airplane/loading.gif"> </p>
+            <div id="fiveNumber">
+            
+            </div>
         </div>
+      </div>
+      
+      <div class="airTopTen" id="airTopTen">
+          前十名
       </div>
       <div class="airTopThree" id="airTopThree">
           <p>第一名:</p>
           <p>第二名:</p>
           <p>第三名:</p>
       </div>
-      <div class="airTopTen" id="airTopTen">
-          前十名
-      </div>
+      @if($isLoad)
+        <div class="gameLoading" id="gameLoading" >
+          <p>LOADING...</p>
+        </div>
+      @endif
     </div>
     <div class="betBox"></div>
     <div class="betList"></div>
   </div>
 
   <script>
-    window.addEventListener('sendAnswer', e=>{
-      console.log(e.detail.answer);
-      
-    });
+    
     
   </script>
 </div>

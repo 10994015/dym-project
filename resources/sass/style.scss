@@ -262,23 +262,26 @@ nav{
                 display: flex;
                 align-items: flex-end;
                 background-color: transparent;
-                >img.bg{
+                transition: .1s;
+                >img{
                     position: absolute;
                     object-fit: cover;
-                    top:0 ;
+                    top:-2800px ;
                     left:0;
                     width:100%;
                     height: auto;
                     &.start{
                         animation: bganim 10.3s linear;
-                        @keyframes bganim {
-                            0%{
-                                transform: translateY(-2800px);
-                            }
-                            100%{
-                                transform: translateY(0);
-                            }
-                        }
+                    }
+                }
+                
+                @keyframes bganim {
+                    0%{
+                        // transform: translateY(-2800px);
+                        top: -2800px;
+                    }
+                    100%{
+                        top: 0;
                     }
                 }
                 >.air{
@@ -370,7 +373,7 @@ nav{
                 position: absolute;
                 top: 0;
                 left:0;
-                background-color: rgba(255,0,0,.5);
+                background-color: #000;
                 width:100%;
                 height: 100%;
                 color:#fff;
@@ -379,10 +382,20 @@ nav{
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
-                // opacity: 0;
+                opacity: 1;
                 p{
+                    text-align: center;
                     font-size: 30px;
                     letter-spacing: 2px;
+                    >img{
+                        width:150px;
+                    }
+                }
+                #fiveNumber{
+                    display: flex;
+                    flex-direction: column-reverse;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
             >.airTopThree{
@@ -391,7 +404,7 @@ nav{
                 left:0;
                 width:100%;
                 height: 100%;
-                background-color: rgba(255,0,0,.5);
+                background-color: #000;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -407,13 +420,25 @@ nav{
                 left:0;
                 width:100%;
                 height: 100%;
-                background-color: rgba(255,0,0,.5);
+                background-color: #000;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 color:#fff;
                 opacity: 0;
+            }
+            >.gameLoading{
+                display: flex;
+                background-color: #000;
+                color:#fff;
+                position: absolute;
+                top: 0;
+                left:0;
+                widtH:100%;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

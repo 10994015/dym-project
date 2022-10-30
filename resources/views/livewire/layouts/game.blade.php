@@ -20,10 +20,7 @@
     <script src="/js/app.js"></script>
     <script src="/js/airplane.js"></script>
     <script>
-        window.Livewire.emit('sendTime');
-        setInterval(()=>{
-            window.Livewire.emit('sendTime');
-        }, 60000);
+        
     </script>
 </body>
 </html>
