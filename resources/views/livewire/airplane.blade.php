@@ -12,7 +12,18 @@
       </div>
       <div class="right">
         <div class="fpsBox">90ms</div>
-        <i class="fas fa-bars" id="bar"></i>
+        <div class="menu">
+          <i class="fas fa-bars" id="bar"></i>
+          <ul class="menuList" id="menuList">
+            <li>
+            <form action="/logout" method="post" id="logoutForm">
+                @csrf
+                <input type="submit" hidden>
+                <a href="javascript:;" class="logout" id="logout">Logout</a>
+            </form>
+            </li>
+          </ul>
+        </div>
       </div>
   </div>
   <div class="content">
@@ -49,10 +60,71 @@
         </div>
       @endif
     </div>
-    <div class="betBox"></div>
-    <div class="betList"></div>
-  </div>
+    <div class="betBox">
+      <nav class="nav">
+          <img src="/images/airplane/btnchk1.png" id="gameBtn1" class="gameBtn" >
+          <img src="/images/airplane/btn2.png" id="gameBtn2" class="gameBtn" >
+          <img src="/images/airplane/btn3.png" id="gameBtn3" class="gameBtn" >
+          <img src="/images/airplane/btn4.png" id="gameBtn4" class="gameBtn" >
+          <img src="/images/airplane/btn5.png" id="gameBtn5" class="gameBtn" >
+      </nav>
+      <div class="content" id="game1">
+          <span class="odds">猜每一個名次的稱號 賠率9.8</span>
+          <div class="rankBtnBox" id="rankBtnBox">
+            @for($i=1;$i<=10;$i++)
+            <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" onclick="toggleRankingFn({{$i}})">
+            @endfor
+          </div>
+          <div class="airplaneRankBox" id="airplaneRankBox">
+            <?php for($i=1;$i<=10;$i++){ ?>
+              <div class="rank no{{$i}}">
+                  <img src="" class="smallDiamond">
+                  <img src="/images/airplane/air{{$i}}.png" class="air betAir clickAudio" alt="{{$i}}">
+              </div>
+            <?php } ?>
+          </div>
+      </div>
+      <div class="content" id="game2">冠亞二星</div>
+      <div class="content" id="game3">大小單雙</div>
+      <div class="content" id="game4">冠亞和</div>
+      <div class="content" id="game5">龍虎</div>
+    </div>
+    <div class="betList">
+        <div class="header">注單列表</div>
+        <div class="list">
+            <div class="title"><p>下注<br>期號</p></div>
+            <div class="issue">SR17082208161906</div>
+        </div>
 
+        <div class="total">
+            <p>總注數</p>
+            <p>總投注金額</p>
+        </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="diamondList">
+      <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
+      <div class="diamondBox">
+        <img src="/images/airplane/diamond10.png" alt="10" class="diamondBtn">
+        <img src="/images/airplane/diamond50.png" alt="50" class="diamondBtn">
+        <img src="/images/airplane/diamond100.png" alt="100" class="diamondBtn">
+        <img src="/images/airplane/diamond1000.png" alt="1000" class="diamondBtn">
+        <img src="/images/airplane/diamond5000.png" alt="5000" class="diamondBtn">
+        <img src="/images/airplane/diamond10000.png" alt="10000" class="diamondBtn">
+      </div>
+      <i class="fa-solid fa-chevron-right" id="diamondBoxRight"></i>
+    </div>
+    <div class="betMoneyBox">
+      <p>每注/元</p>
+      <div class="betMoney"><p>0</p></div>
+    </div>
+    <div class="btnList">
+      <img src="/images/airplane/duble.png" id="doubleBtn">
+      <img src="/images/airplane/re.png" id="reBtn">
+      <img src="/images/airplane/chk.png" id="chkBtn">
+    </div>
+  </div>
   <script>
     
     

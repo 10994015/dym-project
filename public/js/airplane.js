@@ -7,12 +7,20 @@ var countdownNumber = 0;
 window.Livewire.emit('sendTime');
 var air = document.getElementById('airplaneDiv').querySelectorAll('.air');
 var airplaneDivBg = document.getElementById('airplaneDivBg');
+var bar = document.getElementById('bar');
+var menuList = document.getElementById('menuList');
+var isMenuOpen = false;
 var countdown = document.getElementById('countdown');
 var countdownSec = document.getElementById('countdownSec');
 var gameLoading = document.getElementById('gameLoading');
 var airTopThree = document.getElementById('airTopThree');
 var airTopTen = document.getElementById('airTopTen');
 var fiveNumber = document.getElementById('fiveNumber');
+var gameBtn1 = document.getElementById('gameBtn1');
+var gameBtn2 = document.getElementById('gameBtn2');
+var gameBtn3 = document.getElementById('gameBtn3');
+var gameBtn4 = document.getElementById('gameBtn4');
+var gameBtn5 = document.getElementById('gameBtn5');
 var answer = [];
 var reverseanswer = [];
 var nowAnswer = [];
@@ -102,5 +110,66 @@ function fiveNumberFn() {
 setInterval(function () {
   timeRun();
 }, 1000);
+function chengGameFn(e) {
+  var id = "";
+  initGameFn();
+  id = e.target.id.split('Btn')[1];
+  e.target.src = e.target.src.replace('btn', 'btnchk');
+  console.log(id);
+  document.getElementById("game".concat(id)).style.display = "block";
+}
+function initGameFn() {
+  for (var i = 1; i <= 5; i++) {
+    document.getElementById("game".concat(i)).style.display = "none";
+    document.getElementById("gameBtn".concat(i)).src = "images/airplane/btn".concat(i, ".png");
+  }
+}
+gameBtn1.addEventListener('click', chengGameFn);
+gameBtn2.addEventListener('click', chengGameFn);
+gameBtn3.addEventListener('click', chengGameFn);
+gameBtn4.addEventListener('click', chengGameFn);
+gameBtn5.addEventListener('click', chengGameFn);
+var notloginFn = function notloginFn() {
+  Swal.fire({
+    icon: 'error',
+    title: '請先登入！',
+    text: '您無權限進入，請先登入！',
+    footer: '<a href="/register">沒有帳號嗎？點擊註冊</a>',
+    confirmButtonText: '前往登入',
+    confirmButtonColor: '#3085d6'
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      window.location.href = "/login";
+    }
+  });
+};
+var logoutFn = function logoutFn() {
+  Swal.fire({
+    title: '確定要登出嗎？',
+    text: "Are you sure you want to log out?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#aaa',
+    confirmButtonText: 'Yes!'
+  }).then(function (chk) {
+    if (chk.isConfirmed) {
+      Swal.fire('登出成功！', 'Logout succeeded!', 'success').then(function (result) {
+        if (result.isConfirmed) {
+          document.getElementById('logoutForm').submit();
+        }
+      });
+    }
+  });
+};
+document.getElementById('logout').addEventListener('click', logoutFn);
+bar.addEventListener('click', function () {
+  isMenuOpen = !isMenuOpen;
+  if (isMenuOpen) {
+    menuList.style.display = "block";
+  } else {
+    menuList.style.display = "none";
+  }
+});
 /******/ })()
 ;
