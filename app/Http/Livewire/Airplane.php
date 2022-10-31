@@ -32,7 +32,7 @@ class Airplane extends Component
         $this->accMoney += $this->betMoney;
         $this->guessAirArray["no$this->rank"]["air$this->air"]['money'] += intval($this->betMoney);
         // Log::info($this->accMoney);
-        Log::info($this->guessAirArray);
+        // Log::info($this->guessAirArray);
     }
     public function guessFn($air){
         if($this->betMoney <= 0){
