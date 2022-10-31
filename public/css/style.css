@@ -218,8 +218,24 @@ nav > a:hover {
   text-align: center;
   line-height: 35px;
   background-color: #3A3A3A;
-  padding: 0 20px;
   font-weight: 600;
+}
+#airplane > .header > .left > .moneyBox > .dollerBox input[type=number]::-webkit-outer-spin-button,
+#airplane > .header > .left > .moneyBox > .dollerBox input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#airplane > .header > .left > .moneyBox > .dollerBox input[type=number] {
+  -moz-appearance: textfield;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #fff;
 }
 #airplane > .header > .right {
   display: flex;
@@ -288,7 +304,7 @@ nav > a:hover {
   padding: 50px 0;
 }
 #airplane > .content > .playBox {
-  width: 400px;
+  min-width: 400px;
   height: 540px;
   border: 6px #ED35D1 solid;
   position: relative;
@@ -664,6 +680,14 @@ nav > a:hover {
 #airplane > .footer > div {
   margin: 0 30px;
 }
+#airplane > .footer input[type=number]::-webkit-outer-spin-button,
+#airplane > .footer input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#airplane > .footer input[type=number] {
+  -moz-appearance: textfield;
+}
 #airplane > .footer .diamondList {
   display: flex;
   align-items: center;
@@ -674,8 +698,9 @@ nav > a:hover {
   width: 300px;
   overflow: hidden;
 }
-#airplane > .footer .diamondList > .diamondBox > img {
+#airplane > .footer .diamondList > .diamondBox > .diamondBtn {
   width: 100px;
+  transition: 0.2s;
 }
 #airplane > .footer .diamondList > i {
   color: #fff;
@@ -709,6 +734,14 @@ nav > a:hover {
   text-align: center;
   display: block;
   margin-bottom: 0;
+}
+#airplane > .footer > .betMoneyBox > .betMoney > input {
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  outline: none;
 }
 #airplane > .footer > .btnList {
   display: flex;
