@@ -22,7 +22,7 @@ var gameBtn3 = document.getElementById('gameBtn3');
 var gameBtn4 = document.getElementById('gameBtn4');
 var gameBtn5 = document.getElementById('gameBtn5');
 var betMoney = document.getElementById('betMoney');
-var betDollar = 0;
+var totalBet = 0;
 var diamondBtn = document.querySelectorAll('.diamondBtn');
 var diamondBoxLeft = document.getElementById('diamondBoxLeft');
 var diamondBoxRight = document.getElementById('diamondBoxRight');
@@ -30,12 +30,337 @@ var dimondListNum = 0;
 var doubleBtn = document.getElementById('doubleBtn');
 var reBtn = document.getElementById('reBtn');
 var chkBtn = document.getElementById('chkBtn');
+var rank = document.getElementsByClassName('rank');
+var beyMoney = document.getElementById('beyMoney');
 var answer = [];
 var reverseanswer = [];
 var nowAnswer = [];
 var secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5'], [10.14, '6'], [10.15, '7'], [10.16, '8'], [10.17, '9'], [10.18, '10']];
 var myDoller = document.getElementById('myDoller');
 var rankingImg = document.getElementsByClassName('rankingImg');
+var chkBetBool = true;
+var guessAirArray = {
+  no1: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no2: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no3: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no4: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no5: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no6: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no7: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no8: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no9: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  },
+  no10: {
+    air1: {
+      money: 0
+    },
+    air2: {
+      money: 0
+    },
+    air3: {
+      money: 0
+    },
+    air4: {
+      money: 0
+    },
+    air5: {
+      money: 0
+    },
+    air6: {
+      money: 0
+    },
+    air7: {
+      money: 0
+    },
+    air8: {
+      money: 0
+    },
+    air9: {
+      money: 0
+    },
+    air10: {
+      money: 0
+    }
+  }
+};
 var chooseRank = 1;
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 var initSecondsArr = function initSecondsArr() {
@@ -43,9 +368,9 @@ var initSecondsArr = function initSecondsArr() {
 };
 window.addEventListener('sendAnswer', function (e) {
   answer = e.detail.answer;
-  console.log(answer);
+  // console.log(answer);
   nowAnswer = answer[4].ranking.split(',');
-  console.log("now:", nowAnswer);
+  // console.log("now:", nowAnswer);
   initSecondsArr();
   secondsArr.forEach(function (item, key) {
     item[1] = nowAnswer[key];
@@ -56,8 +381,9 @@ function sortFn() {
   secondsArr.sort(function (a, b) {
     return a[1] - b[1];
   });
-  console.log(secondsArr);
+  // console.log(secondsArr);
 }
+
 var fiveHtml = '';
 window.addEventListener('startRun', function (e) {
   answer = e.detail.answer;
@@ -133,12 +459,19 @@ function timeRun() {
       _loop2(i);
     }
   }
-  // if(new Date().getSeconds() == 11){
-  //     window.Livewire.emit('noneLoad');
-  // }
   if (new Date().getSeconds() == 11) {
     airTopTen.innerHTML = nowAnswer.join(',');
     airTopTen.style.opacity = "1";
+  }
+  if (new Date().getSeconds() == 12) {
+    if (!chkBetBool) {
+      calcBetFn();
+      window.Livewire.emit('updateMyMoney');
+    }
+    chkBetBool = true;
+    chkBtn.style.opacity = '1';
+    reBtn.style.opacity = '1';
+    doubleBtn.style.opacity = '1';
   }
   if (new Date().getSeconds() == 15) {
     airTopThree.innerHTML = "<p>\u7B2C\u4E00\u540D:".concat(nowAnswer[0], "</p>\n        <p>\u7B2C\u4E8C\u540D:").concat(nowAnswer[1], "</p>\n        <p>\u7B2C\u4E09\u540D:").concat(nowAnswer[2], "</p>");
@@ -179,7 +512,7 @@ function chengGameFn(e) {
   initGameFn();
   id = e.target.id.split('Btn')[1];
   e.target.src = e.target.src.replace('btn', 'btnchk');
-  console.log(id);
+  // console.log(id);
   document.getElementById("game".concat(id)).style.display = "block";
 }
 function initGameFn() {
@@ -235,31 +568,36 @@ bar.addEventListener('click', function () {
     menuList.style.display = "none";
   }
 });
+for (var i = 0; i < diamondBtn.length; i++) {
+  diamondBtn[i].addEventListener('click', setBetMoney);
+}
+function setBetMoney(e) {
+  beyMoney.value = Number(e.target.alt);
+}
 diamondBoxRight.addEventListener('click', function () {
   if (dimondListNum < 3) {
     dimondListNum++;
   }
-  for (var i = 0; i < diamondBtn.length; i++) {
-    diamondBtn[i].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+  for (var _i = 0; _i < diamondBtn.length; _i++) {
+    diamondBtn[_i].style.transform = "translateX(-".concat(dimondListNum, "00px)");
   }
 });
 diamondBoxLeft.addEventListener('click', function () {
   if (dimondListNum > 0) {
     dimondListNum--;
   }
-  for (var i = 0; i < diamondBtn.length; i++) {
-    diamondBtn[i].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+  for (var _i2 = 0; _i2 < diamondBtn.length; _i2++) {
+    diamondBtn[_i2].style.transform = "translateX(-".concat(dimondListNum, "00px)");
   }
 });
 beyMoney.addEventListener('blur', function () {
-  if (beyMoney.value == "") {
-    window.Livewire.emit('setBetMoney', 0);
+  if (beyMoney.value == "" || beyMoney.value < 0) {
+    beyMoney.value = Number(0);
   }
 });
-chkBtn.addEventListener('click', function () {});
 function initRankFn() {
-  for (var i = 0; i < rankingImg.length; i++) {
-    rankingImg[i].src = "/images/airplane/no".concat(i + 1, ".png");
+  for (var _i3 = 0; _i3 < rankingImg.length; _i3++) {
+    rankingImg[_i3].src = "/images/airplane/no".concat(_i3 + 1, ".png");
   }
 }
 function chengRankFn(e) {
@@ -267,39 +605,757 @@ function chengRankFn(e) {
   e.target.src = "/images/airplane/no".concat(e.target.alt, "chk.png");
   chooseRank = e.target.alt;
 }
-for (var i = 0; i < rankingImg.length; i++) {
-  rankingImg[i].addEventListener('click', chengRankFn);
+for (var _i4 = 0; _i4 < rankingImg.length; _i4++) {
+  rankingImg[_i4].addEventListener('click', chengRankFn);
 }
-window.addEventListener('dollerDebit', function (e) {
-  var remain = Number(myDoller.innerHTML) - Number(e.detail.betMoney);
+function notMoneyFn() {
+  Swal.fire('警告', '餘額不足', 'error');
+}
+for (var _i5 = 0; _i5 < rank.length; _i5++) {
+  rank[_i5].addEventListener('click', guessFn);
+}
+function guessFn(e) {
+  if (Number(beyMoney.value) <= 0) {
+    Swal.fire('警告', '請選擇下注金額', 'error');
+    return;
+  }
+  var remain = Number(myDoller.innerHTML) - Number(beyMoney.value);
   if (remain < 0) {
     notMoneyFn();
     return;
   }
-  window.Livewire.emit('okGuess');
-  myDoller.innerHTML = Number(myDoller.innerHTML) - Number(e.detail.betMoney);
-  // let sd = e.target.parentNode.getElementsByClassName('smallDiamond')[0];
-  console.log(e.detail.air);
-  var sd = document.getElementsByClassName("smallair".concat(e.detail.air))[0];
+  myDoller.innerHTML = Number(myDoller.innerHTML) - Number(beyMoney.value);
+  // console.log(e.target.alt);
+  totalBet += Number(beyMoney.value);
+  var sd = document.getElementsByClassName("smallair".concat(e.target.alt))[0];
   sd.style.display = "none";
-  sd.src = "/images/airplane/diamond".concat(e.detail.betMoney, ".png");
+  sd.src = "/images/airplane/diamond".concat(beyMoney.value, ".png");
   sd.style.display = "block";
   setTimeout(function () {
     sd.style.display = "none";
   }, 200);
-});
-window.addEventListener('chooseBetMoneyFn', function (e) {
-  Swal.fire('警告', '請選擇下注金額', 'error');
-});
-function notMoneyFn() {
-  Swal.fire('警告', '餘額不足', 'error');
+  guessAirArray["no".concat(chooseRank)]["air".concat(e.target.alt)]['money'] += Number(beyMoney.value);
+  // console.log(guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]);
 }
-// window.addEventListener('notMoneyFn',e=>{
-//     Swal.fire(
-//         '警告',
-//         '餘額不足',
-//         'error'
-//     );
-// })
+
+chkBtn.addEventListener('click', chkBtnFn);
+function chkBtnFn() {
+  if (!chkBetBool) {
+    Swal.fire('警告', '請勿重複下注！', 'error');
+    return;
+  }
+  if (totalBet <= 0) {
+    Swal.fire('警告', '您尚未下注！', 'error');
+    return;
+  }
+  Swal.fire('下注成功！', '等待整點開獎', 'success');
+  chkBetBool = false;
+  chkBtn.style.opacity = '.6';
+  reBtn.style.opacity = '.6';
+  doubleBtn.style.opacity = '.6';
+  window.Livewire.emit('chkBet', totalBet);
+  totalBet = 0;
+}
+function calcBetFn() {
+  var winMoney = 0;
+  //賠率
+  var odds = 2;
+  for (var _i6 = 1; _i6 <= 10; _i6++) {
+    // console.log(guessAirArray[`no${i}`]);
+    for (var j = 1; j <= 10; j++) {
+      if (guessAirArray["no".concat(_i6)]["air".concat(j)]['money'] > 0) {
+        // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
+        if (j == nowAnswer[_i6 - 1]) {
+          winMoney = winMoney + guessAirArray["no".concat(_i6)]["air".concat(j)]['money'] * odds;
+        }
+      }
+    }
+  }
+  // console.log(winMoney);
+  window.Livewire.emit('calcMoney', winMoney);
+  guessAirArray = {
+    no1: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no2: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no3: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no4: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no5: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no6: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no7: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no8: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no9: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    },
+    no10: {
+      air1: {
+        money: 0
+      },
+      air2: {
+        money: 0
+      },
+      air3: {
+        money: 0
+      },
+      air4: {
+        money: 0
+      },
+      air5: {
+        money: 0
+      },
+      air6: {
+        money: 0
+      },
+      air7: {
+        money: 0
+      },
+      air8: {
+        money: 0
+      },
+      air9: {
+        money: 0
+      },
+      air10: {
+        money: 0
+      }
+    }
+  };
+}
+window.addEventListener('updateMyMoneyHtml', function (e) {
+  myDoller.innerHTML = e.detail.money;
+  winMessage.innerHTML = "\u606D\u559C\u60A8\u8D0F\u5F97\u4E86".concat(e.detail.win, "\u5143");
+});
+reBtn.addEventListener('click', function () {
+  if (chkBetBool) {
+    guessAirArray = {
+      no1: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no2: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no3: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no4: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no5: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no6: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no7: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no8: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no9: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      },
+      no10: {
+        air1: {
+          money: 0
+        },
+        air2: {
+          money: 0
+        },
+        air3: {
+          money: 0
+        },
+        air4: {
+          money: 0
+        },
+        air5: {
+          money: 0
+        },
+        air6: {
+          money: 0
+        },
+        air7: {
+          money: 0
+        },
+        air8: {
+          money: 0
+        },
+        air9: {
+          money: 0
+        },
+        air10: {
+          money: 0
+        }
+      }
+    };
+    myDoller.innerHTML = Number(myDoller.innerHTML) + Number(totalBet);
+    totalBet = 0;
+    beyMoney.value = 0;
+  } else {
+    Swal.fire('警告', '您已下注！請等待下次下注', 'error');
+  }
+});
+doubleBtn.addEventListener('click', function () {
+  if (!chkBetBool) {
+    Swal.fire('警告', '您已下注！請等待下次下注', 'error');
+    return;
+  }
+  if (totalBet <= 0) {
+    Swal.fire('警告', '您尚未下注', 'error');
+    return;
+  }
+  var newMoney = Number(myDoller.innerHTML) - totalBet;
+  if (newMoney < 0) {
+    Swal.fire('警告', '餘額不足', 'error');
+    return;
+  }
+  myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
+  totalBet = totalBet * 2;
+  for (var _i7 = 1; _i7 <= 10; _i7++) {
+    guessAirArray["no".concat(_i7)];
+    for (var j = 1; j <= 10; j++) {
+      if (guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] > 0) {
+        guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] * 2;
+      }
+    }
+  }
+  Swal.fire('下注成功！', '下注金額雙倍', 'success');
+});
 /******/ })()
 ;

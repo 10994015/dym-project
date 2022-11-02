@@ -237,6 +237,11 @@ nav > a:hover {
   font-weight: 600;
   color: #fff;
 }
+#airplane > .header > .left > .moneyBox > .winMessage {
+  color: rgb(137, 226, 198);
+  margin-left: 4px;
+  font-size: 14px;
+}
 #airplane > .header > .right {
   display: flex;
   justify-content: center;

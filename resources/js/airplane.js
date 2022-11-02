@@ -18,7 +18,7 @@ const gameBtn3 = document.getElementById('gameBtn3');
 const gameBtn4 = document.getElementById('gameBtn4');
 const gameBtn5 = document.getElementById('gameBtn5');
 const betMoney = document.getElementById('betMoney');
-let betDollar = 0;
+let totalBet = 0;
 const diamondBtn = document.querySelectorAll('.diamondBtn');
 const diamondBoxLeft = document.getElementById('diamondBoxLeft');
 const diamondBoxRight = document.getElementById('diamondBoxRight');
@@ -26,6 +26,8 @@ let dimondListNum = 0;
 const doubleBtn = document.getElementById('doubleBtn');
 const reBtn = document.getElementById('reBtn');
 const chkBtn = document.getElementById('chkBtn');
+const rank = document.getElementsByClassName('rank');
+const beyMoney = document.getElementById('beyMoney');
 let answer = [];
 let reverseanswer = [];
 let nowAnswer = [];
@@ -43,6 +45,20 @@ let secondsArr = [
 ];
 const myDoller = document.getElementById('myDoller');
 const rankingImg = document.getElementsByClassName('rankingImg');
+let chkBetBool = true;
+let guessAirArray = {
+    no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+}
+
 let chooseRank = 1;
 document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
 
@@ -63,9 +79,9 @@ const initSecondsArr = ()=>{
 }
 window.addEventListener('sendAnswer', e=>{
     answer = e.detail.answer;
-    console.log(answer);
+    // console.log(answer);
     nowAnswer = answer[4].ranking.split(',');
-    console.log("now:", nowAnswer);
+    // console.log("now:", nowAnswer);
     initSecondsArr();
     secondsArr.forEach((item, key)=>{
         item[1] = nowAnswer[key];
@@ -77,7 +93,7 @@ function sortFn(){
     secondsArr.sort((a, b)=>{
         return a[1] - b[1];
     })
-    console.log(secondsArr);
+    // console.log(secondsArr);
 }
 let fiveHtml = '';
 
@@ -154,14 +170,20 @@ function timeRun(){
                 air[i].style.opacity = '0';
             },secondsArr[i][0]*1000)
         }
-        
     }
-    // if(new Date().getSeconds() == 11){
-    //     window.Livewire.emit('noneLoad');
-    // }
     if(new Date().getSeconds() == 11){
         airTopTen.innerHTML = nowAnswer.join(',');
         airTopTen.style.opacity = "1";
+    }
+    if(new Date().getSeconds() == 12){
+        if(!chkBetBool){
+            calcBetFn();
+            window.Livewire.emit('updateMyMoney');
+        }
+        chkBetBool = true;
+        chkBtn.style.opacity = '1';
+        reBtn.style.opacity = '1';
+        doubleBtn.style.opacity = '1';
     }
     if(new Date().getSeconds() == 15){
         airTopThree.innerHTML = `<p>第一名:${nowAnswer[0]}</p>
@@ -206,7 +228,7 @@ function chengGameFn(e){
     initGameFn();
     id = e.target.id.split('Btn')[1]
     e.target.src = e.target.src.replace('btn', 'btnchk');
-    console.log(id);
+    // console.log(id);
     document.getElementById(`game${id}`).style.display = "block";
 }
 function initGameFn(){
@@ -271,6 +293,13 @@ bar.addEventListener('click',()=>{
     }
 })
 
+for(let i=0;i<diamondBtn.length;i++){
+    diamondBtn[i].addEventListener('click', setBetMoney);
+}
+
+function setBetMoney(e){
+    beyMoney.value = Number(e.target.alt);
+}
 diamondBoxRight.addEventListener('click', function(){
     if(dimondListNum<3){
         dimondListNum++;
@@ -288,13 +317,11 @@ diamondBoxLeft.addEventListener('click', function(){
     }
 });
 beyMoney.addEventListener('blur',()=>{
-    if(beyMoney.value == ""){
-        window.Livewire.emit('setBetMoney',0);
+    if(beyMoney.value == "" || beyMoney.value < 0){
+        beyMoney.value = Number(0);
     }
 })
-chkBtn.addEventListener('click',()=>{
 
-})
 function initRankFn(){
     for(let i=0;i<rankingImg.length;i++){
         rankingImg[i].src =  `/images/airplane/no${i+1}.png`
@@ -308,33 +335,6 @@ function chengRankFn(e){
 for(let i=0;i<rankingImg.length;i++){
     rankingImg[i].addEventListener('click', chengRankFn);
 }
-
-window.addEventListener('dollerDebit', e=>{
-    let remain =  Number(myDoller.innerHTML) -  Number(e.detail.betMoney);
-    if(remain < 0){
-        notMoneyFn();
-        return;
-    }
-    window.Livewire.emit('okGuess');
-    myDoller.innerHTML = Number(myDoller.innerHTML) -  Number(e.detail.betMoney);
-    // let sd = e.target.parentNode.getElementsByClassName('smallDiamond')[0];
-    console.log(e.detail.air);
-    let sd = document.getElementsByClassName(`smallair${e.detail.air}`)[0];
-    sd.style.display = "none";
-    sd.src = `/images/airplane/diamond${e.detail.betMoney}.png`
-    sd.style.display = "block";
-    setTimeout(()=>{
-        sd.style.display = "none";
-    },200)
-    
-})
-window.addEventListener('chooseBetMoneyFn', e=>{
-    Swal.fire(
-        '警告',
-        '請選擇下注金額',
-        'error'
-    );
-})
 function notMoneyFn(){
     Swal.fire(
         '警告',
@@ -342,10 +342,174 @@ function notMoneyFn(){
         'error'
     );
 }
-// window.addEventListener('notMoneyFn',e=>{
-//     Swal.fire(
-//         '警告',
-//         '餘額不足',
-//         'error'
-//     );
-// })
+for(let i=0;i<rank.length;i++){
+    rank[i].addEventListener('click', guessFn);
+}
+
+function guessFn(e){
+    if(Number(beyMoney.value) <= 0){
+        Swal.fire(
+            '警告',
+            '請選擇下注金額',
+            'error'
+        );
+        return;
+    }
+    let remain =  Number(myDoller.innerHTML) -  Number(beyMoney.value);
+    if(remain < 0 ){
+        notMoneyFn();
+        return;
+    }
+    myDoller.innerHTML = Number(myDoller.innerHTML)  -Number(beyMoney.value);
+    // console.log(e.target.alt);
+    totalBet += Number(beyMoney.value);
+    
+    let sd = document.getElementsByClassName(`smallair${e.target.alt}`)[0];
+    sd.style.display = "none";
+    sd.src = `/images/airplane/diamond${beyMoney.value}.png`
+    sd.style.display = "block";
+    setTimeout(()=>{
+        sd.style.display = "none";
+    },200)
+    guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]['money'] += Number(beyMoney.value);
+    // console.log(guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]);
+}
+
+chkBtn.addEventListener('click',chkBtnFn);
+function chkBtnFn(){
+    if(!chkBetBool){
+        Swal.fire(
+            '警告',
+            '請勿重複下注！',
+            'error'
+        );
+        return;
+    }
+    if(totalBet <=0){
+        Swal.fire(
+            '警告',
+            '您尚未下注！',
+            'error'
+        );
+        return;
+    }
+    Swal.fire(
+        '下注成功！',
+        '等待整點開獎',
+        'success'
+    );
+    chkBetBool = false;
+    chkBtn.style.opacity = '.6';
+    reBtn.style.opacity = '.6';
+    doubleBtn.style.opacity = '.6';
+    
+    window.Livewire.emit('chkBet' ,totalBet);
+    totalBet = 0;
+}
+function calcBetFn(){
+    let winMoney = 0;
+    //賠率
+    let odds = 2;
+    for(let i=1;i<=10;i++){
+        // console.log(guessAirArray[`no${i}`]);
+        for(let j=1;j<=10;j++){
+            if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
+                // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
+                if(j == nowAnswer[i-1]){
+                    winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*odds);
+                }
+            }
+        }
+    }
+    // console.log(winMoney);
+    window.Livewire.emit('calcMoney', winMoney);
+
+    guessAirArray = {
+        no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    }
+    
+}
+
+window.addEventListener('updateMyMoneyHtml', e=>{
+    myDoller.innerHTML = e.detail.money;
+    winMessage.innerHTML = `恭喜您贏得了${e.detail.win}元`
+});
+reBtn.addEventListener('click',()=>{
+    if(chkBetBool){
+        guessAirArray = {
+            no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+            no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        }
+        myDoller.innerHTML = Number(myDoller.innerHTML) + Number(totalBet);
+        totalBet = 0;
+        beyMoney.value = 0;
+    }else{
+        Swal.fire(
+            '警告',
+            '您已下注！請等待下次下注',
+            'error'
+        );
+    }
+    
+
+})
+doubleBtn.addEventListener('click',()=>{
+    if(!chkBetBool){
+        Swal.fire(
+            '警告',
+            '您已下注！請等待下次下注',
+            'error'
+        );
+        return;
+    }
+    if(totalBet <= 0){
+        Swal.fire(
+            '警告',
+            '您尚未下注',
+            'error'
+        );
+        return;
+    }
+    let newMoney = Number(myDoller.innerHTML) - totalBet;
+    if(newMoney < 0){
+        Swal.fire(
+            '警告',
+            '餘額不足',
+            'error'
+        );
+        return;
+    }
+    myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
+    totalBet = totalBet*2;
+    for(let i=1;i<=10;i++){
+        guessAirArray[`no${i}`]
+        for(let j=1;j<=10;j++){
+            if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
+                guessAirArray[`no${i}`][`air${j}`]['money'] = guessAirArray[`no${i}`][`air${j}`]['money'] *2 
+            }
+        }
+    }
+
+    Swal.fire(
+        '下注成功！',
+        '下注金額雙倍',
+        'success'
+    );
+})

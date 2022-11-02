@@ -7,7 +7,8 @@
         </div>
         <div class="moneyBox">
           <img src="/images/airplane/money-icon.png">
-          <div class="dollerBox" id="myDoller">{{Auth::user()->money}} </div>
+          <div class="dollerBox" id="myDoller">{{$myDoller}}</div>
+          <div class="winMessage" id="winMessage"></div>
         </div>
       </div>
       <div class="right">
@@ -68,16 +69,21 @@
           <span class="odds">猜每一個名次的稱號 賠率9.8</span>
           <div class="rankBtnBox" id="rankBtnBox">
             @for($i=1;$i<=10;$i++)
-            <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" alt="{{$i}}" wire:click.prevent="setRank({{$i}})">
+            <!-- <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" alt="{{$i}}" wire:click.prevent="setRank({{$i}})"> -->
+            <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" alt="{{$i}}">
             @endfor
           </div>
           <div class="airplaneRankBox" id="airplaneRankBox">
-            <?php for($i=1;$i<=10;$i++){ ?>
-              <div class="rank no{{$i}}" wire:click.prevent="guessFn({{$i}})">
+            @for($i=1;$i<=10;$i++)
+              <!-- <div class="rank no{{$i}}" wire:click.prevent="guessFn({{$i}})">
+                  <img src="" class="smallDiamond smallair{{$i}}">
+                  <img src="/images/airplane/air{{$i}}.png" class="air betAir clickAudio" alt="{{$i}}">
+              </div> -->
+              <div class="rank no{{$i}}" >
                   <img src="" class="smallDiamond smallair{{$i}}">
                   <img src="/images/airplane/air{{$i}}.png" class="air betAir clickAudio" alt="{{$i}}">
               </div>
-            <?php } ?>
+            @endfor
           </div>
       </div>
       <div class="content" id="game2">冠亞二星</div>
@@ -102,18 +108,24 @@
     <div class="diamondList">
       <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
       <div class="diamondBox">
-        <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" wire:click.prevent="setBetMoney(10)">
+        <!-- <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" wire:click.prevent="setBetMoney(10)">
         <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" wire:click.prevent="setBetMoney(50)">
         <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" wire:click.prevent="setBetMoney(100)">
         <img src="/images/airplane/diamond1000.png"  class="diamondBtn" alt="1000" wire:click.prevent="setBetMoney(1000)">
         <img src="/images/airplane/diamond5000.png"  class="diamondBtn" alt="5000" wire:click.prevent="setBetMoney(5000)">
-        <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" wire:click.prevent="setBetMoney(10000)">
+        <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" wire:click.prevent="setBetMoney(10000)"> -->
+        <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" >
+        <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" >
+        <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" >
+        <img src="/images/airplane/diamond1000.png"  class="diamondBtn" alt="1000" >
+        <img src="/images/airplane/diamond5000.png"  class="diamondBtn" alt="5000" >
+        <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" >
       </div>
       <i class="fa-solid fa-chevron-right" id="diamondBoxRight"></i>
     </div>
     <div class="betMoneyBox">
       <p>每注/元</p>
-      <div class="betMoney"> <input type="number" id="beyMoney" wire:model="betMoney"> </div>
+      <div class="betMoney"> <input type="number" id="beyMoney" value="0"> </div>
     </div>
     <div class="btnList">
       <img src="/images/airplane/duble.png" id="doubleBtn">
