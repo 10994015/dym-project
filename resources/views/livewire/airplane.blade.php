@@ -29,6 +29,7 @@
   </div>
   <div class="content">
     <div class="playBox">
+      <img src="/images/airplane/loading.gif" class="loading">
       <div class="airplaneDiv" id="airplaneDiv">
         <img src="/images/airplane/bg2.png" class="bg" id="airplaneDivBg">
         @for($i=1;$i<=10;$i++)
@@ -40,20 +41,89 @@
       </div>
       <div class="countdown" id="countdown">
         <div>
-            <p id="countdownSec"> 
-              <img src="/images/airplane/loading.gif">
-            </p>
-            <div id="fiveNumber"></div>
+          <div class="timer">
+            <div id="countdownSec"> 
+              <!-- <img src="/images/airplane/timeBg.png" class="timeBg"> -->
+              <!-- <img src="/images/airplane/loading.gif"> -->
+              <p></p>
+            </div>
+          </div>
+            <img src="/images/airplane/trend.png" class="trend">
+            <div id="fiveNumber">
+            </div>
         </div>
       </div>
-      
+     
       <div class="airTopTen" id="airTopTen">
-          前十名
+          <div class="list top">
+            <div class="airBox">
+              <img src="/images/airplane/airbox1.png" class="airBoxBg">
+              <img src="/images/airplane/airRank1.png" class="airNum airNum1">
+            </div>
+          </div>
+          <div class="list">
+            <div class="airBox">
+              <img src="/images/airplane/airbox2.png" class="airBoxBg">
+              <img src="/images/airplane/airRank2.png" class="airNum airNum2">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox3.png" class="airBoxBg">
+              <img src="/images/airplane/airRank3.png" class="airNum airNum3">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox4.png" class="airBoxBg">
+              <img src="/images/airplane/airRank4.png" class="airNum airNum4">
+            </div>
+          </div>
+          <div class="list">
+            <div class="airBox">
+              <img src="/images/airplane/airbox5.png" class="airBoxBg">
+              <img src="/images/airplane/airRank5.png" class="airNum airNum5">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox6.png" class="airBoxBg">
+              <img src="/images/airplane/airRank6.png" class="airNum airNum6">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox7.png" class="airBoxBg">
+              <img src="/images/airplane/airRank7.png" class="airNum airNum7">
+            </div>
+          </div>
+          <div class="list">
+            <div class="airBox">
+              <img src="/images/airplane/airbox8.png" class="airBoxBg">
+              <img src="/images/airplane/airRank8.png" class="airNum airNum8">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox9.png" class="airBoxBg">
+              <img src="/images/airplane/airRank9.png" class="airNum airNum9">
+            </div>
+            <div class="airBox">
+              <img src="/images/airplane/airbox10.png" class="airBoxBg">
+              <img src="/images/airplane/airRank10.png" class="airNum airNum10">
+            </div>
+          </div>
       </div>
       <div class="airTopThree" id="airTopThree">
-          <p>第一名:</p>
-          <p>第二名:</p>
-          <p>第三名:</p>
+         <img src="/images/airplane/champion.png" class="championTitle">
+         <img src="/images/airplane/streamer.png" class="streamer">
+         <div class="airList">
+           <div class="airBox">
+             <img src="/images/airplane/airbt.png" class="airbt">
+             <img src="/images/airplane/rake2.png" class="rake">
+             <img src="/images/airplane/airRank1.png" class="air topThreeAir">
+           </div>
+           <div class="airBox top1">
+             <img src="/images/airplane/airbt.png" class="airbt">
+             <img src="/images/airplane/rake1.png" class="rake">
+             <img src="/images/airplane/airRank3.png" class="air topThreeAir">
+           </div>
+           <div class="airBox">
+             <img src="/images/airplane/airbt.png" class="airbt">
+             <img src="/images/airplane/rake3.png" class="rake">
+             <img src="/images/airplane/airRank6.png" class="air topThreeAir">
+           </div>
+         </div>
       </div>
      
     </div>
@@ -69,16 +139,11 @@
           <span class="odds">猜每一個名次的稱號 賠率9.8</span>
           <div class="rankBtnBox" id="rankBtnBox">
             @for($i=1;$i<=10;$i++)
-            <!-- <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" alt="{{$i}}" wire:click.prevent="setRank({{$i}})"> -->
             <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}" class="rankingImg clickAudio" alt="{{$i}}">
             @endfor
           </div>
           <div class="airplaneRankBox" id="airplaneRankBox">
             @for($i=1;$i<=10;$i++)
-              <!-- <div class="rank no{{$i}}" wire:click.prevent="guessFn({{$i}})">
-                  <img src="" class="smallDiamond smallair{{$i}}">
-                  <img src="/images/airplane/air{{$i}}.png" class="air betAir clickAudio" alt="{{$i}}">
-              </div> -->
               <div class="rank no{{$i}}" >
                   <img src="" class="smallDiamond smallair{{$i}}">
                   <img src="/images/airplane/air{{$i}}.png" class="air betAir clickAudio" alt="{{$i}}">
@@ -108,12 +173,6 @@
     <div class="diamondList">
       <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
       <div class="diamondBox">
-        <!-- <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" wire:click.prevent="setBetMoney(10)">
-        <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" wire:click.prevent="setBetMoney(50)">
-        <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" wire:click.prevent="setBetMoney(100)">
-        <img src="/images/airplane/diamond1000.png"  class="diamondBtn" alt="1000" wire:click.prevent="setBetMoney(1000)">
-        <img src="/images/airplane/diamond5000.png"  class="diamondBtn" alt="5000" wire:click.prevent="setBetMoney(5000)">
-        <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" wire:click.prevent="setBetMoney(10000)"> -->
         <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" >
         <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" >
         <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" >

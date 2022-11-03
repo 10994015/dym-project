@@ -309,10 +309,17 @@ nav > a:hover {
   padding: 50px 0;
 }
 #airplane > .content > .playBox {
-  min-width: 400px;
+  min-width: 450px;
   height: 540px;
   border: 6px #ED35D1 solid;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#airplane > .content > .playBox > .loading {
+  width: 50px;
+  background: transparent;
 }
 #airplane > .content > .playBox > .airplaneDiv {
   position: absolute;
@@ -320,12 +327,12 @@ nav > a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   background-color: transparent;
   transition: 0.1s;
+  opacity: 0;
 }
 #airplane > .content > .playBox > .airplaneDiv > img {
   position: absolute;
@@ -348,7 +355,7 @@ nav > a:hover {
   }
 }
 #airplane > .content > .playBox > .airplaneDiv > .air {
-  width: 38px;
+  width: 10%;
   transform: translateY(-380px);
   transform: translateY(120px);
   transform: translateY(340px);
@@ -433,7 +440,11 @@ nav > a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #000;
+  background-color: transparent;
+  background-image: url("/images/airplane/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   width: 100%;
   height: 100%;
   color: #fff;
@@ -442,21 +453,76 @@ nav > a:hover {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  opacity: 1;
+  opacity: 0;
 }
-#airplane > .content > .playBox > .countdown p {
+#airplane > .content > .playBox > .countdown > div {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#airplane > .content > .playBox > .countdown .timer {
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/images/airplane/timeBg.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 95%;
+}
+#airplane > .content > .playBox > .countdown #countdownSec {
   text-align: center;
   font-size: 30px;
   letter-spacing: 2px;
+  z-index: 9999;
+  width: 100%;
 }
-#airplane > .content > .playBox > .countdown p > img {
-  width: 150px;
+#airplane > .content > .playBox > .countdown #countdownSec p {
+  margin-top: 20px;
+  color: #C8E1FF;
+  font-size: 60px;
+  font-weight: 500;
+  font-family: "Wallpoet", cursive;
 }
 #airplane > .content > .playBox > .countdown #fiveNumber {
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
+  width: 95%;
+}
+#airplane > .content > .playBox > .countdown #fiveNumber > .item {
+  width: 100%;
+  padding: 1px 0 6px;
+  border-top: 2px #13ECF5 solid;
+  background-image: linear-gradient(to right, #111016, #035261, #111016);
+  border-bottom: 2px #13ECF5 solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+#airplane > .content > .playBox > .countdown #fiveNumber > .item > .num {
+  font-size: 10px;
+  color: #D8D4A4;
+  margin-bottom: 0px;
+}
+#airplane > .content > .playBox > .countdown #fiveNumber > .item > .rankBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#airplane > .content > .playBox > .countdown #fiveNumber > .item > .rankBox > .number {
+  height: 25px;
+  margin: 0 6px;
+}
+#airplane > .content > .playBox > .countdown .trend {
+  width: 150px;
 }
 #airplane > .content > .playBox > .airTopThree {
   position: absolute;
@@ -464,15 +530,68 @@ nav > a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-image: url("/images/airplane/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
 }
-#airplane > .content > .playBox > .airTopThree > p {
-  color: #fff;
+#airplane > .content > .playBox > .airTopThree > .championTitle {
+  width: 90%;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#airplane > .content > .playBox > .airTopThree > .streamer {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#airplane > .content > .playBox > .airTopThree > .airList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 96%;
+}
+#airplane > .content > .playBox > .airTopThree > .airList > .airBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%;
+  height: 220px;
+}
+#airplane > .content > .playBox > .airTopThree > .airList > .airBox.top1 {
+  margin-top: 100px;
+}
+#airplane > .content > .playBox > .airTopThree > .airList > .airBox > .rake {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+#airplane > .content > .playBox > .airTopThree > .airList > .airBox > .airbt {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+#airplane > .content > .playBox > .airTopThree > .airList > .airBox > .air {
+  position: absolute;
+  bottom: 15px;
+  left: 60%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 #airplane > .content > .playBox > .airTopTen {
   position: absolute;
@@ -487,6 +606,46 @@ nav > a:hover {
   align-items: center;
   color: #fff;
   opacity: 0;
+  background-image: url("/images/airplane/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+#airplane > .content > .playBox > .airTopTen > .list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+#airplane > .content > .playBox > .airTopTen > .list.top > .airBox {
+  width: 35%;
+}
+#airplane > .content > .playBox > .airTopTen > .list > .airBox {
+  position: relative;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+#airplane > .content > .playBox > .airTopTen > .list > .airBox > .airBoxBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#airplane > .content > .playBox > .airTopTen > .list > .airBox > .airNum {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 70%;
+}
+@keyframes airRankIn {
+  0% {
+    right: -300px;
+  }
 }
 #airplane > .content > .playBox > .gameLoading {
   display: flex;

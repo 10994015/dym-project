@@ -58,7 +58,8 @@ let guessAirArray = {
     no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
     no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
 }
-
+const airNum = document.getElementsByClassName('airNum');
+const topThreeAir = document.getElementsByClassName('topThreeAir');
 let chooseRank = 1;
 document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
 
@@ -108,7 +109,13 @@ window.addEventListener('startRun', e=>{
         countdown.style.opacity = '0';
         airTopThree.style.opacity = '0';
         airTopTen.style.opacity = '0';
+        for(let i=0;i<airNum.length;i++){
+            airNum[i].style.animation = 'none';
+            airNum[i].style.animationDelay = '0s';
+        }
+        
         sortFn();
+        airplaneDiv.style.opacity = "1";
         airplaneDivBg.classList.add('start');
         airplaneDivBg.style.animationDelay =  `-${ new Date().getSeconds()}s`;
         let startSec = (10-new Date().getSeconds())*1000;
@@ -121,24 +128,35 @@ window.addEventListener('startRun', e=>{
             },secondsArr[i][0]*1000 - (new Date().getSeconds() * 1000))
         }
         setTimeout(()=>{
-            airTopTen.innerHTML = nowAnswer.join(',');
+            // airTopTen.innerHTML = nowAnswer.join(',');
+            airTopTenHTML(nowAnswer);
             airTopTen.style.opacity = "1";
-            countdown.style.opacity = '1';
+            for(let i=0;i<airNum.length;i++){
+                airNum[i].style.animation = 'airRankIn .1s linear';
+                airNum[i].style.animationDelay = `.${i}s`;
+            }
+            // countdown.style.opacity = '1';
             airplaneDivBg.style.animationDelay = '0s';
             var id =setInterval(timeRun,1000,id);
         }, startSec)
     }else{
         if(new Date().getSeconds() >=11 && new Date().getSeconds() < 15){
-            airTopTen.innerHTML = nowAnswer.join(',');
+            airTopTenHTML(nowAnswer);
             airTopTen.style.opacity = "1";
+            for(let i=0;i<airNum.length;i++){
+                airNum[i].style.animation = 'airRankIn .1s linear';
+                airNum[i].style.animationDelay = `.${i}s`;
+            }
         }
         if(new Date().getSeconds() >=15 && new Date().getSeconds() < 19){
-            airTopTen.innerHTML = nowAnswer.join(',');
+            airTopTenHTML(nowAnswer);
             airTopTen.style.opacity = "1";
-            countdown.style.opacity = '1';
-            airTopThree.innerHTML = `<p>第一名:${nowAnswer[0]}</p>
-            <p>第二名:${nowAnswer[1]}</p>
-            <p>第三名:${nowAnswer[2]}</p>`;
+            for(let i=0;i<airNum.length;i++){
+                airNum[i].style.animation = 'airRankIn .1s linear';
+                airNum[i].style.animationDelay = `.${i}s`;
+            }
+            // countdown.style.opacity = '1';
+            airTopThreeHTML(nowAnswer);
             airTopThree.style.opacity = "1";
         }
         var id =setInterval(timeRun,1000,id);
@@ -150,12 +168,12 @@ function timeRun(){
     countdownNumber = 60 - new Date().getSeconds();
     
     if(countdownNumber < 10){
-        countdownSec.innerHTML = "00:0"+countdownNumber;
+        countdownSec.innerHTML =  "<p>00:0"+countdownNumber + "</p>";
     }else{
-        countdownSec.innerHTML = "00:" + countdownNumber;
+        countdownSec.innerHTML =   "<p>00:" + countdownNumber + "</p>";
     }
     if(countdownNumber==60){
-        countdownSec.innerHTML = "00:00";
+        countdownSec.innerHTML =  "<p>00:00" + "</p>";
     }
     
     if(new Date().getSeconds() == 0){
@@ -163,6 +181,7 @@ function timeRun(){
     }
     if(new Date().getSeconds() == 1){
         sortFn();
+        airplaneDiv.style.opacity = "1";
         airplaneDivBg.classList.add('start');
         for(let i=0;i<air.length;i++){
             air[i].style.animation = `airNo1 ${secondsArr[i][0]}s linear`;
@@ -172,8 +191,12 @@ function timeRun(){
         }
     }
     if(new Date().getSeconds() == 11){
-        airTopTen.innerHTML = nowAnswer.join(',');
+        airTopTenHTML(nowAnswer);
         airTopTen.style.opacity = "1";
+        for(let i=0;i<airNum.length;i++){
+            airNum[i].style.animation = 'airRankIn .1s linear';
+            airNum[i].style.animationDelay = `.${i}s`;
+        }
     }
     if(new Date().getSeconds() == 12){
         if(!chkBetBool){
@@ -181,14 +204,12 @@ function timeRun(){
             window.Livewire.emit('updateMyMoney');
         }
         chkBetBool = true;
-        chkBtn.style.opacity = '1';
-        reBtn.style.opacity = '1';
-        doubleBtn.style.opacity = '1';
+        chkBtn.src = '/images/airplane/chk.png';
+        reBtn.src = '/images/airplane/re.png';
+        doubleBtn.src = '/images/airplane/double.png';
     }
     if(new Date().getSeconds() == 15){
-        airTopThree.innerHTML = `<p>第一名:${nowAnswer[0]}</p>
-        <p>第二名:${nowAnswer[1]}</p>
-        <p>第三名:${nowAnswer[2]}</p>`;
+        airTopThreeHTML(nowAnswer);
         airTopThree.style.opacity = "1";
     }
     if(new Date().getSeconds()<=19 ){
@@ -204,9 +225,14 @@ function timeRun(){
     }
    
     if(new Date().getSeconds() == 20){
+        airplaneDiv.style.opacity = "0";
         airplaneDivBg.classList.remove('start');
         airTopThree.style.opacity = "0";
         airTopTen.style.opacity = "0";
+        for(let i=0;i<airNum.length;i++){
+            airNum[i].style.animation = 'none';
+            airNum[i].style.animationDelay = '0s';
+        }
         for(let a=0;a<air.length;a++){
             air[a].style.opacity = '1';
             air[a].style.animation = 'none';
@@ -218,7 +244,25 @@ function fiveNumberFn(){
     fiveHtml = "";
     fiveNumber.innerHTML = ""
     answer.forEach(item=>{
-        fiveHtml += `<small> 走勢: ${item.ranking} </small>`
+        fiveHtml += `
+            <div class="item">
+                <p class="num">${item.number}</p>
+                <div class="rankBox">
+                    <img src="/images/airplane/num${item.ranking.split(',')[0]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[1]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[2]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[3]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[4]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[5]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[6]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[7]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[8]}.png" class="number">
+                    <img src="/images/airplane/num${item.ranking.split(',')[9]}.png" class="number">
+                </div>
+              </div>
+        `
+        console.log(item.ranking.split(','));
+        
     })
     fiveNumber.innerHTML = fiveHtml;
 }
@@ -399,9 +443,9 @@ function chkBtnFn(){
         'success'
     );
     chkBetBool = false;
-    chkBtn.style.opacity = '.6';
-    reBtn.style.opacity = '.6';
-    doubleBtn.style.opacity = '.6';
+    chkBtn.src = '/images/airplane/chkdisable.png';
+    reBtn.src = '/images/airplane/redisable.png';
+    doubleBtn.src = '/images/airplane/doubledisable.png';
     
     window.Livewire.emit('chkBet' ,totalBet);
     totalBet = 0;
@@ -513,3 +557,16 @@ doubleBtn.addEventListener('click',()=>{
         'success'
     );
 })
+
+
+function airTopTenHTML(nowAnswer){
+   for(let i=0;i<airNum.length;i++){
+    airNum[i].src = `/images/airplane/airRank${nowAnswer[i]}.png`;
+   }
+}
+let threeArr = [1,0,2];
+function airTopThreeHTML(nowAnswer){
+    for(let i=0;i<topThreeAir.length;i++){
+        topThreeAir[i].src = `/images/airplane/airRank${nowAnswer[threeArr[i]]}.png`
+    }
+}

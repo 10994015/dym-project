@@ -361,6 +361,8 @@ var guessAirArray = {
     }
   }
 };
+var airNum = document.getElementsByClassName('airNum');
+var topThreeAir = document.getElementsByClassName('topThreeAir');
 var chooseRank = 1;
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 var initSecondsArr = function initSecondsArr() {
@@ -396,38 +398,56 @@ window.addEventListener('startRun', function (e) {
     countdown.style.opacity = '0';
     airTopThree.style.opacity = '0';
     airTopTen.style.opacity = '0';
+    for (var i = 0; i < airNum.length; i++) {
+      airNum[i].style.animation = 'none';
+      airNum[i].style.animationDelay = '0s';
+    }
     sortFn();
+    airplaneDiv.style.opacity = "1";
     airplaneDivBg.classList.add('start');
     airplaneDivBg.style.animationDelay = "-".concat(new Date().getSeconds(), "s");
     var startSec = (10 - new Date().getSeconds()) * 1000;
-    var _loop = function _loop(i) {
-      air[i].style.animation = "airNo1 ".concat(secondsArr[i][0], "s linear");
-      air[i].style.animationDelay = "-".concat(new Date().getSeconds(), "s");
+    var _loop = function _loop(_i) {
+      air[_i].style.animation = "airNo1 ".concat(secondsArr[_i][0], "s linear");
+      air[_i].style.animationDelay = "-".concat(new Date().getSeconds(), "s");
       setTimeout(function () {
-        air[i].style.animationDelay = '0s';
-        air[i].style.opacity = '0';
-      }, secondsArr[i][0] * 1000 - new Date().getSeconds() * 1000);
+        air[_i].style.animationDelay = '0s';
+        air[_i].style.opacity = '0';
+      }, secondsArr[_i][0] * 1000 - new Date().getSeconds() * 1000);
     };
-    for (var i = 0; i < air.length; i++) {
-      _loop(i);
+    for (var _i = 0; _i < air.length; _i++) {
+      _loop(_i);
     }
     setTimeout(function () {
-      airTopTen.innerHTML = nowAnswer.join(',');
+      // airTopTen.innerHTML = nowAnswer.join(',');
+      airTopTenHTML(nowAnswer);
       airTopTen.style.opacity = "1";
-      countdown.style.opacity = '1';
+      for (var _i2 = 0; _i2 < airNum.length; _i2++) {
+        airNum[_i2].style.animation = 'airRankIn .1s linear';
+        airNum[_i2].style.animationDelay = ".".concat(_i2, "s");
+      }
+      // countdown.style.opacity = '1';
       airplaneDivBg.style.animationDelay = '0s';
       var id = setInterval(timeRun, 1000, id);
     }, startSec);
   } else {
     if (new Date().getSeconds() >= 11 && new Date().getSeconds() < 15) {
-      airTopTen.innerHTML = nowAnswer.join(',');
+      airTopTenHTML(nowAnswer);
       airTopTen.style.opacity = "1";
+      for (var _i3 = 0; _i3 < airNum.length; _i3++) {
+        airNum[_i3].style.animation = 'airRankIn .1s linear';
+        airNum[_i3].style.animationDelay = ".".concat(_i3, "s");
+      }
     }
     if (new Date().getSeconds() >= 15 && new Date().getSeconds() < 19) {
-      airTopTen.innerHTML = nowAnswer.join(',');
+      airTopTenHTML(nowAnswer);
       airTopTen.style.opacity = "1";
-      countdown.style.opacity = '1';
-      airTopThree.innerHTML = "<p>\u7B2C\u4E00\u540D:".concat(nowAnswer[0], "</p>\n            <p>\u7B2C\u4E8C\u540D:").concat(nowAnswer[1], "</p>\n            <p>\u7B2C\u4E09\u540D:").concat(nowAnswer[2], "</p>");
+      for (var _i4 = 0; _i4 < airNum.length; _i4++) {
+        airNum[_i4].style.animation = 'airRankIn .1s linear';
+        airNum[_i4].style.animationDelay = ".".concat(_i4, "s");
+      }
+      // countdown.style.opacity = '1';
+      airTopThreeHTML(nowAnswer);
       airTopThree.style.opacity = "1";
     }
     var id = setInterval(timeRun, 1000, id);
@@ -436,18 +456,19 @@ window.addEventListener('startRun', function (e) {
 function timeRun() {
   countdownNumber = 60 - new Date().getSeconds();
   if (countdownNumber < 10) {
-    countdownSec.innerHTML = "00:0" + countdownNumber;
+    countdownSec.innerHTML = "<p>00:0" + countdownNumber + "</p>";
   } else {
-    countdownSec.innerHTML = "00:" + countdownNumber;
+    countdownSec.innerHTML = "<p>00:" + countdownNumber + "</p>";
   }
   if (countdownNumber == 60) {
-    countdownSec.innerHTML = "00:00";
+    countdownSec.innerHTML = "<p>00:00" + "</p>";
   }
   if (new Date().getSeconds() == 0) {
     window.Livewire.emit('sendTime');
   }
   if (new Date().getSeconds() == 1) {
     sortFn();
+    airplaneDiv.style.opacity = "1";
     airplaneDivBg.classList.add('start');
     var _loop2 = function _loop2(i) {
       air[i].style.animation = "airNo1 ".concat(secondsArr[i][0], "s linear");
@@ -460,8 +481,12 @@ function timeRun() {
     }
   }
   if (new Date().getSeconds() == 11) {
-    airTopTen.innerHTML = nowAnswer.join(',');
+    airTopTenHTML(nowAnswer);
     airTopTen.style.opacity = "1";
+    for (var _i5 = 0; _i5 < airNum.length; _i5++) {
+      airNum[_i5].style.animation = 'airRankIn .1s linear';
+      airNum[_i5].style.animationDelay = ".".concat(_i5, "s");
+    }
   }
   if (new Date().getSeconds() == 12) {
     if (!chkBetBool) {
@@ -469,12 +494,12 @@ function timeRun() {
       window.Livewire.emit('updateMyMoney');
     }
     chkBetBool = true;
-    chkBtn.style.opacity = '1';
-    reBtn.style.opacity = '1';
-    doubleBtn.style.opacity = '1';
+    chkBtn.src = '/images/airplane/chk.png';
+    reBtn.src = '/images/airplane/re.png';
+    doubleBtn.src = '/images/airplane/double.png';
   }
   if (new Date().getSeconds() == 15) {
-    airTopThree.innerHTML = "<p>\u7B2C\u4E00\u540D:".concat(nowAnswer[0], "</p>\n        <p>\u7B2C\u4E8C\u540D:").concat(nowAnswer[1], "</p>\n        <p>\u7B2C\u4E09\u540D:").concat(nowAnswer[2], "</p>");
+    airTopThreeHTML(nowAnswer);
     airTopThree.style.opacity = "1";
   }
   if (new Date().getSeconds() <= 19) {
@@ -490,9 +515,14 @@ function timeRun() {
   }
 
   if (new Date().getSeconds() == 20) {
+    airplaneDiv.style.opacity = "0";
     airplaneDivBg.classList.remove('start');
     airTopThree.style.opacity = "0";
     airTopTen.style.opacity = "0";
+    for (var _i6 = 0; _i6 < airNum.length; _i6++) {
+      airNum[_i6].style.animation = 'none';
+      airNum[_i6].style.animationDelay = '0s';
+    }
     for (var a = 0; a < air.length; a++) {
       air[a].style.opacity = '1';
       air[a].style.animation = 'none';
@@ -503,7 +533,8 @@ function fiveNumberFn() {
   fiveHtml = "";
   fiveNumber.innerHTML = "";
   answer.forEach(function (item) {
-    fiveHtml += "<small> \u8D70\u52E2: ".concat(item.ranking, " </small>");
+    fiveHtml += "\n            <div class=\"item\">\n                <p class=\"num\">".concat(item.number, "</p>\n                <div class=\"rankBox\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[0], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[1], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[2], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[3], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[4], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[5], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[6], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[7], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[8], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[9], ".png\" class=\"number\">\n                </div>\n              </div>\n        ");
+    console.log(item.ranking.split(','));
   });
   fiveNumber.innerHTML = fiveHtml;
 }
@@ -578,16 +609,16 @@ diamondBoxRight.addEventListener('click', function () {
   if (dimondListNum < 3) {
     dimondListNum++;
   }
-  for (var _i = 0; _i < diamondBtn.length; _i++) {
-    diamondBtn[_i].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+  for (var _i7 = 0; _i7 < diamondBtn.length; _i7++) {
+    diamondBtn[_i7].style.transform = "translateX(-".concat(dimondListNum, "00px)");
   }
 });
 diamondBoxLeft.addEventListener('click', function () {
   if (dimondListNum > 0) {
     dimondListNum--;
   }
-  for (var _i2 = 0; _i2 < diamondBtn.length; _i2++) {
-    diamondBtn[_i2].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+  for (var _i8 = 0; _i8 < diamondBtn.length; _i8++) {
+    diamondBtn[_i8].style.transform = "translateX(-".concat(dimondListNum, "00px)");
   }
 });
 beyMoney.addEventListener('blur', function () {
@@ -596,8 +627,8 @@ beyMoney.addEventListener('blur', function () {
   }
 });
 function initRankFn() {
-  for (var _i3 = 0; _i3 < rankingImg.length; _i3++) {
-    rankingImg[_i3].src = "/images/airplane/no".concat(_i3 + 1, ".png");
+  for (var _i9 = 0; _i9 < rankingImg.length; _i9++) {
+    rankingImg[_i9].src = "/images/airplane/no".concat(_i9 + 1, ".png");
   }
 }
 function chengRankFn(e) {
@@ -605,14 +636,14 @@ function chengRankFn(e) {
   e.target.src = "/images/airplane/no".concat(e.target.alt, "chk.png");
   chooseRank = e.target.alt;
 }
-for (var _i4 = 0; _i4 < rankingImg.length; _i4++) {
-  rankingImg[_i4].addEventListener('click', chengRankFn);
+for (var _i10 = 0; _i10 < rankingImg.length; _i10++) {
+  rankingImg[_i10].addEventListener('click', chengRankFn);
 }
 function notMoneyFn() {
   Swal.fire('警告', '餘額不足', 'error');
 }
-for (var _i5 = 0; _i5 < rank.length; _i5++) {
-  rank[_i5].addEventListener('click', guessFn);
+for (var _i11 = 0; _i11 < rank.length; _i11++) {
+  rank[_i11].addEventListener('click', guessFn);
 }
 function guessFn(e) {
   if (Number(beyMoney.value) <= 0) {
@@ -650,9 +681,9 @@ function chkBtnFn() {
   }
   Swal.fire('下注成功！', '等待整點開獎', 'success');
   chkBetBool = false;
-  chkBtn.style.opacity = '.6';
-  reBtn.style.opacity = '.6';
-  doubleBtn.style.opacity = '.6';
+  chkBtn.src = '/images/airplane/chkdisable.png';
+  reBtn.src = '/images/airplane/redisable.png';
+  doubleBtn.src = '/images/airplane/doubledisable.png';
   window.Livewire.emit('chkBet', totalBet);
   totalBet = 0;
 }
@@ -660,13 +691,13 @@ function calcBetFn() {
   var winMoney = 0;
   //賠率
   var odds = 2;
-  for (var _i6 = 1; _i6 <= 10; _i6++) {
+  for (var _i12 = 1; _i12 <= 10; _i12++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i6)]["air".concat(j)]['money'] > 0) {
+      if (guessAirArray["no".concat(_i12)]["air".concat(j)]['money'] > 0) {
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-        if (j == nowAnswer[_i6 - 1]) {
-          winMoney = winMoney + guessAirArray["no".concat(_i6)]["air".concat(j)]['money'] * odds;
+        if (j == nowAnswer[_i12 - 1]) {
+          winMoney = winMoney + guessAirArray["no".concat(_i12)]["air".concat(j)]['money'] * odds;
         }
       }
     }
@@ -1347,15 +1378,26 @@ doubleBtn.addEventListener('click', function () {
   }
   myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
   totalBet = totalBet * 2;
-  for (var _i7 = 1; _i7 <= 10; _i7++) {
-    guessAirArray["no".concat(_i7)];
+  for (var _i13 = 1; _i13 <= 10; _i13++) {
+    guessAirArray["no".concat(_i13)];
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] > 0) {
-        guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i7)]["air".concat(j)]['money'] * 2;
+      if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
+        guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * 2;
       }
     }
   }
   Swal.fire('下注成功！', '下注金額雙倍', 'success');
 });
+function airTopTenHTML(nowAnswer) {
+  for (var _i14 = 0; _i14 < airNum.length; _i14++) {
+    airNum[_i14].src = "/images/airplane/airRank".concat(nowAnswer[_i14], ".png");
+  }
+}
+var threeArr = [1, 0, 2];
+function airTopThreeHTML(nowAnswer) {
+  for (var _i15 = 0; _i15 < topThreeAir.length; _i15++) {
+    topThreeAir[_i15].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i15]], ".png");
+  }
+}
 /******/ })()
 ;

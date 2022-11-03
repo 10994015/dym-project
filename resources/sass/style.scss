@@ -304,22 +304,29 @@ nav{
         align-items: center;
         padding: 50px 0;
         >.playBox{
-            min-width:400px;
+            min-width:450px;
             height: 540px;
             border:6px #ED35D1 solid;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >.loading{
+                width:50px;
+                background: transparent;
+            }
             >.airplaneDiv{
                 position: absolute;
                 top: 0;
                 left:0;
                 width:100%;
                 height: 100%;
-                background-color: rgba(255,0,0,.5);
                 overflow: hidden;
                 display: flex;
                 align-items: flex-end;
                 background-color: transparent;
                 transition: .1s;
+                opacity: 0;
                 >img{
                     position: absolute;
                     object-fit: cover;
@@ -342,7 +349,7 @@ nav{
                     }
                 }
                 >.air{
-                    width:38px;
+                    width:10%;
                     transform: translateY(-380px);
                     transform: translateY(120px);
                     transform: translateY(340px);
@@ -430,7 +437,11 @@ nav{
                 position: absolute;
                 top: 0;
                 left:0;
-                background-color: #000;
+                background-color: transparent;
+                background-image: url('/images/airplane/bg.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
                 width:100%;
                 height: 100%;
                 color:#fff;
@@ -440,12 +451,41 @@ nav{
                 align-items: center;
                 overflow: hidden;
                 opacity: 1;
-                p{
+                opacity: 0;
+                >div{
+                    width:100%;
+                    background-color: transparent;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .timer{
+                    position: relative;
+                    width:100%;
+                    min-height:120px ;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-image: url('/images/airplane/timeBg.png');
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width:95%;
+                 
+                }
+                #countdownSec{
                     text-align: center;
                     font-size: 30px;
                     letter-spacing: 2px;
-                    >img{
-                        width:150px;
+                    z-index: 9999;
+                    
+                    width:100%;
+                    p{
+                        margin-top: 20px;
+                        color:#C8E1FF;
+                        font-size: 60px;
+                        font-weight: 500;
+                        font-family: 'Wallpoet', cursive;
                     }
                 }
                 #fiveNumber{
@@ -453,6 +493,37 @@ nav{
                     flex-direction: column-reverse;
                     justify-content: center;
                     align-items: center;
+                    width:95%;
+                    >.item{
+                        width:100%;
+                        padding:1px 0 6px ;
+                        border-top: 2px #13ECF5 solid;
+                        background-image: linear-gradient(to right, #111016, #035261, #111016);
+                        border-bottom: 2px #13ECF5 solid;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        margin-bottom: 10px;
+                        >.num{
+                            font-size: 10px;
+                            color:#D8D4A4;
+                            margin-bottom: 0px;
+                        }
+                        >.rankBox{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            >.number{
+                                height: 25px;
+                                margin:0 6px;
+                            }
+                        }
+                        
+                    }
+                }
+                .trend{
+                    width:150px;
                 }
             }
             >.airTopThree{
@@ -461,14 +532,67 @@ nav{
                 left:0;
                 width:100%;
                 height: 100%;
-                background-color: #000;
+                background-image: url('/images/airplane/bg.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 opacity: 0;
-                >p{
-                    color:#fff;
+                >.championTitle{
+                    width:90%;
+                    position: absolute;
+                    top: 20px;
+                    left:50%;
+                    transform: translateX(-50%);
+                }
+                >.streamer{
+                    width:100%;
+                    position: absolute;
+                    top: 50%;
+                    left:50%;
+                    transform: translate(-50%, -50%);
+                }
+                >.airList{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width:96%;
+                    >.airBox{
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: flex-end;
+                        width:30%;
+                        height: 220px;
+                        &.top1{
+                            margin-top: 100px;
+                        }
+                        >.rake{
+                            position: absolute;
+                            top:0;
+                            left:50%;
+                            transform: translateX(-50%);
+                            width:100%;
+                        }
+                        >.airbt{
+                            position: absolute;
+                            bottom:0;
+                            left:50%;
+                            transform: translateX(-50%);
+                            width:100%;
+                        }
+                        >.air{
+                            position: absolute;
+                            bottom:15px;
+                            left:60%;
+                            transform: translateX(-50%);
+                            width:100%;
+                        }
+                    }
                 }
             }
             >.airTopTen{
@@ -484,6 +608,50 @@ nav{
                 align-items: center;
                 color:#fff;
                 opacity: 0;
+                background-image: url('/images/airplane/bg.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                overflow: hidden;
+                >.list{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width:100%;
+                    height: 100px;
+                    &.top{
+                        >.airBox{
+                            width:35%;
+                        }
+                    }
+                    >.airBox{
+                        position: relative;
+                        width:30%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin:0 10px;
+                        >.airBoxBg{
+                            position: absolute;
+                            top:0;
+                            left:0;
+                            width:100%;
+                        }
+                        >.airNum{
+                            position: absolute;
+                            top:-20px;
+                            right:-20px;
+                            width:70%;
+                            
+                           
+                            @keyframes airRankIn {
+                                0%{
+                                    right:-300px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             >.gameLoading{
                 display: flex;
