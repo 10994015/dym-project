@@ -187,7 +187,7 @@
       <div class="betMoney"> <input type="number" id="beyMoney" value="0"> </div>
     </div>
     <div class="btnList">
-      <img src="/images/airplane/duble.png" id="doubleBtn">
+      <img src="/images/airplane/double.png" id="doubleBtn">
       <img src="/images/airplane/re.png" id="reBtn">
       <img src="/images/airplane/chk.png" id="chkBtn">
     </div>

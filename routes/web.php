@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Home::class);
+Route::get('/home', Home::class);
 Route::get('/airplane', Airplane::class)->middleware('auth');
 Route::get('/answer', Answer::class)->middleware('auth');
 Route::middleware([
