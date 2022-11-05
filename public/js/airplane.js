@@ -39,6 +39,7 @@ var secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5
 var myDoller = document.getElementById('myDoller');
 var rankingImg = document.getElementsByClassName('rankingImg');
 var chkBetBool = true;
+var isBetTime = true;
 var guessAirArray = {
   no1: {
     air1: {
@@ -465,6 +466,10 @@ function timeRun() {
   }
   if (new Date().getSeconds() == 0) {
     window.Livewire.emit('sendTime');
+    isBetTime = false;
+    chkBtn.src = '/images/airplane/chkdisable.png';
+    reBtn.src = '/images/airplane/redisable.png';
+    doubleBtn.src = '/images/airplane/doubledisable.png';
   }
   if (new Date().getSeconds() == 1) {
     sortFn();
@@ -493,6 +498,7 @@ function timeRun() {
       calcBetFn();
       window.Livewire.emit('updateMyMoney');
     }
+    isBetTime = true;
     chkBetBool = true;
     chkBtn.src = '/images/airplane/chk.png';
     reBtn.src = '/images/airplane/re.png';
@@ -671,6 +677,10 @@ function guessFn(e) {
 
 chkBtn.addEventListener('click', chkBtnFn);
 function chkBtnFn() {
+  if (!isBetTime) {
+    Swal.fire('警告', '現在非下注時間', 'error');
+    return;
+  }
   if (!chkBetBool) {
     Swal.fire('警告', '請勿重複下注！', 'error');
     return;
@@ -1363,6 +1373,10 @@ reBtn.addEventListener('click', function () {
   }
 });
 doubleBtn.addEventListener('click', function () {
+  if (!isBetTime) {
+    Swal.fire('警告', '現在非下注時間', 'error');
+    return;
+  }
   if (!chkBetBool) {
     Swal.fire('警告', '您已下注！請等待下次下注', 'error');
     return;

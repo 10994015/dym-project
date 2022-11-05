@@ -46,6 +46,7 @@ let secondsArr = [
 const myDoller = document.getElementById('myDoller');
 const rankingImg = document.getElementsByClassName('rankingImg');
 let chkBetBool = true;
+let isBetTime = true;
 let guessAirArray = {
     no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
     no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
@@ -178,6 +179,10 @@ function timeRun(){
     
     if(new Date().getSeconds() == 0){
         window.Livewire.emit('sendTime');
+        isBetTime = false;
+        chkBtn.src = '/images/airplane/chkdisable.png';
+        reBtn.src = '/images/airplane/redisable.png';
+        doubleBtn.src = '/images/airplane/doubledisable.png';
     }
     if(new Date().getSeconds() == 1){
         sortFn();
@@ -203,6 +208,7 @@ function timeRun(){
             calcBetFn();
             window.Livewire.emit('updateMyMoney');
         }
+        isBetTime = true;
         chkBetBool = true;
         chkBtn.src = '/images/airplane/chk.png';
         reBtn.src = '/images/airplane/re.png';
@@ -421,6 +427,14 @@ function guessFn(e){
 
 chkBtn.addEventListener('click',chkBtnFn);
 function chkBtnFn(){
+    if(!isBetTime){
+        Swal.fire(
+            '警告',
+            '現在非下注時間',
+            'error'
+        );
+        return;
+    }
     if(!chkBetBool){
         Swal.fire(
             '警告',
@@ -515,6 +529,14 @@ reBtn.addEventListener('click',()=>{
 
 })
 doubleBtn.addEventListener('click',()=>{
+    if(!isBetTime){
+        Swal.fire(
+            '警告',
+            '現在非下注時間',
+            'error'
+        );
+        return;
+    }
     if(!chkBetBool){
         Swal.fire(
             '警告',

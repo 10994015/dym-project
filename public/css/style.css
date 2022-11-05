@@ -780,20 +780,45 @@ nav > a:hover {
   text-align: center;
   line-height: 50px;
 }
-#airplane > .content > .betList > .list {
-  width: 100%;
-  height: 55px;
+#airplane > .content > .betList .listAll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  height: 100%;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+#airplane > .content > .betList .listAll::-webkit-scrollbar {
+  width: 3px;
+}
+#airplane > .content > .betList .listAll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+#airplane > .content > .betList .listAll::-webkit-scrollbar-thumb {
+  background: #ED35D1;
+}
+#airplane > .content > .betList .listAll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#airplane > .content > .betList .listAll > .list {
+  width: 95%;
+  min-height: 55px;
   background-color: rgba(226, 60, 210, 0.5);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
-#airplane > .content > .betList > .list > .title {
+#airplane > .content > .betList .listAll > .list > .title {
   border: 1px #fff solid;
   border-radius: 50%;
-  width: 45px;
+  min-width: 45px;
   height: 45px;
   text-align: center;
   display: flex;
@@ -802,12 +827,13 @@ nav > a:hover {
   margin: 0 3px;
   font-size: 12px;
 }
-#airplane > .content > .betList > .list > .title > p {
+#airplane > .content > .betList .listAll > .list > .title > p {
   margin-bottom: 0;
 }
-#airplane > .content > .betList > .list > .issue {
-  font-weight: 900;
+#airplane > .content > .betList .listAll > .list > .issue {
+  font-weight: 600;
   margin: 0 3px;
+  font-size: 13px;
 }
 #airplane > .content > .betList > .total {
   width: 100%;
