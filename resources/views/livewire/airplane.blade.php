@@ -1,5 +1,6 @@
 <div id="airplane" wire:ignore>
-    <div class="header">
+  <div id="loading" wire:loading><p>DYM Loading...</p></div>
+  <div class="header" wire:loading.remove>
       <div class="left">
         <div class="userBox">
           <img src="/images/airplane/w644.jpg">
@@ -27,10 +28,10 @@
         </div>
       </div>
   </div>
-  <div class="content">
+  <div class="content" wire:loading.remove>
     <div class="playBox">
-      <img src="/images/airplane/loading.gif" class="loading">
-      <div class="airplaneDiv" id="airplaneDiv">
+      <img src="/images/airplane/loading.gif" class="loading" >
+      <div class="airplaneDiv" id="airplaneDiv" >
         <img src="/images/airplane/bg2.png" class="bg" id="airplaneDivBg">
         @for($i=1;$i<=10;$i++)
           <div class="air">
@@ -39,12 +40,10 @@
           </div>
         @endfor
       </div>
-      <div class="countdown" id="countdown">
+      <div class="countdown" id="countdown" >
         <div>
           <div class="timer">
             <div id="countdownSec"> 
-              <!-- <img src="/images/airplane/timeBg.png" class="timeBg"> -->
-              <!-- <img src="/images/airplane/loading.gif"> -->
               <p></p>
             </div>
           </div>
@@ -54,7 +53,7 @@
         </div>
       </div>
      
-      <div class="airTopTen" id="airTopTen">
+      <div class="airTopTen" id="airTopTen" >
           <div class="list top">
             <div class="airBox">
               <img src="/images/airplane/airbox1.png" class="airBoxBg">
@@ -104,7 +103,7 @@
             </div>
           </div>
       </div>
-      <div class="airTopThree" id="airTopThree">
+      <div class="airTopThree" id="airTopThree" >
          <img src="/images/airplane/champion.png" class="championTitle">
          <img src="/images/airplane/streamer.png" class="streamer">
          <div class="airList">
@@ -173,7 +172,7 @@
         </div>
     </div>
   </div>
-  <div class="footer">
+  <div class="footer" wire:loading.remove>
     <div class="diamondList">
       <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
       <div class="diamondBox">

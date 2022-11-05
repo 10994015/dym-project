@@ -148,6 +148,17 @@ nav{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    >#loading{
+        width:100%;
+        height: 100vh;
+        background-color: #2C1B71;
+        color:#fff;
+        font-weight: 600;
+        font-size: 80px;
+        text-align: center;
+        line-height: 100vh;
+        display: flex;
+    }
     >.header{
         width:100%;
         height: 80px;
@@ -681,6 +692,7 @@ nav{
             >nav.nav{
                 display: flex;
                 justify-content: flex-start;
+                background: transparent;
                 >img{
                     width:120px;
                     display: block;
@@ -804,7 +816,7 @@ nav{
                 
                 /* Track */
                 &::-webkit-scrollbar-track {
-                    background: #f1f1f1;
+                    background: #ccc;
                 }
                 
                 /* Handle */
@@ -826,6 +838,7 @@ nav{
                     justify-content: center;
                     border-radius: 20px;
                     margin-bottom: 10px;
+                    margin-right: 5px;
                     >.title{
                         border:1px #fff solid;
                         border-radius: 50%;
