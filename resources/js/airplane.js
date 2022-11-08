@@ -29,6 +29,7 @@ const chkBtn = document.getElementById('chkBtn');
 const rank = document.getElementsByClassName('rank');
 const beyMoney = document.getElementById('beyMoney');
 let answer = [];
+let riskAnswerArr = [];
 let reverseanswer = [];
 let nowAnswer = [];
 let secondsArr = [
@@ -83,6 +84,11 @@ window.addEventListener('sendAnswer', e=>{
     answer = e.detail.answer;
     // console.log(answer);
     nowAnswer = answer[4].ranking.split(',');
+    // console.log(e.detail.riskAnswer[0].ranking);
+    
+    riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
+    // console.log(riskAnswerArr);
+    
     // console.log("now:", nowAnswer);
     initSecondsArr();
     secondsArr.forEach((item, key)=>{
@@ -102,6 +108,7 @@ let fiveHtml = '';
 window.addEventListener('startRun', e=>{
     answer = e.detail.answer;
     nowAnswer = answer[4].ranking.split(',');
+    riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
     initSecondsArr();
     secondsArr.forEach((item, key)=>{
         item[1] = nowAnswer[key];
@@ -267,7 +274,7 @@ function fiveNumberFn(){
                 </div>
               </div>
         `
-        console.log(item.ranking.split(','));
+        // console.log(item.ranking.split(','));
         
     })
     fiveNumber.innerHTML = fiveHtml;
@@ -460,8 +467,8 @@ function chkBtnFn(){
     chkBtn.src = '/images/airplane/chkdisable.png';
     reBtn.src = '/images/airplane/redisable.png';
     doubleBtn.src = '/images/airplane/doubledisable.png';
-    
     window.Livewire.emit('chkBet' ,totalBet);
+    riskCalcBetFn(totalBet);
     totalBet = 0;
 }
 function calcBetFn(){
@@ -496,7 +503,25 @@ function calcBetFn(){
     }
     
 }
+function riskCalcBetFn(totalBet){
+    let riskWinMoney = 0;
+    //賠率
+    let riskodds = 2;
+    for(let i=1;i<=10;i++){
+        // console.log(guessAirArray[`no${i}`]);
+        for(let j=1;j<=10;j++){
+            if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
+                // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
+                if(j == riskAnswerArr[i-1]){
+                    riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskodds);
+                }
+            }
+        }
+    }
+    window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet);
 
+    
+}
 window.addEventListener('updateMyMoneyHtml', e=>{
     myDoller.innerHTML = e.detail.money;
     winMessage.innerHTML = `恭喜您贏得了${e.detail.win}元`

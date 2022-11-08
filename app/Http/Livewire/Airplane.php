@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Answer;
 use App\Models\Betlist;
+use App\Models\RiskBet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -16,30 +17,24 @@ class Airplane extends Component
     public $myDoller;
     public $accMoney;
     public $winMoney = 0;
-    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney'];
+    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney'];
 
   
    
     public function sendTime(){
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
+        $riskTime = date('Y-m-d H:i', strtotime("+1 minute"));
         $answer = Answer::whereBetween('bet_time', [$beforeTime, $nowTime])->get();
-        $this->dispatchBrowserEvent('sendAnswer', ['answer'=>$answer]);
+        $riskAnswer = Answer::where('bet_time',$riskTime)->get();
+        $this->dispatchBrowserEvent('sendAnswer', ['answer'=>$answer, 'riskAnswer'=>$riskAnswer]);
     }
     public function chkBet($t){
-        // Log::info($t);
         $this->betMoney = $t;
         $this->myDoller = intval($this->myDoller) - intval($t);
         $userMoney = Auth::user(); 
         $userMoney->money = $this->myDoller;
         $userMoney->save();
-        
-        
-        // $beforeTime = date('Y-m-d H:i', strtotime("+1 minute"));
-        // $answer = Answer::where('bet_time', $beforeTime);
-        // $betlist = new Betlist();
-        // $betlist->bet_number = $answer->number;
-        // $betlist->money = $t;
     }
     public function calcMoney($win){
         $this->winMoney = $win;
@@ -59,6 +54,17 @@ class Airplane extends Component
         $betlist->save();
 
     }
+    public function riskCalcMoney($riskWinMoney, $totalBet){
+        $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
+        $answer = Answer::where('bet_time', $nowTime)->first();
+        $riskbet = new RiskBet();
+        $riskbet->bet_number = $answer->number;
+        $riskbet->money = $totalBet;
+        $riskbet->result = $riskWinMoney;
+        $riskbet->user_id = Auth::id();
+        $riskbet->save();
+
+    }
     public function updateMyMoney(){
         $this->myDoller = Auth::user()->money;
         // $this->myDoller->save();
@@ -73,7 +79,9 @@ class Airplane extends Component
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
         $answer = Answer::whereBetween('bet_time', [$beforeTime, $nowTime])->get();
-        $this->dispatchBrowserEvent('startRun', ['answer'=>$answer]);
+        $riskTime = date('Y-m-d H:i', strtotime("+1 minute"));
+        $riskAnswer = Answer::where('bet_time',$riskTime)->get();
+        $this->dispatchBrowserEvent('startRun', ['answer'=>$answer, 'riskAnswer'=>$riskAnswer]);
 
         $betlist = Betlist::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
         $bet_count = Betlist::where('user_id', Auth::id())->count();

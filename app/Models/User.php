@@ -62,4 +62,7 @@ class User extends Authenticatable
     public function betlists(){
         return $this->hasMany('App\Models\Betlist'::class);
     }
+    public function risk_bets(){
+        return $this->hasMany('App\Models\RiskBet'::class);
+    }
 }

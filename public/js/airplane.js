@@ -33,6 +33,7 @@ var chkBtn = document.getElementById('chkBtn');
 var rank = document.getElementsByClassName('rank');
 var beyMoney = document.getElementById('beyMoney');
 var answer = [];
+var riskAnswerArr = [];
 var reverseanswer = [];
 var nowAnswer = [];
 var secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5'], [10.14, '6'], [10.15, '7'], [10.16, '8'], [10.17, '9'], [10.18, '10']];
@@ -373,6 +374,11 @@ window.addEventListener('sendAnswer', function (e) {
   answer = e.detail.answer;
   // console.log(answer);
   nowAnswer = answer[4].ranking.split(',');
+  // console.log(e.detail.riskAnswer[0].ranking);
+
+  riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
+  // console.log(riskAnswerArr);
+
   // console.log("now:", nowAnswer);
   initSecondsArr();
   secondsArr.forEach(function (item, key) {
@@ -391,6 +397,7 @@ var fiveHtml = '';
 window.addEventListener('startRun', function (e) {
   answer = e.detail.answer;
   nowAnswer = answer[4].ranking.split(',');
+  riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
   initSecondsArr();
   secondsArr.forEach(function (item, key) {
     item[1] = nowAnswer[key];
@@ -540,8 +547,9 @@ function fiveNumberFn() {
   fiveNumber.innerHTML = "";
   answer.forEach(function (item) {
     fiveHtml += "\n            <div class=\"item\">\n                <p class=\"num\">".concat(item.number, "</p>\n                <div class=\"rankBox\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[0], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[1], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[2], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[3], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[4], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[5], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[6], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[7], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[8], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[9], ".png\" class=\"number\">\n                </div>\n              </div>\n        ");
-    console.log(item.ranking.split(','));
+    // console.log(item.ranking.split(','));
   });
+
   fiveNumber.innerHTML = fiveHtml;
 }
 function chengGameFn(e) {
@@ -695,6 +703,7 @@ function chkBtnFn() {
   reBtn.src = '/images/airplane/redisable.png';
   doubleBtn.src = '/images/airplane/doubledisable.png';
   window.Livewire.emit('chkBet', totalBet);
+  riskCalcBetFn(totalBet);
   totalBet = 0;
 }
 function calcBetFn() {
@@ -1036,6 +1045,23 @@ function calcBetFn() {
       }
     }
   };
+}
+function riskCalcBetFn(totalBet) {
+  var riskWinMoney = 0;
+  //賠率
+  var riskodds = 2;
+  for (var _i13 = 1; _i13 <= 10; _i13++) {
+    // console.log(guessAirArray[`no${i}`]);
+    for (var j = 1; j <= 10; j++) {
+      if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
+        // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
+        if (j == riskAnswerArr[_i13 - 1]) {
+          riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * riskodds;
+        }
+      }
+    }
+  }
+  window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet);
 }
 window.addEventListener('updateMyMoneyHtml', function (e) {
   myDoller.innerHTML = e.detail.money;
@@ -1392,25 +1418,25 @@ doubleBtn.addEventListener('click', function () {
   }
   myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
   totalBet = totalBet * 2;
-  for (var _i13 = 1; _i13 <= 10; _i13++) {
-    guessAirArray["no".concat(_i13)];
+  for (var _i14 = 1; _i14 <= 10; _i14++) {
+    guessAirArray["no".concat(_i14)];
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
-        guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * 2;
+      if (guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] > 0) {
+        guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] * 2;
       }
     }
   }
   Swal.fire('下注成功！', '下注金額雙倍', 'success');
 });
 function airTopTenHTML(nowAnswer) {
-  for (var _i14 = 0; _i14 < airNum.length; _i14++) {
-    airNum[_i14].src = "/images/airplane/airRank".concat(nowAnswer[_i14], ".png");
+  for (var _i15 = 0; _i15 < airNum.length; _i15++) {
+    airNum[_i15].src = "/images/airplane/airRank".concat(nowAnswer[_i15], ".png");
   }
 }
 var threeArr = [1, 0, 2];
 function airTopThreeHTML(nowAnswer) {
-  for (var _i15 = 0; _i15 < topThreeAir.length; _i15++) {
-    topThreeAir[_i15].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i15]], ".png");
+  for (var _i16 = 0; _i16 < topThreeAir.length; _i16++) {
+    topThreeAir[_i16].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i16]], ".png");
   }
 }
 /******/ })()
