@@ -501,7 +501,6 @@ function calcBetFn(){
         no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
         no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
     }
-    
 }
 function riskCalcBetFn(totalBet){
     let riskWinMoney = 0;
@@ -518,7 +517,9 @@ function riskCalcBetFn(totalBet){
             }
         }
     }
-    window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet);
+    
+    
+    window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray );
 
     
 }

@@ -1,6 +1,6 @@
 <div id="airplane" wire:ignore>
-  <div id="loading" wire:loading><p>DYM Loading...</p></div>
-  <div class="header" wire:loading.remove>
+  <!-- <div id="loading" wire:loading><p>DYM Loading...</p></div> -->
+  <div class="header" >
       <div class="left">
         <div class="userBox">
           <img src="/images/airplane/w644.jpg">
@@ -28,7 +28,7 @@
         </div>
       </div>
   </div>
-  <div class="content" wire:loading.remove>
+  <div class="content" >
     <div class="playBox">
       <img src="/images/airplane/loading.gif" class="loading" >
       <div class="airplaneDiv" id="airplaneDiv" >
@@ -172,7 +172,7 @@
         </div>
     </div>
   </div>
-  <div class="footer" wire:loading.remove>
+  <div class="footer" >
     <div class="diamondList">
       <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
       <div class="diamondBox">

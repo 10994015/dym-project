@@ -1061,7 +1061,7 @@ function riskCalcBetFn(totalBet) {
       }
     }
   }
-  window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet);
+  window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray);
 }
 window.addEventListener('updateMyMoneyHtml', function (e) {
   myDoller.innerHTML = e.detail.money;

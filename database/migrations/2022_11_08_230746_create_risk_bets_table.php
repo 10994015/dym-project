@@ -16,6 +16,7 @@ class CreateRiskBetsTable extends Migration
         Schema::create('risk_bets', function (Blueprint $table) {
             $table->id();
             $table->string('bet_number');
+            $table->json('guess')->nullable();
             $table->integer('money');
             $table->integer('result');
             $table->unsignedBigInteger('user_id');

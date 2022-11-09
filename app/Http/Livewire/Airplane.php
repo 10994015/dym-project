@@ -54,11 +54,13 @@ class Airplane extends Component
         $betlist->save();
 
     }
-    public function riskCalcMoney($riskWinMoney, $totalBet){
+    public function riskCalcMoney($riskWinMoney, $totalBet, $guessAirArray){
+        Log::info(json_encode($guessAirArray));
         $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
         $answer = Answer::where('bet_time', $nowTime)->first();
         $riskbet = new RiskBet();
         $riskbet->bet_number = $answer->number;
+        $riskbet->guess = json_encode($guessAirArray);
         $riskbet->money = $totalBet;
         $riskbet->result = $riskWinMoney;
         $riskbet->user_id = Auth::id();
