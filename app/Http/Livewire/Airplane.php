@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Answer;
 use App\Models\Betlist;
+use App\Models\GameInfos;
 use App\Models\RiskBet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,16 @@ class Airplane extends Component
         $userMoney->save();
     }
     public function calcMoney($win){
+        $gameinfo = GameInfos::where('gamenumber', '23')->first();
+        $nowTime = date('Y-m-d H:i');
+        $answer = Answer::where('bet_time', $nowTime)->first();
+        
+        if($gameinfo->mode == '1'){
+            $risk = RiskBet::where('bet_number', $answer->number)->orderBy('result', 'DESC')->first();
+            if($risk->result ==  $win){
+                $win = 0;
+            }
+        }
         $this->winMoney = $win;
         $userMoney = Auth::user(); 
         $userMoney->money = intval($userMoney->money) + intval($win);
@@ -44,8 +55,6 @@ class Airplane extends Component
         $userMoney->save();
         
         
-        $nowTime = date('Y-m-d H:i');
-        $answer = Answer::where('bet_time', $nowTime)->first();
         $betlist = new Betlist();
         $betlist->bet_number = $answer->number;
         $betlist->money = $this->betMoney;
@@ -68,6 +77,7 @@ class Airplane extends Component
 
     }
     public function updateMyMoney(){
+       
         $this->myDoller = Auth::user()->money;
         // $this->myDoller->save();
         $m = $this->myDoller;
