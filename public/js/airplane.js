@@ -1048,12 +1048,20 @@ function calcBetFn() {
 }
 function riskCalcBetFn(totalBet) {
   var riskWinMoney = 0;
+  var max_bet = 0;
+  var max_airplane = 0;
+  var max_rank = 0;
   //賠率
   var riskodds = 2;
   for (var _i13 = 1; _i13 <= 10; _i13++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
       if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
+        if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > max_bet) {
+          max_bet = guessAirArray["no".concat(_i13)]["air".concat(j)]['money'];
+          max_rank = _i13;
+          max_airplane = j;
+        }
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
         if (j == riskAnswerArr[_i13 - 1]) {
           riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * riskodds;
@@ -1061,7 +1069,8 @@ function riskCalcBetFn(totalBet) {
       }
     }
   }
-  window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray);
+  console.log(max_bet);
+  window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray, max_bet, max_rank, max_airplane);
 }
 window.addEventListener('updateMyMoneyHtml', function (e) {
   myDoller.innerHTML = e.detail.money;

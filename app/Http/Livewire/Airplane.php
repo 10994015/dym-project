@@ -38,22 +38,15 @@ class Airplane extends Component
         $userMoney->save();
     }
     public function calcMoney($win){
-        $gameinfo = GameInfos::where('gamenumber', '23')->first();
         $nowTime = date('Y-m-d H:i');
         $answer = Answer::where('bet_time', $nowTime)->first();
         
-        if($gameinfo->mode == '1'){
-            $risk = RiskBet::where('bet_number', $answer->number)->orderBy('result', 'DESC')->first();
-            if($risk->result ==  $win){
-                $win = 0;
-            }
-        }
+        
         $this->winMoney = $win;
         $userMoney = Auth::user(); 
         $userMoney->money = intval($userMoney->money) + intval($win);
         // Log::info( $userMoney->money);
         $userMoney->save();
-        
         
         $betlist = new Betlist();
         $betlist->bet_number = $answer->number;
@@ -63,8 +56,10 @@ class Airplane extends Component
         $betlist->save();
 
     }
-    public function riskCalcMoney($riskWinMoney, $totalBet, $guessAirArray){
-        Log::info(json_encode($guessAirArray));
+    public function riskCalcMoney($riskWinMoney, $totalBet, $guessAirArray, $max_bet, $max_rank, $max_airplane){
+        // Log::info(json_encode($guessAirArray));
+        $gameinfo = GameInfos::where('gamenumber', '23')->first();
+
         $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
         $answer = Answer::where('bet_time', $nowTime)->first();
         $riskbet = new RiskBet();
@@ -72,9 +67,32 @@ class Airplane extends Component
         $riskbet->guess = json_encode($guessAirArray);
         $riskbet->money = $totalBet;
         $riskbet->result = $riskWinMoney;
+        $riskbet->max_bet = $max_bet;
+        $riskbet->max_rank = $max_rank;
+        $riskbet->max_airplane = $max_airplane;
         $riskbet->user_id = Auth::id();
         $riskbet->save();
-
+        if($gameinfo->mode == '1'){
+            $this->riskControl($answer->number);
+        }
+    }
+    public function riskControl($bet_number){
+        $risk_max = RiskBet::where('bet_number', $bet_number)->orderBy('max_bet', 'DESC')->first();
+        Log::info("金額:".$risk_max->max_bet);
+        Log::info("名次:".$risk_max->max_rank);
+        Log::info("飛機:".$risk_max->max_airplane);
+        while(true){
+            $newRank = [1,2,3,4,5,6,7,8,9,10];
+            shuffle($newRank);
+            if($newRank[$risk_max->max_rank-1] != $risk_max->max_airplane){
+                break;
+            }
+        }
+        $newranking = implode(",",$newRank);
+        Log::info($newranking);
+        $answer = Answer::where('number', $bet_number)->first();
+        $answer->ranking = $newranking;
+        $answer->save();
     }
     public function updateMyMoney(){
        
@@ -85,6 +103,7 @@ class Airplane extends Component
         $this->winMoney = 0;
         $this->betMoney = 0;
     }
+
     public function render()
     {
         $this->myDoller = Auth::user()->money;
