@@ -157,18 +157,17 @@
     </div>
     <div class="betList">
         <div class="header">注單列表</div>
-       <div class="listAll">
-          @foreach($betlist as $bet)
-          <div class="list">
+        <div class="list-title">
               <div class="title"><p>下注<br>期號</p></div>
-              <div class="issue">{{$bet->bet_number}}</div>
+              <div class="issue">SR9359202211130349</div>
           </div>
-          @endforeach
-       </div>
+        <div class="listAll" id="listAll">
+        </div>
+       
 
         <div class="total">
-            <p>總注數: {{$bet_count}}</p>
-            <p>總投注金額: {{$bet_sum}}</p>
+            <p>總注數: <span id="totalBetNmuber">0</span></p>
+            <p>總投注金額: <span id="totalBetMoney">0</span></p>
         </div>
     </div>
   </div>

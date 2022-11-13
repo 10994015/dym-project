@@ -775,9 +775,8 @@ nav > a:hover {
   height: 540px;
   border: 6px #ED35D1 solid;
   position: relative;
-  padding: 10px;
-  padding-top: 54px;
-  padding-bottom: 55px;
+  padding-top: 44px;
+  padding-bottom: 115px;
 }
 #airplane > .content > .betList > .header {
   width: calc(100% + 12px);
@@ -791,6 +790,35 @@ nav > a:hover {
   font-size: 24px;
   text-align: center;
   line-height: 50px;
+}
+#airplane > .content > .betList .list-title {
+  width: 100%;
+  min-height: 55px;
+  background-color: rgba(226, 60, 210, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#airplane > .content > .betList .list-title > .title {
+  border: 1px #fff solid;
+  border-radius: 50%;
+  min-width: 45px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  font-size: 12px;
+}
+#airplane > .content > .betList .list-title > .title > p {
+  margin-bottom: 0;
+}
+#airplane > .content > .betList .list-title > .issue {
+  font-weight: 600;
+  margin: 0 3px;
+  font-size: 13px;
 }
 #airplane > .content > .betList .listAll {
   display: flex;
@@ -816,37 +844,26 @@ nav > a:hover {
 #airplane > .content > .betList .listAll::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-#airplane > .content > .betList .listAll > .list {
+#airplane > .content > .betList .listAll > .item {
   width: 95%;
-  min-height: 55px;
-  background-color: rgba(226, 60, 210, 0.5);
+  border-radius: 10px;
+  background-color: rgba(117, 34, 122, 0.75);
+  padding: 2px 10px;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  margin-right: 5px;
-}
-#airplane > .content > .betList .listAll > .list > .title {
-  border: 1px #fff solid;
-  border-radius: 50%;
-  min-width: 45px;
-  height: 45px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 3px;
-  font-size: 12px;
-}
-#airplane > .content > .betList .listAll > .list > .title > p {
-  margin-bottom: 0;
-}
-#airplane > .content > .betList .listAll > .list > .issue {
-  font-weight: 600;
-  margin: 0 3px;
+  margin: 5px 0;
   font-size: 13px;
+  position: relative;
+}
+#airplane > .content > .betList .listAll > .item i.deleteBet {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+#airplane > .content > .betList .listAll > .item span {
+  color: #02FEFF;
+  font-weight: 900;
 }
 #airplane > .content > .betList > .total {
   width: 100%;

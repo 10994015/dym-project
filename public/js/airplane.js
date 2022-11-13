@@ -37,6 +37,8 @@ var riskAnswerArr = [];
 var reverseanswer = [];
 var nowAnswer = [];
 var secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5'], [10.14, '6'], [10.15, '7'], [10.16, '8'], [10.17, '9'], [10.18, '10']];
+var game_name_arr = ['定位膽', '冠亞二星', '大小單雙', '冠亞和', '龍虎'];
+var game_name_num = 0;
 var myDoller = document.getElementById('myDoller');
 var rankingImg = document.getElementsByClassName('rankingImg');
 var chkBetBool = true;
@@ -363,10 +365,21 @@ var guessAirArray = {
     }
   }
 };
+var deleteBet = null;
+var totalBetNmuber = document.getElementById('totalBetNmuber');
+var totalBetMoney = document.getElementById('totalBetMoney');
+var totalBetNumberCalc = 0;
+var listAll = document.getElementById('listAll');
+var listAllHtml = '';
 var airNum = document.getElementsByClassName('airNum');
 var topThreeAir = document.getElementsByClassName('topThreeAir');
 var chooseRank = 1;
+var setOdds = 0;
+var bethtmlArr = [];
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
+window.addEventListener('setOdds', function (e) {
+  setOdds = e.detail.odds;
+});
 var initSecondsArr = function initSecondsArr() {
   secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5'], [10.14, '6'], [10.15, '7'], [10.16, '8'], [10.17, '9'], [10.18, '10']];
 };
@@ -477,6 +490,13 @@ function timeRun() {
     chkBtn.src = '/images/airplane/chkdisable.png';
     reBtn.src = '/images/airplane/redisable.png';
     doubleBtn.src = '/images/airplane/doubledisable.png';
+    totalBet = 0;
+    totalBetNumberCalc = 0;
+    totalBetNmuber.innerHTML = totalBetNumberCalc;
+    totalBetMoney.innerHTML = totalBet;
+    listAllHtml = "";
+    listAll.innerHTML = "";
+    bethtmlArr = [];
   }
   if (new Date().getSeconds() == 1) {
     sortFn();
@@ -557,7 +577,7 @@ function chengGameFn(e) {
   initGameFn();
   id = e.target.id.split('Btn')[1];
   e.target.src = e.target.src.replace('btn', 'btnchk');
-  // console.log(id);
+  game_name_num = Number(id) - 1;
   document.getElementById("game".concat(id)).style.display = "block";
 }
 function initGameFn() {
@@ -669,6 +689,9 @@ function guessFn(e) {
     notMoneyFn();
     return;
   }
+  var rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+  var airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+  totalBetNumberCalc++;
   myDoller.innerHTML = Number(myDoller.innerHTML) - Number(beyMoney.value);
   // console.log(e.target.alt);
   totalBet += Number(beyMoney.value);
@@ -680,9 +703,44 @@ function guessFn(e) {
     sd.style.display = "none";
   }, 200);
   guessAirArray["no".concat(chooseRank)]["air".concat(e.target.alt)]['money'] += Number(beyMoney.value);
-  // console.log(guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]);
+  totalBetNmuber.innerHTML = totalBetNumberCalc;
+  totalBetMoney.innerHTML = totalBet;
+  bethtmlArr.push([]);
+  bethtmlArr[bethtmlArr.length - 1].push(game_name_arr[game_name_num], "".concat(rankGuessArr[chooseRank], " - ").concat(airGuessArr[Number(e.target.alt)]), setOdds, beyMoney.value);
+  listAllHtml = "";
+  for (var _i12 = 0; _i12 < bethtmlArr.length; _i12++) {
+    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i12, "\">\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i12][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i12][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i12][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i12][3], "<br>\n                </div>");
+  }
+  listAll.innerHTML = listAllHtml;
+  if (document.getElementsByClassName('deleteBet').length > 0) {
+    for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
+      document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+    }
+  }
 }
-
+function removeBetArr(e) {
+  var idx = Number(e.target.parentNode.querySelector('input').value);
+  var rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+  var removeRank = rankGuessArr.indexOf(bethtmlArr[idx][1].split('-')[0].trim());
+  var removeAir = Number(bethtmlArr[idx][1].split('-')[1].trim());
+  guessAirArray["no".concat(removeRank)]["air".concat(removeAir)]['money'] -= Number(bethtmlArr[idx][3]);
+  myDoller.innerHTML = Number(myDoller.innerHTML) + Number(bethtmlArr[idx][3]);
+  totalBetNumberCalc = totalBetNumberCalc - 1;
+  totalBet = totalBet - bethtmlArr[idx][3];
+  totalBetNmuber.innerHTML = totalBetNumberCalc;
+  totalBetMoney.innerHTML = totalBet;
+  bethtmlArr.splice(idx, 1);
+  listAllHtml = "";
+  for (var _i13 = 0; _i13 < bethtmlArr.length; _i13++) {
+    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i13, "\">\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i13][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i13][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i13][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i13][3], "<br>\n                </div>");
+  }
+  listAll.innerHTML = listAllHtml;
+  if (document.getElementsByClassName('deleteBet').length > 0) {
+    for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
+      document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+    }
+  }
+}
 chkBtn.addEventListener('click', chkBtnFn);
 function chkBtnFn() {
   if (!isBetTime) {
@@ -705,18 +763,22 @@ function chkBtnFn() {
   window.Livewire.emit('chkBet', totalBet);
   riskCalcBetFn(totalBet);
   totalBet = 0;
+  for (var _i14 = 0; _i14 < document.getElementsByClassName('deleteBet').length; _i14++) {
+    document.getElementsByClassName('deleteBet')[_i14].removeEventListener('click', removeBetArr);
+    document.getElementsByClassName('deleteBet')[_i14].style.display = "none";
+  }
 }
 function calcBetFn() {
   var winMoney = 0;
   //賠率
   var odds = 2;
-  for (var _i12 = 1; _i12 <= 10; _i12++) {
+  for (var _i15 = 1; _i15 <= 10; _i15++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i12)]["air".concat(j)]['money'] > 0) {
+      if (guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] > 0) {
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-        if (j == nowAnswer[_i12 - 1]) {
-          winMoney = winMoney + guessAirArray["no".concat(_i12)]["air".concat(j)]['money'] * odds;
+        if (j == nowAnswer[_i15 - 1]) {
+          winMoney = winMoney + guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] * odds;
         }
       }
     }
@@ -1053,18 +1115,18 @@ function riskCalcBetFn(totalBet) {
   var max_rank = 0;
   //賠率
   var riskodds = 2;
-  for (var _i13 = 1; _i13 <= 10; _i13++) {
+  for (var _i16 = 1; _i16 <= 10; _i16++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
-        if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > max_bet) {
-          max_bet = guessAirArray["no".concat(_i13)]["air".concat(j)]['money'];
-          max_rank = _i13;
+      if (guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] > 0) {
+        if (guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] > max_bet) {
+          max_bet = guessAirArray["no".concat(_i16)]["air".concat(j)]['money'];
+          max_rank = _i16;
           max_airplane = j;
         }
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-        if (j == riskAnswerArr[_i13 - 1]) {
-          riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * riskodds;
+        if (j == riskAnswerArr[_i16 - 1]) {
+          riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] * riskodds;
         }
       }
     }
@@ -1403,6 +1465,12 @@ reBtn.addEventListener('click', function () {
     myDoller.innerHTML = Number(myDoller.innerHTML) + Number(totalBet);
     totalBet = 0;
     beyMoney.value = 0;
+    totalBetNumberCalc = 0;
+    totalBetNmuber.innerHTML = totalBetNumberCalc;
+    totalBetMoney.innerHTML = totalBet;
+    listAllHtml = "";
+    listAll.innerHTML = "";
+    bethtmlArr = [];
   } else {
     Swal.fire('警告', '您已下注！請等待下次下注', 'error');
   }
@@ -1427,25 +1495,37 @@ doubleBtn.addEventListener('click', function () {
   }
   myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
   totalBet = totalBet * 2;
-  for (var _i14 = 1; _i14 <= 10; _i14++) {
-    guessAirArray["no".concat(_i14)];
-    for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] > 0) {
-        guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] = guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] * 2;
+  totalBetMoney.innerHTML = totalBet;
+  listAllHtml = "";
+  for (var j = 0; j < bethtmlArr.length; j++) {
+    bethtmlArr[j][3] = Number(bethtmlArr[j][3]) * 2;
+    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(j, "\">\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[j][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[j][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[j][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[j][3], "<br>\n                </div>");
+  }
+  listAll.innerHTML = listAllHtml;
+  if (document.getElementsByClassName('deleteBet').length > 0) {
+    for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
+      document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+    }
+  }
+  for (var _i17 = 1; _i17 <= 10; _i17++) {
+    guessAirArray["no".concat(_i17)];
+    for (var _j = 1; _j <= 10; _j++) {
+      if (guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] > 0) {
+        guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] = guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] * 2;
       }
     }
   }
   Swal.fire('下注成功！', '下注金額雙倍', 'success');
 });
 function airTopTenHTML(nowAnswer) {
-  for (var _i15 = 0; _i15 < airNum.length; _i15++) {
-    airNum[_i15].src = "/images/airplane/airRank".concat(nowAnswer[_i15], ".png");
+  for (var _i18 = 0; _i18 < airNum.length; _i18++) {
+    airNum[_i18].src = "/images/airplane/airRank".concat(nowAnswer[_i18], ".png");
   }
 }
 var threeArr = [1, 0, 2];
 function airTopThreeHTML(nowAnswer) {
-  for (var _i16 = 0; _i16 < topThreeAir.length; _i16++) {
-    topThreeAir[_i16].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i16]], ".png");
+  for (var _i19 = 0; _i19 < topThreeAir.length; _i19++) {
+    topThreeAir[_i19].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i19]], ".png");
   }
 }
 /******/ })()

@@ -44,6 +44,8 @@ let secondsArr = [
     [10.17,'9'],
     [10.18,'10']
 ];
+let game_name_arr = ['定位膽', '冠亞二星', '大小單雙', '冠亞和', '龍虎'];
+let game_name_num = 0;
 const myDoller = document.getElementById('myDoller');
 const rankingImg = document.getElementsByClassName('rankingImg');
 let chkBetBool = true;
@@ -60,11 +62,22 @@ let guessAirArray = {
     no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
     no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
 }
+let deleteBet = null;
+const totalBetNmuber = document.getElementById('totalBetNmuber');
+const totalBetMoney = document.getElementById('totalBetMoney');
+let totalBetNumberCalc = 0;
+const listAll = document.getElementById('listAll');
+let listAllHtml = '';
 const airNum = document.getElementsByClassName('airNum');
 const topThreeAir = document.getElementsByClassName('topThreeAir');
 let chooseRank = 1;
-document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
+let setOdds = 0;
 
+let bethtmlArr = [];
+document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
+window.addEventListener('setOdds', e=>{
+    setOdds = e.detail.odds;
+});
 
 const initSecondsArr = ()=>{
     secondsArr = [
@@ -190,6 +203,16 @@ function timeRun(){
         chkBtn.src = '/images/airplane/chkdisable.png';
         reBtn.src = '/images/airplane/redisable.png';
         doubleBtn.src = '/images/airplane/doubledisable.png';
+
+        totalBet = 0;
+
+        totalBetNumberCalc = 0;
+        totalBetNmuber.innerHTML = totalBetNumberCalc;
+        totalBetMoney.innerHTML = totalBet;
+
+        listAllHtml = "";
+        listAll.innerHTML = "";
+        bethtmlArr = [];
     }
     if(new Date().getSeconds() == 1){
         sortFn();
@@ -285,7 +308,8 @@ function chengGameFn(e){
     initGameFn();
     id = e.target.id.split('Btn')[1]
     e.target.src = e.target.src.replace('btn', 'btnchk');
-    // console.log(id);
+    game_name_num = Number(id) -1;
+    
     document.getElementById(`game${id}`).style.display = "block";
 }
 function initGameFn(){
@@ -413,10 +437,15 @@ function guessFn(e){
         return;
     }
     let remain =  Number(myDoller.innerHTML) -  Number(beyMoney.value);
+    
     if(remain < 0 ){
         notMoneyFn();
         return;
     }
+    let rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+    let airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+
+    totalBetNumberCalc++;
     myDoller.innerHTML = Number(myDoller.innerHTML)  -Number(beyMoney.value);
     // console.log(e.target.alt);
     totalBet += Number(beyMoney.value);
@@ -429,9 +458,72 @@ function guessFn(e){
         sd.style.display = "none";
     },200)
     guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]['money'] += Number(beyMoney.value);
-    // console.log(guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]);
+
+    totalBetNmuber.innerHTML = totalBetNumberCalc;
+    totalBetMoney.innerHTML = totalBet;
+    bethtmlArr.push([])
+    bethtmlArr[bethtmlArr.length -1].push( game_name_arr[game_name_num], `${rankGuessArr[chooseRank]} - ${airGuessArr[Number(e.target.alt)]}`, setOdds, beyMoney.value);
+    listAllHtml = "";
+    for(let i=0;i<bethtmlArr.length;i++){
+        listAllHtml += `<div class="item">
+                    <i class="fas fa-times deleteBet"></i>
+                    <input type="hidden" value="${i}">
+                    <span>下注項目:</span><br>
+                    ${bethtmlArr[i][0]}<br>
+                    <span>下注內容:</span><br>
+                    ${bethtmlArr[i][1]}<br>
+                    <span>賠率:</span>
+                    ${bethtmlArr[i][2]}<br>
+                    <span>投注金額:</span>
+                    ${bethtmlArr[i][3]}<br>
+                </div>`;
+    }
+    listAll.innerHTML = listAllHtml;
+    if(document.getElementsByClassName('deleteBet').length > 0){
+        for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
+            document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+        }
+    }
+    
 }
 
+function removeBetArr(e){
+    let idx = Number(e.target.parentNode.querySelector('input').value);
+    let rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+    let removeRank = rankGuessArr.indexOf(bethtmlArr[idx][1].split('-')[0].trim());
+    let removeAir = Number(bethtmlArr[idx][1].split('-')[1].trim());
+    guessAirArray[`no${removeRank}`][`air${removeAir}`]['money'] -= Number(bethtmlArr[idx][3]);
+    myDoller.innerHTML = Number(myDoller.innerHTML) + Number(bethtmlArr[idx][3]);
+
+    totalBetNumberCalc = totalBetNumberCalc-1;
+    totalBet = totalBet - bethtmlArr[idx][3]
+    totalBetNmuber.innerHTML = totalBetNumberCalc;
+    totalBetMoney.innerHTML = totalBet;
+    bethtmlArr.splice(idx, 1);
+    listAllHtml = "";
+    for(let i=0;i<bethtmlArr.length;i++){
+        listAllHtml += `<div class="item">
+                    <i class="fas fa-times deleteBet"></i>
+                    <input type="hidden" value="${i}">
+                    <span>下注項目:</span><br>
+                    ${bethtmlArr[i][0]}<br>
+                    <span>下注內容:</span><br>
+                    ${bethtmlArr[i][1]}<br>
+                    <span>賠率:</span>
+                    ${bethtmlArr[i][2]}<br>
+                    <span>投注金額:</span>
+                    ${bethtmlArr[i][3]}<br>
+                </div>`;
+    }
+    listAll.innerHTML = listAllHtml;
+
+
+    if(document.getElementsByClassName('deleteBet').length > 0){
+        for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
+            document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+        }
+    }
+}
 chkBtn.addEventListener('click',chkBtnFn);
 function chkBtnFn(){
     if(!isBetTime){
@@ -470,6 +562,10 @@ function chkBtnFn(){
     window.Livewire.emit('chkBet' ,totalBet);
     riskCalcBetFn(totalBet);
     totalBet = 0;
+    for(let i=0;i<document.getElementsByClassName('deleteBet').length;i++){
+        document.getElementsByClassName('deleteBet')[i].removeEventListener('click', removeBetArr);
+        document.getElementsByClassName('deleteBet')[i].style.display = "none";
+    }
 }
 function calcBetFn(){
     let winMoney = 0;
@@ -553,6 +649,15 @@ reBtn.addEventListener('click',()=>{
         myDoller.innerHTML = Number(myDoller.innerHTML) + Number(totalBet);
         totalBet = 0;
         beyMoney.value = 0;
+
+        totalBetNumberCalc = 0;
+        totalBetNmuber.innerHTML = totalBetNumberCalc;
+        totalBetMoney.innerHTML = totalBet;
+
+        listAllHtml = "";
+        listAll.innerHTML = "";
+        bethtmlArr = [];
+
     }else{
         Swal.fire(
             '警告',
@@ -599,6 +704,30 @@ doubleBtn.addEventListener('click',()=>{
     }
     myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
     totalBet = totalBet*2;
+    totalBetMoney.innerHTML = totalBet;
+    
+    listAllHtml = "";
+    for(let j=0;j<bethtmlArr.length;j++){
+        bethtmlArr[j][3] = Number(bethtmlArr[j][3])*2;
+        listAllHtml += `<div class="item">
+                    <i class="fas fa-times deleteBet"></i>
+                    <input type="hidden" value="${j}">
+                    <span>下注項目:</span><br>
+                    ${bethtmlArr[j][0]}<br>
+                    <span>下注內容:</span><br>
+                    ${bethtmlArr[j][1]}<br>
+                    <span>賠率:</span>
+                    ${bethtmlArr[j][2]}<br>
+                    <span>投注金額:</span>
+                    ${bethtmlArr[j][3]}<br>
+                </div>`;
+    }
+    listAll.innerHTML = listAllHtml;
+    if(document.getElementsByClassName('deleteBet').length > 0){
+        for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
+            document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+        }
+    }
     for(let i=1;i<=10;i++){
         guessAirArray[`no${i}`]
         for(let j=1;j<=10;j++){

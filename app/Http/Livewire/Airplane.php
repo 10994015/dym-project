@@ -18,10 +18,9 @@ class Airplane extends Component
     public $myDoller;
     public $accMoney;
     public $winMoney = 0;
+    public $odds;
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney'];
 
-  
-   
     public function sendTime(){
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
@@ -40,7 +39,6 @@ class Airplane extends Component
     public function calcMoney($win){
         $nowTime = date('Y-m-d H:i');
         $answer = Answer::where('bet_time', $nowTime)->first();
-        
         
         $this->winMoney = $win;
         $userMoney = Auth::user(); 
@@ -113,6 +111,10 @@ class Airplane extends Component
         $riskTime = date('Y-m-d H:i', strtotime("+1 minute"));
         $riskAnswer = Answer::where('bet_time',$riskTime)->get();
         $this->dispatchBrowserEvent('startRun', ['answer'=>$answer, 'riskAnswer'=>$riskAnswer]);
+
+        $game_info = GameInfos::where('gamenumber', 23)->first();
+        $this->odds = $game_info->odds;
+        $this->dispatchBrowserEvent('setOdds', ['odds'=>$this->odds]);
 
         $betlist = Betlist::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
         $bet_count = Betlist::where('user_id', Auth::id())->count();
