@@ -19,15 +19,25 @@ class Airplane extends Component
     public $accMoney;
     public $winMoney = 0;
     public $odds;
-    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney'];
+    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn'];
 
     public function sendTime(){
+        
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
         $riskTime = date('Y-m-d H:i', strtotime("+1 minute"));
         $answer = Answer::whereBetween('bet_time', [$beforeTime, $nowTime])->get();
         $riskAnswer = Answer::where('bet_time',$riskTime)->get();
         $this->dispatchBrowserEvent('sendAnswer', ['answer'=>$answer, 'riskAnswer'=>$riskAnswer]);
+    }
+    public function isRiskFn(){
+        $gameinfo = GameInfos::where('gamenumber', '23')->first();
+        if($gameinfo->mode="1"){
+            $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
+            $answer = Answer::where('bet_time', $nowTime)->first();
+            // Log::info($riks);
+            $this->riskControl($answer->number);
+        }
     }
     public function chkBet($t){
         $this->betMoney = $t;
@@ -70,9 +80,9 @@ class Airplane extends Component
         $riskbet->max_airplane = $max_airplane;
         $riskbet->user_id = Auth::id();
         $riskbet->save();
-        if($gameinfo->mode == '1'){
-            $this->riskControl($answer->number);
-        }
+        // if($gameinfo->mode == '1'){
+        //     $this->riskControl($answer->number);
+        // }
     }
     public function riskControl($bet_number){
         $risk_max = RiskBet::where('bet_number', $bet_number)->orderBy('max_bet', 'DESC')->first();
@@ -92,6 +102,7 @@ class Airplane extends Component
         $answer->ranking = $newranking;
         $answer->save();
     }
+
     public function updateMyMoney(){
        
         $this->myDoller = Auth::user()->money;

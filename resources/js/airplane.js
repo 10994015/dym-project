@@ -274,6 +274,11 @@ function timeRun(){
             air[a].style.animation = 'none';
         }
     }
+    if(new Date().getSeconds() == 57){
+        if(totalBet>0){
+            window.Livewire.emit('isRiskFn');
+        }
+    }
 }
 
 function fiveNumberFn(){
