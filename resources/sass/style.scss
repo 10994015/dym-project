@@ -346,13 +346,16 @@ nav{
                     width:100%;
                     height: auto;
                     &.start{
-                        animation: bganim 10.3s linear;
+                        animation: bganim 12s linear;
                     }
                 }
                 
                 @keyframes bganim {
                     0%{
                         // transform: translateY(-2800px);
+                        top: -2800px;
+                    }
+                    10%{
                         top: -2800px;
                     }
                     100%{
@@ -411,34 +414,34 @@ nav{
                             transform: translateY(270px);
                         }
                         10%{
-                            transform: translateY(60px);
+                            transform: translateY(270px);
                         }
                         20%{
-                            transform: translateY(150px);
+                            transform: translateY(60px);
                         }
                         30%{
-                            transform: translateY(90px);
+                            transform: translateY(230px);
                         }
                         40%{
-                            transform: translateY(170px);
+                            transform: translateY(120px);
                         }
                         50%{
-                            transform: translateY(100px);
+                            transform: translateY(200px);
                         }
                         60%{
-                            transform: translateY(150px);
-                        }
-                        70%{
-                            transform: translateY(70px);
-                        }
-                        80%{
-                            transform: translateY(160px);
-                        }
-                        90%{
                             transform: translateY(90px);
                         }
-                        100%{
+                        70%{
+                            transform: translateY(10px);
+                        }
+                        80%{
                             transform: translateY(-380px);
+                        }
+                        90%{
+                            transform: translateY(-1000px);
+                        }
+                        100%{
+                            transform: translateY(-1000px);
                         }
                     }
                     

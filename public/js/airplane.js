@@ -381,7 +381,7 @@ window.addEventListener('setOdds', function (e) {
   setOdds = e.detail.odds;
 });
 var initSecondsArr = function initSecondsArr() {
-  secondsArr = [[10, '1'], [10.1, '2'], [10.11, '3'], [10.12, '4'], [10.13, '5'], [10.14, '6'], [10.15, '7'], [10.16, '8'], [10.17, '9'], [10.18, '10']];
+  secondsArr = [[12, '1'], [12.1, '2'], [12.11, '3'], [12.12, '4'], [12.13, '5'], [12.14, '6'], [12.15, '7'], [12.16, '8'], [12.17, '9'], [12.18, '10']];
 };
 window.addEventListener('sendAnswer', function (e) {
   answer = e.detail.answer;
@@ -397,7 +397,9 @@ window.addEventListener('sendAnswer', function (e) {
   secondsArr.forEach(function (item, key) {
     item[1] = nowAnswer[key];
   });
-  fiveNumberFn();
+  setTimeout(function () {
+    fiveNumberFn();
+  }, 1000);
 });
 function sortFn() {
   secondsArr.sort(function (a, b) {
@@ -416,7 +418,7 @@ window.addEventListener('startRun', function (e) {
     item[1] = nowAnswer[key];
   });
   if (new Date().getSeconds() < 11) {
-    countdown.style.opacity = '0';
+    // countdown.style.opacity = '0';
     airTopThree.style.opacity = '0';
     airTopTen.style.opacity = '0';
     for (var i = 0; i < airNum.length; i++) {
@@ -539,9 +541,9 @@ function timeRun() {
     if (new Date().getSeconds() == 0) {
       countdown.style.opacity = "1";
       // fiveNumberFn();
+    } else {
+      countdown.style.opacity = "0";
     }
-
-    countdown.style.opacity = "0";
   } else {
     countdown.style.opacity = "1";
     // fiveNumberFn();
