@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/airplane.js', 'public/js/airplane.js')
+    .js('resources/js/horizontal.js', 'public/js/horizontal.js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]).sass('resources/sass/style.scss', 'public/css');

@@ -14,9 +14,9 @@ class AddOperatesTable extends Migration
     public function up()
     {
         Schema::table('operates', function (Blueprint $table) {
-            $table->integer('single_term');
-            $table->integer('single_bet_limit');
-            $table->integer('odds');
+            $table->integer('game3_single_term');
+            $table->integer('game3_single_bet_limit');
+            $table->double('game3_odds');
         });
     }
 
@@ -28,9 +28,9 @@ class AddOperatesTable extends Migration
     public function down()
     {
         Schema::table('operates', function (Blueprint $table) {
-            $table->dropColumn('single_term');
-            $table->dropColumn('single_bet_limit');
-            $table->dropColumn('odds');
+            $table->dropColumn('game3_single_term');
+            $table->dropColumn('game3_single_bet_limit');
+            $table->dropColumn('game3_odds');
         });
     }
 }

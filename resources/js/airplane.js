@@ -279,7 +279,7 @@ function timeRun(){
         }
     }
     if(new Date().getSeconds() == 57){
-        if(totalBet>0){
+        if(!chkBetBool){
             window.Livewire.emit('isRiskFn');
         }
     }
@@ -395,7 +395,7 @@ diamondBoxRight.addEventListener('click', function(){
         dimondListNum++;
     }
     for(let i=0;i<diamondBtn.length;i++){
-        diamondBtn[i].style.transform = `translateX(-${dimondListNum}00px)`;
+        diamondBtn[i].style.transform = `translateX(-${dimondListNum*100}%)`;
     }
 });
 diamondBoxLeft.addEventListener('click', function(){
@@ -403,7 +403,7 @@ diamondBoxLeft.addEventListener('click', function(){
         dimondListNum--;
     }
     for(let i=0;i<diamondBtn.length;i++){
-        diamondBtn[i].style.transform = `translateX(-${dimondListNum}00px)`;
+        diamondBtn[i].style.transform = `translateX(-${dimondListNum*100}%)`;
     }
 });
 beyMoney.addEventListener('blur',()=>{
@@ -579,7 +579,7 @@ function chkBtnFn(){
 function calcBetFn(){
     let winMoney = 0;
     //賠率
-    let odds = 2;
+    let odds = setOdds;
     for(let i=1;i<=10;i++){
         // console.log(guessAirArray[`no${i}`]);
         for(let j=1;j<=10;j++){
@@ -613,7 +613,7 @@ function riskCalcBetFn(totalBet){
     let max_airplane = 0;
     let max_rank = 0;
     //賠率
-    let riskodds = 2;
+    let riskodds = setOdds;
     for(let i=1;i<=10;i++){
         // console.log(guessAirArray[`no${i}`]);
         for(let j=1;j<=10;j++){
@@ -639,7 +639,7 @@ function riskCalcBetFn(totalBet){
 }
 window.addEventListener('updateMyMoneyHtml', e=>{
     myDoller.innerHTML = e.detail.money;
-    winMessage.innerHTML = `恭喜您贏得了${e.detail.win}元`
+    winMessage.innerHTML = `恭喜您贏得了${Math.round(e.detail.win)}元`
 });
 reBtn.addEventListener('click',()=>{
     if(chkBetBool){

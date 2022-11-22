@@ -171,7 +171,7 @@
         </div>
     </div>
   </div>
-  <div class="footer" >
+  <div class="footer">
     <div class="diamondList">
       <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
       <div class="diamondBox">

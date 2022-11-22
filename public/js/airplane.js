@@ -564,7 +564,7 @@ function timeRun() {
     }
   }
   if (new Date().getSeconds() == 57) {
-    if (totalBet > 0) {
+    if (!chkBetBool) {
       window.Livewire.emit('isRiskFn');
     }
   }
@@ -651,7 +651,7 @@ diamondBoxRight.addEventListener('click', function () {
     dimondListNum++;
   }
   for (var _i7 = 0; _i7 < diamondBtn.length; _i7++) {
-    diamondBtn[_i7].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+    diamondBtn[_i7].style.transform = "translateX(-".concat(dimondListNum * 100, "%)");
   }
 });
 diamondBoxLeft.addEventListener('click', function () {
@@ -659,7 +659,7 @@ diamondBoxLeft.addEventListener('click', function () {
     dimondListNum--;
   }
   for (var _i8 = 0; _i8 < diamondBtn.length; _i8++) {
-    diamondBtn[_i8].style.transform = "translateX(-".concat(dimondListNum, "00px)");
+    diamondBtn[_i8].style.transform = "translateX(-".concat(dimondListNum * 100, "%)");
   }
 });
 beyMoney.addEventListener('blur', function () {
@@ -778,7 +778,7 @@ function chkBtnFn() {
 function calcBetFn() {
   var winMoney = 0;
   //賠率
-  var odds = 2;
+  var odds = setOdds;
   for (var _i15 = 1; _i15 <= 10; _i15++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
@@ -1121,7 +1121,7 @@ function riskCalcBetFn(totalBet) {
   var max_airplane = 0;
   var max_rank = 0;
   //賠率
-  var riskodds = 2;
+  var riskodds = setOdds;
   for (var _i16 = 1; _i16 <= 10; _i16++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
@@ -1143,7 +1143,7 @@ function riskCalcBetFn(totalBet) {
 }
 window.addEventListener('updateMyMoneyHtml', function (e) {
   myDoller.innerHTML = e.detail.money;
-  winMessage.innerHTML = "\u606D\u559C\u60A8\u8D0F\u5F97\u4E86".concat(e.detail.win, "\u5143");
+  winMessage.innerHTML = "\u606D\u559C\u60A8\u8D0F\u5F97\u4E86".concat(Math.round(e.detail.win), "\u5143");
 });
 reBtn.addEventListener('click', function () {
   if (chkBetBool) {

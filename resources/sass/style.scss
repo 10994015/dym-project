@@ -140,14 +140,23 @@ nav{
         }
     }
 }
-
 #airplane{
     width:100%;
     min-height: 100vh;
-    background-image: url('/images/airplane/bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 45px;
+    @media screen and (max-width:880px) {
+        height: auto;
+        display: block;
+        transform: rotate(90deg) translateY( 300px) scale(0.8);
+        min-width:200vw;
+        height: 100vh;
+        width:200%;
+        padding-top: 60px;
+    }
     >#loading{
         width:100%;
         height: 100vh;
@@ -161,18 +170,25 @@ nav{
     }
     >.header{
         width:100%;
-        height: 80px;
+        height: 60px;
         background-image: linear-gradient(to right,#06033A,#492E9B,#06033A);
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 100px;
         border-bottom:4px #FFDD00 solid;
+        position: fixed;
+        top: 0;
+        left:0;
+        @media screen and (max-width:880px) {
+            min-width:200vw;
+            width:100%;
+        }
         >.left{
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
+            height: 60px;
             >.userBox{
                 color:#fff;
                 display: flex;
@@ -181,21 +197,21 @@ nav{
                 position: relative;
                 >img{
                     border:3px #3DCCF3 solid;
-                    width:60px;
-                    height: 60px;
+                    width:45px;
+                    height: 45px;
                     object-fit: cover;
                     border-radius: 50%;
                     position: absolute;
-                    top: -25%;
-                    left:-20px;
+                    top: -15%;
+                    left:-10px;
                 }
                 >.userNameBox{
                     width:300px;
-                    height: 40px;
+                    height: 35px;
                     border:2px #3DCCF3 solid;
                     border-radius: 10px;
                     text-align: center;
-                    line-height: 35px;
+                    line-height: 30px;
                     padding: 0 20px ;
                     background-color: #3A3A3A;
                     font-weight: 600;
@@ -208,18 +224,18 @@ nav{
                 align-items: center;
                 margin-left: 25px;
                 >img{
-                    width:40px;
-                    height: 40px;
+                    width:35px;
+                    height: 35px;
                     object-fit: cover;
                     margin-right: 10px;
                 }
                 >.dollerBox{
                     width:200px;
-                    height: 40px;
+                    height: 35px;
                     border:2px #3DCCF3 solid;
                     border-radius: 10px;
                     text-align: center;
-                    line-height: 35px;
+                    line-height: 30px;
                     background-color: #3A3A3A;
                     font-weight: 600;
                     input[type=number]::-webkit-outer-spin-button,
@@ -254,11 +270,11 @@ nav{
             align-items: center;
             >.fpsBox{
                 width:150px;
-                height: 40px;
+                height: 35px;
                 border:2px #3DCCF3 solid;
                 border-radius: 10px;
                 text-align: center;
-                line-height: 35px;
+                line-height: 30px;
                 padding: 0 20px ;
                 background-color: #3A3A3A;
                 color:#fff;
@@ -268,7 +284,7 @@ nav{
             >.menu{
                 position: relative;
                 >i#bar{
-                    font-size: 40px;
+                    font-size: 35px;
                     cursor: default;
                     color: #E43FD1;
                 }
@@ -309,19 +325,23 @@ nav{
     }
     >.content{
         width:100%;
-        min-height:calc(100vh - 84px) ;
         display: flex;
         justify-content: center;
-        align-items: center;
-        padding: 50px 0;
+        // align-items: center;
+        padding: 20px 70px 10px;
+      
+        @media screen and (max-width:1400px) {
+            padding: 10px 5px;
+        }
+        @media screen and (max-width:880px) {
+            padding: 10px 0;
+        }
         >.playBox{
-            min-width:450px;
-            height: 540px;
+            // height: 540px;
+            width:35%;
             border:6px #ED35D1 solid;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding-top: 30.25%;
             >.loading{
                 width:50px;
                 background: transparent;
@@ -682,10 +702,9 @@ nav{
         }
         >.betBox{
             margin:0 20px;
-            width: 600px;
-            // height: 530px;
-            // background: #2baaca;
-            // background: linear-gradient(-60deg, transparent 35px, #2baaca 0);
+            width: 45%;
+            height: 100%;
+            position: relative;
             #hiddenRadioRank{
                 position: fixed;
                 top:-999999999999999999px;
@@ -696,8 +715,12 @@ nav{
                 display: flex;
                 justify-content: flex-start;
                 background: transparent;
+                width:100%;
+                position: absolute;
+                top: 0;
+                left:0;
                 >img{
-                    width:120px;
+                    width:20%;
                     display: block;
                     object-fit: contain;
                     cursor: default;
@@ -710,11 +733,13 @@ nav{
                 }
             }
             >.content{
-                width: 600px;
-                height:490px;
+                width: 100%;
+                height:100%;
                 border:1px  #2baaca solid;
+                border-top: none;
                 background: #000;
                 color:#fff;
+                padding-top: 60px;
                 >span.odds{
                     margin-top: 25px;
                     display: block;
@@ -730,7 +755,7 @@ nav{
                     margin-top: 20px;
                     width:100%;
                     display: grid;
-                    grid-template-columns:repeat(5, 100px);
+                    grid-template-columns:repeat(5, 15%);
                     justify-content: center;
                     grid-column-gap: 10px;
                     grid-row-gap: 1em;
@@ -743,7 +768,7 @@ nav{
                     margin-top: 20px;
                     width:100%;
                     display: grid;
-                    grid-template-columns:repeat(5, 90px);
+                    grid-template-columns:repeat(5, 15%);
                     justify-content: center;
                     grid-column-gap: 10px;
                     grid-row-gap:5px;
@@ -783,14 +808,12 @@ nav{
             }
         }
         >.betList{
-            margin:0 20px;
-            width: 252px;
-            min-width: 252px;
-            height: 540px;
+            width: 20%;
             border:6px #ED35D1 solid;
             position: relative;
             padding-top: 44px;
-            padding-bottom: 115px;
+            height: 100%;
+            padding-bottom: 125px;
             >.header{
                 width:calc(100% + 12px);
                 height: 50px;
@@ -915,7 +938,7 @@ nav{
         justify-content: center;
         align-items: center;
         padding-bottom: 50px ;
-        >div{
+        >.betMoneyBox{
             margin: 0 30px;
         }
         input[type=number]::-webkit-outer-spin-button,
@@ -931,14 +954,17 @@ nav{
             display: flex;
             align-items: center;
             justify-content: center;
+            width:25%;
+            min-width: 300px;
             >.diamondBox{
                 display: flex;
-                width:300px;
+                width:100%;
                 overflow: hidden;
                 >.diamondBtn{
-                    width:100px;
+                    width: 33.3%;
+                    
                     // transform: translateX(0);
-                    transition: .2s;
+                    transition: .1s;
                 }
             }
             >i{
@@ -954,6 +980,7 @@ nav{
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width:12%;
             >p{
                 color:#00FFFF;
                 font-weight: 600;
@@ -961,8 +988,7 @@ nav{
             }
             
             >.betMoney{
-                width:200px;
-                height: 40px;
+                width:100%;
                 border-radius: 8px;
                 border:2px #00FFFF solid;
                 background-color: #3A3A3A;
@@ -990,9 +1016,11 @@ nav{
             display: flex;
             align-items: center;
             justify-content: center;
+            width:35%;
+            min-width: 300px;
             >img{
                 margin: 0 5px;
-                width:180px;
+                width:33.3%;
             }
         }
     }

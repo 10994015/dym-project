@@ -13,6 +13,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Ubuntu:ital,wght@1,300&family=Wallpoet&display=swap" rel="stylesheet">
     @livewireStyles
+    <style>
+        body{
+            background-image: url('/images/airplane/bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        
+    
+        }
+    </style>
 </head>
 <body>
     <main>
