@@ -28,9 +28,18 @@
         </div>
       </div>
   </div>
+  <div class="cycleNumber" id="cycleNumber"></div>
   <div class="content" >
-    <div class="playBox">
-      <img src="/images/airplane/loading.gif" class="loading" >
+
+    <div class="timer md-1000">
+      <i class="fa-solid fa-circle-down" id="openGameBtn"></i>
+      <div id="countdownSec_md"> 
+        <p></p>
+      </div>
+    </div>
+
+    <div class="playBox" id="playBox">
+      <!-- <img src="/images/airplane/loading.gif" class="loading" > -->
       <div class="airplaneDiv" id="airplaneDiv" >
         <img src="/images/airplane/bg2.png" class="bg" id="airplaneDivBg">
         @for($i=1;$i<=10;$i++)
@@ -41,7 +50,7 @@
         @endfor
       </div>
       <div class="countdown" id="countdown" >
-        <div>
+        {{-- <div> --}}
           <div class="timer">
             <div id="countdownSec"> 
               <p></p>
@@ -50,7 +59,7 @@
             <img src="/images/airplane/trend.png" class="trend">
             <div id="fiveNumber">
             </div>
-        </div>
+        {{-- </div> --}}
       </div>
      
       <div class="airTopTen" id="airTopTen" >

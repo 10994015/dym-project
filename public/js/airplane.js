@@ -12,6 +12,7 @@ var menuList = document.getElementById('menuList');
 var isMenuOpen = false;
 var countdown = document.getElementById('countdown');
 var countdownSec = document.getElementById('countdownSec');
+var countdownSec_md = document.getElementById('countdownSec_md');
 var gameLoading = document.getElementById('gameLoading');
 var airTopThree = document.getElementById('airTopThree');
 var airTopTen = document.getElementById('airTopTen');
@@ -23,6 +24,7 @@ var gameBtn4 = document.getElementById('gameBtn4');
 var gameBtn5 = document.getElementById('gameBtn5');
 var betMoney = document.getElementById('betMoney');
 var totalBet = 0;
+var playBox = document.getElementById('playBox');
 var diamondBtn = document.querySelectorAll('.diamondBtn');
 var diamondBoxLeft = document.getElementById('diamondBoxLeft');
 var diamondBoxRight = document.getElementById('diamondBoxRight');
@@ -32,6 +34,7 @@ var reBtn = document.getElementById('reBtn');
 var chkBtn = document.getElementById('chkBtn');
 var rank = document.getElementsByClassName('rank');
 var beyMoney = document.getElementById('beyMoney');
+var cycleNumber = document.getElementById('cycleNumber');
 var answer = [];
 var riskAnswerArr = [];
 var reverseanswer = [];
@@ -375,6 +378,7 @@ var airNum = document.getElementsByClassName('airNum');
 var topThreeAir = document.getElementsByClassName('topThreeAir');
 var chooseRank = 1;
 var setOdds = 0;
+var openGameBtn = document.getElementById('openGameBtn');
 var bethtmlArr = [];
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 window.addEventListener('setOdds', function (e) {
@@ -391,7 +395,8 @@ window.addEventListener('sendAnswer', function (e) {
 
   riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
   // console.log(riskAnswerArr);
-
+  console.log(e.detail.riskAnswer[0].number);
+  cycleNumber.innerHTML = "\u671F\u865F: ".concat(e.detail.riskAnswer[0].number);
   // console.log("now:", nowAnswer);
   initSecondsArr();
   secondsArr.forEach(function (item, key) {
@@ -480,11 +485,26 @@ function timeRun() {
   countdownNumber = 60 - new Date().getSeconds();
   if (countdownNumber < 10) {
     countdownSec.innerHTML = "<p>00:0" + countdownNumber + "</p>";
+    countdownSec_md.innerHTML = "<p>00:0" + countdownNumber + "</p>";
   } else {
-    countdownSec.innerHTML = "<p>00:" + countdownNumber + "</p>";
+    if (countdownNumber > 40) {
+      countdownSec_md.innerHTML = "<p>開獎中</p>";
+      openGameBtn.style.display = "block";
+      if (screen.width <= 1000) {
+        playBox.style.opacity = 1;
+      }
+    } else {
+      countdownSec.innerHTML = "<p>00:" + countdownNumber + "</p>";
+      countdownSec_md.innerHTML = "<p>00:" + countdownNumber + "</p>";
+      openGameBtn.style.display = "none";
+      if (screen.width <= 1000) {
+        playBox.style.opacity = 0;
+      }
+    }
   }
   if (countdownNumber == 60) {
     countdownSec.innerHTML = "<p>00:00" + "</p>";
+    countdownSec_md.innerHTML = "<p>00:00" + "</p>";
   }
   if (new Date().getSeconds() == 0) {
     window.Livewire.emit('sendTime');
@@ -1535,5 +1555,14 @@ function airTopThreeHTML(nowAnswer) {
     topThreeAir[_i19].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i19]], ".png");
   }
 }
+var playBoxisOpen = false;
+openGameBtn.addEventListener('click', function () {
+  playBoxisOpen = !playBoxisOpen;
+  if (playBoxisOpen) {
+    playBox.style.opacity = '1';
+  } else {
+    playBox.style.opacity = '0';
+  }
+});
 /******/ })()
 ;

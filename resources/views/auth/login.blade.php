@@ -20,5 +20,6 @@
             <button type="submit" class="btn btn-warning  loginBtn">LOGIN</button>
         </form>
     </div>
+    @include('livewire.layouts.alert')
 </x-guest-layout>
 

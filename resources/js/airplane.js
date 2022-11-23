@@ -8,6 +8,7 @@ const menuList = document.getElementById('menuList');
 let isMenuOpen = false;
 const countdown = document.getElementById('countdown');
 const countdownSec = document.getElementById('countdownSec');
+const countdownSec_md = document.getElementById('countdownSec_md');
 const gameLoading = document.getElementById('gameLoading');
 const airTopThree = document.getElementById('airTopThree');
 const airTopTen = document.getElementById('airTopTen');
@@ -19,6 +20,7 @@ const gameBtn4 = document.getElementById('gameBtn4');
 const gameBtn5 = document.getElementById('gameBtn5');
 const betMoney = document.getElementById('betMoney');
 let totalBet = 0;
+const playBox = document.getElementById('playBox');
 const diamondBtn = document.querySelectorAll('.diamondBtn');
 const diamondBoxLeft = document.getElementById('diamondBoxLeft');
 const diamondBoxRight = document.getElementById('diamondBoxRight');
@@ -28,6 +30,7 @@ const reBtn = document.getElementById('reBtn');
 const chkBtn = document.getElementById('chkBtn');
 const rank = document.getElementsByClassName('rank');
 const beyMoney = document.getElementById('beyMoney');
+const cycleNumber = document.getElementById('cycleNumber');
 let answer = [];
 let riskAnswerArr = [];
 let reverseanswer = [];
@@ -72,7 +75,7 @@ const airNum = document.getElementsByClassName('airNum');
 const topThreeAir = document.getElementsByClassName('topThreeAir');
 let chooseRank = 1;
 let setOdds = 0;
-
+const openGameBtn = document.getElementById('openGameBtn');
 let bethtmlArr = [];
 document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
 window.addEventListener('setOdds', e=>{
@@ -101,7 +104,8 @@ window.addEventListener('sendAnswer', e=>{
     
     riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
     // console.log(riskAnswerArr);
-    
+    console.log(e.detail.riskAnswer[0].number);
+    cycleNumber.innerHTML = `期號: ${e.detail.riskAnswer[0].number}`;
     // console.log("now:", nowAnswer);
     initSecondsArr();
     secondsArr.forEach((item, key)=>{
@@ -192,11 +196,27 @@ function timeRun(){
     
     if(countdownNumber < 10){
         countdownSec.innerHTML =  "<p>00:0"+countdownNumber + "</p>";
+        countdownSec_md.innerHTML =  "<p>00:0"+countdownNumber + "</p>";
     }else{
-        countdownSec.innerHTML =   "<p>00:" + countdownNumber + "</p>";
+        if(countdownNumber > 40){
+            countdownSec_md.innerHTML =   "<p>開獎中</p>";
+            openGameBtn.style.display = "block";
+            if(screen.width <= 1000){
+                playBox.style.opacity = 1;
+            }
+        }else{
+            countdownSec.innerHTML =   "<p>00:" + countdownNumber + "</p>";
+            countdownSec_md.innerHTML =   "<p>00:" + countdownNumber + "</p>";
+            openGameBtn.style.display = "none";
+            if(screen.width <= 1000){
+                playBox.style.opacity = 0;
+            }
+        }
+        
     }
     if(countdownNumber==60){
         countdownSec.innerHTML =  "<p>00:00" + "</p>";
+        countdownSec_md.innerHTML =  "<p>00:00" + "</p>";
     }
     
     if(new Date().getSeconds() == 0){
@@ -765,3 +785,13 @@ function airTopThreeHTML(nowAnswer){
         topThreeAir[i].src = `/images/airplane/airRank${nowAnswer[threeArr[i]]}.png`
     }
 }
+let playBoxisOpen = false;
+openGameBtn.addEventListener('click', ()=>{
+    playBoxisOpen = !playBoxisOpen;
+    if(playBoxisOpen){
+        playBox.style.opacity = '1';
+    }else{
+        playBox.style.opacity = '0';
+    }
+    
+})

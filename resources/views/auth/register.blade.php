@@ -24,5 +24,6 @@
             <button type="submit" class="btn btn-warning  registerBtn">REGISTER</button>
         </form>
     </div>
+    @include('livewire.layouts.alert')
 </x-guest-layout>
 
