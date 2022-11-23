@@ -151,17 +151,10 @@ nav > a:hover {
   justify-content: center;
   height: 100vh;
   padding-top: 45px;
-}
-@media screen and (max-width: 880px) {
-  #airplane {
-    height: auto;
-    display: block;
-    transform: rotate(90deg) translateY(300px) scale(0.8);
-    min-width: 200vw;
-    height: 100vh;
-    width: 200%;
-    padding-top: 60px;
-  }
+  background-image: url("/images/airplane/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #airplane > #loading {
   width: 100%;

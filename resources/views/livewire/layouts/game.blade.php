@@ -15,12 +15,7 @@
     @livewireStyles
     <style>
         body{
-            background-image: url('/images/airplane/bg.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        
-    
+           
         }
     </style>
 </head>
