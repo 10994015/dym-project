@@ -35,6 +35,7 @@ var chkBtn = document.getElementById('chkBtn');
 var rank = document.getElementsByClassName('rank');
 var beyMoney = document.getElementById('beyMoney');
 var cycleNumber = document.getElementById('cycleNumber');
+var betListIssue = document.getElementById('betListIssue');
 var answer = [];
 var riskAnswerArr = [];
 var reverseanswer = [];
@@ -398,6 +399,7 @@ window.addEventListener('sendAnswer', function (e) {
   // console.log(riskAnswerArr);
   // console.log(e.detail.riskAnswer[0].number);
   cycleNumber.innerHTML = "\u671F\u865F: ".concat(e.detail.riskAnswer[0].number);
+  betListIssue.innerHTML = "\u671F\u865F: ".concat(e.detail.riskAnswer[0].number);
   // console.log("now:", nowAnswer);
   initSecondsArr();
   secondsArr.forEach(function (item, key) {

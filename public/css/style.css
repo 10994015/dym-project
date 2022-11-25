@@ -454,6 +454,9 @@ nav > a:hover {
   list-style: none;
   padding: 0 10px 0 18px;
 }
+#airplane > .header > .right > .menu > .menuList > li:hover {
+  background-color: rgba(6, 3, 58, 0.75);
+}
 #airplane > .header > .right > .menu > .menuList > li a {
   display: flex;
   align-items: center;
@@ -1349,4 +1352,88 @@ nav > a:hover {
 #airplane > .footer > .btnList > img {
   margin: 0 5px;
   width: 33.3%;
+}
+#airplane > .trendModal {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+#airplane > .trendModal .content {
+  width: 98%;
+  max-width: 1200px;
+  height: 800px;
+  background-color: rgba(71, 45, 153, 0.85);
+  border-radius: 12px;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+#airplane > .trendModal .content > .header {
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  position: relative;
+}
+#airplane > .trendModal .content > .header > p {
+  color: #fff;
+  height: 70px;
+  line-height: 70px;
+  margin-bottom: 0;
+}
+#airplane > .trendModal .content > .header > i {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  font-size: 40px;
+  color: #fff;
+  transform: translateY(-50%);
+}
+#airplane > .trendModal .content > .list {
+  width: 95%;
+  margin: 15px auto 5px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  overflow-y: scroll;
+  padding: 5px 10px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#airplane > .trendModal .content > .list::-webkit-scrollbar {
+  opacity: 0;
+}
+#airplane > .trendModal .content > .list > .item {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px 0;
+  border-top: 2px #9a85e2 solid;
+  border-bottom: 2px #9a85e2 solid;
+  margin: 10px 0;
+}
+#airplane > .trendModal .content > .list > .item > .number {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #fff;
+}
+#airplane > .trendModal .content > .list > .item > .imgList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#airplane > .trendModal .content > .list > .item > .imgList > img {
+  width: 9%;
 }

@@ -22,7 +22,6 @@ class Airplane extends Component
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn'];
 
     public function sendTime(){
-        
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
         $riskTime = date('Y-m-d H:i', strtotime("+1 minute"));

@@ -31,6 +31,7 @@ const chkBtn = document.getElementById('chkBtn');
 const rank = document.getElementsByClassName('rank');
 const beyMoney = document.getElementById('beyMoney');
 const cycleNumber = document.getElementById('cycleNumber');
+const betListIssue = document.getElementById('betListIssue');
 let answer = [];
 let riskAnswerArr = [];
 let reverseanswer = [];
@@ -107,6 +108,7 @@ window.addEventListener('sendAnswer', e=>{
     // console.log(riskAnswerArr);
     // console.log(e.detail.riskAnswer[0].number);
     cycleNumber.innerHTML = `期號: ${e.detail.riskAnswer[0].number}`;
+    betListIssue.innerHTML = `期號: ${e.detail.riskAnswer[0].number}`;
     // console.log("now:", nowAnswer);
     initSecondsArr();
     secondsArr.forEach((item, key)=>{

@@ -165,7 +165,7 @@
         <div class="header">注單列表</div>
         <div class="list-title">
               <div class="title"><p>下注<br>期號</p></div>
-              <div class="issue">SR9359202211130349</div>
+              <div class="issue" id="betListIssue">SR9359202211130349</div>
           </div>
         <div class="listAll" id="listAll">
         </div>
@@ -202,8 +202,6 @@
       <img src="/images/airplane/chk.png" id="chkBtn">
     </div>
   </div>
-  <script>
-    
-    
-  </script>
+
+  @include('livewire.trend')
 </div>
