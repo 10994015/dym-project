@@ -17,13 +17,10 @@
         <div class="menu">
           <i class="fas fa-bars" id="bar"></i>
           <ul class="menuList" id="menuList">
-            <li>
-            <form action="/logout" method="post" id="logoutForm">
-                @csrf
-                <input type="submit" hidden>
-                <a href="javascript:;" class="logout" id="logout">Logout</a>
-            </form>
-            </li>
+            <li><a href="/"><i class="fa-solid fa-chevron-left"></i><p>回大廳</p></a></li>
+            <li><a href="javascript:;"><i class="fa-solid fa-registered"></i><p>規則</p></a></li>
+            <li><a href="javascript:;"><i class="fa-solid fa-chart-line"></i><p>走勢</p></a></li>
+            <li><a href="javascript:;"><i class="fa-solid fa-file-lines"></i><p>紀錄</p></a></li>
           </ul>
         </div>
       </div>
@@ -181,22 +178,24 @@
     </div>
   </div>
   <div class="footer">
-    <div class="diamondList">
-      <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
-      <div class="diamondBox">
-        <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" >
-        <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" >
-        <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" >
-        <img src="/images/airplane/diamond1000.png"  class="diamondBtn" alt="1000" >
-        <img src="/images/airplane/diamond5000.png"  class="diamondBtn" alt="5000" >
-        <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" >
+   <div class="choose">
+      <div class="diamondList">
+        <i class="fa-solid fa-chevron-left" id="diamondBoxLeft"></i>
+        <div class="diamondBox">
+          <img src="/images/airplane/diamond10.png"  class="diamondBtn" alt="10" >
+          <img src="/images/airplane/diamond50.png"  class="diamondBtn" alt="50" >
+          <img src="/images/airplane/diamond100.png"  class="diamondBtn" alt="100" >
+          <img src="/images/airplane/diamond1000.png"  class="diamondBtn" alt="1000" >
+          <img src="/images/airplane/diamond5000.png"  class="diamondBtn" alt="5000" >
+          <img src="/images/airplane/diamond10000.png"  class="diamondBtn" alt="10000" >
+        </div>
+        <i class="fa-solid fa-chevron-right" id="diamondBoxRight"></i>
       </div>
-      <i class="fa-solid fa-chevron-right" id="diamondBoxRight"></i>
-    </div>
-    <div class="betMoneyBox">
-      <p>每注/元</p>
-      <div class="betMoney"> <input type="number" id="beyMoney" value="0"> </div>
-    </div>
+      <div class="betMoneyBox">
+        <p>每注/元</p>
+        <div class="betMoney"> <input type="number" id="beyMoney" value="0"> </div>
+      </div>
+   </div>
     <div class="btnList">
       <img src="/images/airplane/double.png" id="doubleBtn">
       <img src="/images/airplane/re.png" id="reBtn">

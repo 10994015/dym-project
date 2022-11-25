@@ -136,7 +136,7 @@ nav{
     .loginForm{
         width:100%;
         max-width: 400px;
-        input[type="email"],input[type="password"]{
+        input[type="text"],input[type="password"]{
             border-radius:25px;
             height: 45px;
         }
@@ -195,7 +195,10 @@ nav{
     background-position: center;
     padding: 0 70px;
     @media screen and (max-width:1000px){
-        padding: 80px 5px 0;
+        padding: 70px 5px 0;
+    }
+    @media screen and (max-width:600px){
+        padding: 40px 5px 0;
     }
     >#loading{
         width:100%;
@@ -225,7 +228,7 @@ nav{
         z-index: 9999;
         // opacity: 0;
         @media screen and (max-width:1000px){
-            padding: 0px 15px 0 0;
+            padding: 0px 0 0 15px;
         }
         @media screen and (max-width:550px){
             justify-content:flex-start;
@@ -372,12 +375,13 @@ nav{
                     position: absolute;
                     top: 40px;
                     right:0;
-                    width:150px;
+                    width:180px;
                     height: auto;
                     list-style: none;
                     padding-left:0;
                     display: none;
                     animation: menuOpen .2s linear;
+                    background-color: rgba(71, 45, 153,.85);
                     @keyframes menuOpen {
                         0%{
                             opacity: .3;
@@ -390,13 +394,33 @@ nav{
                     }
                     >li{
                         width:100%;
-                        height: 35px;
-                        text-align: center;
-                        line-height: 35px;
-                        border-bottom:#ccc;
+                        height: 60px;
+                        line-height: 60px;
                         color:#000;
                         font-weight: 600;
                         list-style: none;
+                        padding:0  10px 0 18px;
+                        a{
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            height: 60px;
+                            font-weight: 800;
+                                >i{
+                                    color:#EEDF98;
+                                }
+                                >p{
+                                    margin-left: 10px;
+                                    width:75%;
+                                    color:#EEDF98;
+                                    line-height: 60px;
+                                    height: 60px;
+                                    display: block;
+                                    margin-bottom: 0;
+                                    font-weight: 800;
+                                    font-size: 20px;
+                                }
+                        }
                     }
                 }
             }
@@ -426,7 +450,7 @@ nav{
             position: relative;
         }
         @media screen and (max-width:880px) {
-            padding: 10px 0;
+            padding: 5px 0;
         }
         >.playBox{
             // height: 540px;
@@ -440,9 +464,15 @@ nav{
                 width:100%;
                 position: absolute;
                 top: 120px;
-                left:0;
+                left:50%;
+                transform: translateX(-50%);
                 opacity: 0;
                 z-index: 999;
+                display: none;
+                max-width: 700px;
+            }
+            @media screen and (max-width:500px){
+                top: 130px;
             }
             >.loading{
                 width:50px;
@@ -464,6 +494,9 @@ nav{
                 background-color: transparent;
                 transition: .1s;
                 opacity: 0;
+                @media screen and (max-widt:1000px){
+                    max-width: 700px;
+                }
                 >img{
                     position: absolute;
                     object-fit: cover;
@@ -593,6 +626,9 @@ nav{
                 flex-direction: column;
                 opacity: 1;
                 opacity: 0;
+                @media screen and (max-width:1000px){
+                    opacity: 0;
+                }
                 >div{
                     width:100%;
                     background-color: transparent;
@@ -686,6 +722,9 @@ nav{
                 justify-content: center;
                 align-items: center;
                 opacity: 0;
+                @media screen and (max-width:1000px){
+                    max-width: 700px;
+                }
                 >.championTitle{
                     width:90%;
                     position: absolute;
@@ -699,6 +738,13 @@ nav{
                     top: 50%;
                     left:50%;
                     transform: translate(-50%, -50%);
+                    @media screen and (max-width:1000px){
+                        max-width: 700px;
+                        top: 0;
+                        left:0;
+                        transform: translate(0);
+                        max-height: 100%;
+                    }
                 }
                 >.airList{
                     display: flex;
@@ -758,6 +804,9 @@ nav{
                 background-size: cover;
                 background-position: center;
                 overflow: hidden;
+                @media screen and (max-width:1000px){
+                    max-width: 700px;
+                }
                 >.list{
                     display: flex;
                     justify-content: center;
@@ -820,6 +869,7 @@ nav{
             @media screen and (max-width:1000px){
                 min-height: 500px;
                 width:100%;
+                max-width: 700px;
             }
             #hiddenRadioRank{
                 position: fixed;
@@ -1070,7 +1120,7 @@ nav{
                 >#openGameBtn{
                     position: absolute;
                     bottom: 10px;
-                    right:20px;
+                    left:70%;
                     color:#fff;
                     font-size: 24px;
                     z-index: 999;
@@ -1108,7 +1158,7 @@ nav{
         @media screen and (max-width:1000px){
             flex-direction: column;
             justify-content:flex-start;
-            margin-top: 50px;
+            margin-top: 0px;
             padding-bottom: 0;
         }
         >.betMoneyBox{
@@ -1122,72 +1172,112 @@ nav{
         input[type=number] {
         -moz-appearance: textfield;
         }
-
-        .diamondList{
+        >.choose{
             display: flex;
-            align-items: center;
             justify-content: center;
-            width:25%;
+            align-items: center;
+            width:65%;
             min-width: 300px;
             @media screen and (max-width:1000px){
-                min-width: 0;
-                width:50%;
+                margin-bottom: 10px;
             }
-            >.diamondBox{
+            @media screen and (max-width:340px){
+                min-width:100px;
+            }
+            .diamondList{
                 display: flex;
-                width:100%;
-                overflow: hidden;
-                >.diamondBtn{
-                    width: 33.3%;
-                    // transform: translateX(0);
-                    transition: .1s;
-                }
-            }
-            >i{
-                color:#fff;
-                font-size: 30px;
-                cursor: pointer;
-            }
-            
-            
-        }
-        >.betMoneyBox{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width:12%;
-            >p{
-                color:#00FFFF;
-                font-weight: 600;
-                margin-bottom:5px;
-            }
-            
-            >.betMoney{
-                width:100%;
-                border-radius: 8px;
-                border:2px #00FFFF solid;
-                background-color: #3A3A3A;
-                color:#fff;
-                font-weight: 600;
-                display: flex;
-                justify-content: center;
                 align-items: center;
-                >p{
-                    text-align: center;
-                    display: block;
-                    margin-bottom: 0;
+                justify-content: center;
+                width:50%;
+                margin-right: 20px;
+                max-width: 400px;
+                @media screen and (max-width:1000px){
+                    min-width: 210px;
+                    width:50%;
                 }
-                >input{
-                    background-color: transparent;
+                >.diamondBox{
+                    display: flex;
+                    width:100%;
+                    overflow: hidden;
+                    >.diamondBtn{
+                        width: 33.3%;
+                        // transform: translateX(0);
+                        transition: .1s;
+                    }
+                }
+                >i{
+                    color:#fff;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
+                
+                
+            }
+            .betMoneyBox{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width:25%;
+                margin-left:20px;
+                max-width: 200px;
+                
+                >p{
+                    color:#00FFFF;
+                    font-weight: 600;
+                    margin-bottom:5px;
+                    text-align: center;
+                    @media screen and (max-width:1000px){
+                        font-size: 13px;
+                        width:80px;
+                    }
+                }
+                
+                >.betMoney{
+                    width:100%;
+                    border-radius: 8px;
+                    border:2px #00FFFF solid;
+                    background-color: #3A3A3A;
                     color:#fff;
                     font-weight: 600;
-                    text-align: center;
-                    border:none;
-                    outline: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    @media screen and (max-width:450px){
+                            max-width:80px;
+                            width:80px;
+                            min-width: 50px;
+                    }
+                    @media screen and (max-width:340px){
+                        width:50px;
+                    }
+                    >p{
+                        text-align: center;
+                        display: block;
+                        margin-bottom: 0;
+                        @media screen and (max-width:1000px){
+                            font-size: 12px;
+                            width:80px;
+                        }
+                    }
+                    >input{
+                        background-color: transparent;
+                        color:#fff;
+                        font-weight: 600;
+                        text-align: center;
+                        border:none;
+                        outline: none;
+                        height: 30px;
+                        width:100%;
+                        @media screen and (max-width:1000px){
+                            height: 25px;
+                        }
+                        
+                    }
                 }
             }
         }
+       
         >.btnList{
             display: flex;
             align-items: center;

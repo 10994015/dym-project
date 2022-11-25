@@ -159,7 +159,7 @@ nav > a:hover {
   width: 100%;
   max-width: 400px;
 }
-#loginPage .loginForm input[type=email], #loginPage .loginForm input[type=password] {
+#loginPage .loginForm input[type=text], #loginPage .loginForm input[type=password] {
   border-radius: 25px;
   height: 45px;
 }
@@ -222,7 +222,12 @@ nav > a:hover {
 }
 @media screen and (max-width: 1000px) {
   #airplane {
-    padding: 80px 5px 0;
+    padding: 70px 5px 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  #airplane {
+    padding: 40px 5px 0;
   }
 }
 #airplane > #loading {
@@ -254,7 +259,7 @@ nav > a:hover {
 }
 @media screen and (max-width: 1000px) {
   #airplane > .header {
-    padding: 0px 15px 0 0;
+    padding: 0px 0 0 15px;
   }
 }
 @media screen and (max-width: 550px) {
@@ -422,12 +427,13 @@ nav > a:hover {
   position: absolute;
   top: 40px;
   right: 0;
-  width: 150px;
+  width: 180px;
   height: auto;
   list-style: none;
   padding-left: 0;
   display: none;
   animation: menuOpen 0.2s linear;
+  background-color: rgba(71, 45, 153, 0.85);
 }
 @keyframes menuOpen {
   0% {
@@ -441,13 +447,33 @@ nav > a:hover {
 }
 #airplane > .header > .right > .menu > .menuList > li {
   width: 100%;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-bottom: #ccc;
+  height: 60px;
+  line-height: 60px;
   color: #000;
   font-weight: 600;
   list-style: none;
+  padding: 0 10px 0 18px;
+}
+#airplane > .header > .right > .menu > .menuList > li a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  font-weight: 800;
+}
+#airplane > .header > .right > .menu > .menuList > li a > i {
+  color: #EEDF98;
+}
+#airplane > .header > .right > .menu > .menuList > li a > p {
+  margin-left: 10px;
+  width: 75%;
+  color: #EEDF98;
+  line-height: 60px;
+  height: 60px;
+  display: block;
+  margin-bottom: 0;
+  font-weight: 800;
+  font-size: 20px;
 }
 #airplane > .cycleNumber {
   width: 100%;
@@ -478,7 +504,7 @@ nav > a:hover {
 }
 @media screen and (max-width: 880px) {
   #airplane > .content {
-    padding: 10px 0;
+    padding: 5px 0;
   }
 }
 #airplane > .content > .playBox {
@@ -494,9 +520,17 @@ nav > a:hover {
     width: 100%;
     position: absolute;
     top: 120px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
     z-index: 999;
+    display: none;
+    max-width: 700px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #airplane > .content > .playBox {
+    top: 130px;
   }
 }
 #airplane > .content > .playBox > .loading {
@@ -519,6 +553,11 @@ nav > a:hover {
   background-color: transparent;
   transition: 0.1s;
   opacity: 0;
+}
+@media screen and (max-widt: 1000px) {
+  #airplane > .content > .playBox > .airplaneDiv {
+    max-width: 700px;
+  }
 }
 #airplane > .content > .playBox > .airplaneDiv > img {
   position: absolute;
@@ -645,6 +684,11 @@ nav > a:hover {
   flex-direction: column;
   opacity: 0;
 }
+@media screen and (max-width: 1000px) {
+  #airplane > .content > .playBox > .countdown {
+    opacity: 0;
+  }
+}
 #airplane > .content > .playBox > .countdown > div {
   width: 100%;
   background-color: transparent;
@@ -733,6 +777,11 @@ nav > a:hover {
   align-items: center;
   opacity: 0;
 }
+@media screen and (max-width: 1000px) {
+  #airplane > .content > .playBox > .airTopThree {
+    max-width: 700px;
+  }
+}
 #airplane > .content > .playBox > .airTopThree > .championTitle {
   width: 90%;
   position: absolute;
@@ -746,6 +795,15 @@ nav > a:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 1000px) {
+  #airplane > .content > .playBox > .airTopThree > .streamer {
+    max-width: 700px;
+    top: 0;
+    left: 0;
+    transform: translate(0);
+    max-height: 100%;
+  }
 }
 #airplane > .content > .playBox > .airTopThree > .airList {
   display: flex;
@@ -805,6 +863,11 @@ nav > a:hover {
   background-position: center;
   overflow: hidden;
 }
+@media screen and (max-width: 1000px) {
+  #airplane > .content > .playBox > .airTopTen {
+    max-width: 700px;
+  }
+}
 #airplane > .content > .playBox > .airTopTen > .list {
   display: flex;
   justify-content: center;
@@ -863,6 +926,7 @@ nav > a:hover {
   #airplane > .content > .betBox {
     min-height: 500px;
     width: 100%;
+    max-width: 700px;
   }
 }
 #airplane > .content > .betBox #hiddenRadioRank {
@@ -1110,7 +1174,7 @@ nav > a:hover {
 #airplane > .content .timer.md-1000 > #openGameBtn {
   position: absolute;
   bottom: 10px;
-  right: 20px;
+  left: 70%;
   color: #fff;
   font-size: 24px;
   z-index: 999;
@@ -1145,7 +1209,7 @@ nav > a:hover {
   #airplane > .footer {
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 50px;
+    margin-top: 0px;
     padding-bottom: 0;
   }
 }
@@ -1160,46 +1224,73 @@ nav > a:hover {
 #airplane > .footer input[type=number] {
   -moz-appearance: textfield;
 }
-#airplane > .footer .diamondList {
+#airplane > .footer > .choose {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 25%;
+  align-items: center;
+  width: 65%;
   min-width: 300px;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .footer .diamondList {
-    min-width: 0;
+  #airplane > .footer > .choose {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 340px) {
+  #airplane > .footer > .choose {
+    min-width: 100px;
+  }
+}
+#airplane > .footer > .choose .diamondList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-right: 20px;
+  max-width: 400px;
+}
+@media screen and (max-width: 1000px) {
+  #airplane > .footer > .choose .diamondList {
+    min-width: 210px;
     width: 50%;
   }
 }
-#airplane > .footer .diamondList > .diamondBox {
+#airplane > .footer > .choose .diamondList > .diamondBox {
   display: flex;
   width: 100%;
   overflow: hidden;
 }
-#airplane > .footer .diamondList > .diamondBox > .diamondBtn {
+#airplane > .footer > .choose .diamondList > .diamondBox > .diamondBtn {
   width: 33.3%;
   transition: 0.1s;
 }
-#airplane > .footer .diamondList > i {
+#airplane > .footer > .choose .diamondList > i {
   color: #fff;
   font-size: 30px;
   cursor: pointer;
 }
-#airplane > .footer > .betMoneyBox {
+#airplane > .footer > .choose .betMoneyBox {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12%;
+  width: 25%;
+  margin-left: 20px;
+  max-width: 200px;
 }
-#airplane > .footer > .betMoneyBox > p {
+#airplane > .footer > .choose .betMoneyBox > p {
   color: #00FFFF;
   font-weight: 600;
   margin-bottom: 5px;
+  text-align: center;
 }
-#airplane > .footer > .betMoneyBox > .betMoney {
+@media screen and (max-width: 1000px) {
+  #airplane > .footer > .choose .betMoneyBox > p {
+    font-size: 13px;
+    width: 80px;
+  }
+}
+#airplane > .footer > .choose .betMoneyBox > .betMoney {
   width: 100%;
   border-radius: 8px;
   border: 2px #00FFFF solid;
@@ -1210,18 +1301,43 @@ nav > a:hover {
   justify-content: center;
   align-items: center;
 }
-#airplane > .footer > .betMoneyBox > .betMoney > p {
+@media screen and (max-width: 450px) {
+  #airplane > .footer > .choose .betMoneyBox > .betMoney {
+    max-width: 80px;
+    width: 80px;
+    min-width: 50px;
+  }
+}
+@media screen and (max-width: 340px) {
+  #airplane > .footer > .choose .betMoneyBox > .betMoney {
+    width: 50px;
+  }
+}
+#airplane > .footer > .choose .betMoneyBox > .betMoney > p {
   text-align: center;
   display: block;
   margin-bottom: 0;
 }
-#airplane > .footer > .betMoneyBox > .betMoney > input {
+@media screen and (max-width: 1000px) {
+  #airplane > .footer > .choose .betMoneyBox > .betMoney > p {
+    font-size: 12px;
+    width: 80px;
+  }
+}
+#airplane > .footer > .choose .betMoneyBox > .betMoney > input {
   background-color: transparent;
   color: #fff;
   font-weight: 600;
   text-align: center;
   border: none;
   outline: none;
+  height: 30px;
+  width: 100%;
+}
+@media screen and (max-width: 1000px) {
+  #airplane > .footer > .choose .betMoneyBox > .betMoney > input {
+    height: 25px;
+  }
 }
 #airplane > .footer > .btnList {
   display: flex;

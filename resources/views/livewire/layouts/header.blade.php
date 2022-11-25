@@ -7,12 +7,12 @@
         <form action="/logout" method="post" id="logoutForm">
             @csrf
             <input type="submit" hidden>
-            <a href="javascript:;" class="logout" onclick="logoutFn()">Logout</a>
+            <a href="javascript:;" class="logout" onclick="logoutFn()">登出</a>
         </form>
         <!-- <a href="/logout" class="logout" onclick="logoutFn()">Logout</a> -->
         @else
-        <a href="/login" class="login">Login</a>
-        <a href="/register" class="register">Register</a>
+        <a href="/login" class="login">登入</a>
+        <a href="/register" class="register">註冊</a>
         @endif
     </div>
 </header>
