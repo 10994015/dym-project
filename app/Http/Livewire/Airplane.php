@@ -19,7 +19,7 @@ class Airplane extends Component
     public $accMoney;
     public $winMoney = 0;
     public $odds;
-    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn'];
+    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend'];
 
     public function sendTime(){
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
@@ -111,7 +111,12 @@ class Airplane extends Component
         $this->winMoney = 0;
         $this->betMoney = 0;
     }
-
+    public function updateTrend(){
+        $beforeTime = date('Y-m-d H:i', strtotime("-50 minute"));
+        $nowTime = date('Y-m-d H:i');
+        $answer = Answer::whereBetween('bet_time', [$beforeTime, $nowTime])->orderBy('id', 'DESC')->take(50)->get();
+        $this->dispatchBrowserEvent('updateTrendFn', ['answer'=>$answer]);
+    }
     public function render()
     {
         $this->myDoller = Auth::user()->money;

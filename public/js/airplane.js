@@ -382,6 +382,10 @@ var setOdds = 0;
 var openGameBtn = document.getElementById('openGameBtn');
 var playBoxisOpen = false;
 var bethtmlArr = [];
+var trendModal = document.getElementById('trendModal');
+var closeTrendModalBtn = document.getElementById('closeTrendModalBtn');
+var openTrendModalBtn = document.getElementById('openTrendModalBtn');
+var trendModalList = document.getElementById('trendModalList');
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 window.addEventListener('setOdds', function (e) {
   setOdds = e.detail.odds;
@@ -499,6 +503,7 @@ window.addEventListener('startRun', function (e) {
     doubleBtn.src = '/images/airplane/doubledisable.png';
   }
 });
+window.Livewire.emit('updateTrend');
 function timeRun() {
   countdownNumber = 60 - new Date().getSeconds();
   if (countdownNumber < 10) {
@@ -599,6 +604,7 @@ function timeRun() {
   }
 
   if (new Date().getSeconds() == 20) {
+    window.Livewire.emit('updateTrend');
     airplaneDiv.style.opacity = "0";
     airplaneDivBg.classList.remove('start');
     airTopThree.style.opacity = "0";
@@ -618,6 +624,19 @@ function timeRun() {
     }
   }
 }
+window.addEventListener('updateTrendFn', function (e) {
+  var trendhtml = '';
+  // console.log(e.detail.answer);
+  for (var i = 0; i < e.detail.answer.length; i++) {
+    var _rank = e.detail.answer[i].ranking.split(',');
+    trendhtml += "<div class=\"item\"><div class=\"number\">".concat(e.detail.answer[i].number, "</div><div class=\"imgList\">");
+    for (var j = 0; j < _rank.length; j++) {
+      trendhtml += "<img src='/images/airplane/air".concat(_rank[j], ".png'>");
+    }
+    trendhtml += '</div></div>';
+  }
+  trendModalList.innerHTML = trendhtml;
+});
 function fiveNumberFn() {
   fiveHtml = "";
   fiveNumber.innerHTML = "";
@@ -1590,6 +1609,12 @@ function airTopThreeHTML(nowAnswer) {
     topThreeAir[_i19].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i19]], ".png");
   }
 }
+openTrendModalBtn.addEventListener('click', function () {
+  trendModal.style.display = "flex";
+});
+closeTrendModalBtn.addEventListener('click', function () {
+  trendModal.style.display = "none";
+});
 openGameBtn.addEventListener('click', function () {
   playBoxisOpen = !playBoxisOpen;
   if (playBoxisOpen) {

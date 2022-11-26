@@ -1306,13 +1306,15 @@ nav{
         justify-content: center;
         align-items: center;
         z-index: 999999;
+        display: none;
+        animation: openModal .1s linear;
         .content{
             width:98%;
             max-width: 1200px;
             height: 800px;
             background-color:rgba(71, 45, 153,.85);
             border-radius: 12px;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
             overflow: hidden;
             >.header{
                 font-size: 30px;
@@ -1340,7 +1342,7 @@ nav{
             }
             >.list{
                 width:95%;
-                margin: 15px auto 5px;
+                margin: 0 auto ;
                 background-color: rgba(0,0,0,.85);
                 border-radius: 12px;
                 overflow-y: scroll;
@@ -1350,8 +1352,15 @@ nav{
                 flex-direction: column;
                 align-items: center;
                 &::-webkit-scrollbar {
-                    opacity: 0;
+                    width: 5px;
+                    height: 8px;
+                    background-color: #aaa;
+                    border-radius: 8px;
                 }
+                &::-webkit-scrollbar-thumb {
+                    background: rgba(71, 45, 153,.85);
+                    border-radius: 8px;
+                  }
                 >.item{
                     width:90%;
                     display: flex;
@@ -1361,23 +1370,42 @@ nav{
                     border-top: 2px #9a85e2 solid;
                     border-bottom: 2px #9a85e2 solid;
                     margin:10px 0;
+                    @media screen and (max-width:1000px){
+                        width:100%;
+                    }
                     >.number{
                         font-size: 22px;
                         font-weight: 600;
                         margin-bottom: 5px;
                         color:#fff;
+                        @media screen and (max-width:1000px){
+                            font-size: 20px;
+                        }
+                        @media screen and (max-width:700px){
+                            font-size: 18px;
+                        }
+                        @media screen and (max-width:500px){
+                            font-size: 14px;
+                        }
                     }
                     >.imgList{
                         display: flex;
                         justify-content: center;
                         align-items: center;
                         >img{
-                            width:9%;
-                            
+                            width:9.5%;
+                            @media screen and (max-width:1000px){
+                                width:10%;
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+    @keyframes openModal {
+        0%{
+            transform: scale(.5);
         }
     }
 }

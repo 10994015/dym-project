@@ -79,6 +79,10 @@ let setOdds = 0;
 const openGameBtn = document.getElementById('openGameBtn');
 let playBoxisOpen = false;
 let bethtmlArr = [];
+const trendModal = document.getElementById('trendModal');
+const closeTrendModalBtn = document.getElementById('closeTrendModalBtn');
+const openTrendModalBtn = document.getElementById('openTrendModalBtn');
+const trendModalList = document.getElementById('trendModalList');
 document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
 window.addEventListener('setOdds', e=>{
     setOdds = e.detail.odds;
@@ -207,7 +211,10 @@ window.addEventListener('startRun', e=>{
         reBtn.src = '/images/airplane/redisable.png';
         doubleBtn.src = '/images/airplane/doubledisable.png';
     }
+    
 })
+
+window.Livewire.emit('updateTrend');
 function timeRun(){
     countdownNumber = 60 - new Date().getSeconds();
     
@@ -311,8 +318,9 @@ function timeRun(){
         }
         // fiveNumberFn();
     }
-   
+    
     if(new Date().getSeconds() == 20){
+        window.Livewire.emit('updateTrend');
         airplaneDiv.style.opacity = "0";
         airplaneDivBg.classList.remove('start');
         airTopThree.style.opacity = "0";
@@ -332,7 +340,20 @@ function timeRun(){
         }
     }
 }
-
+window.addEventListener('updateTrendFn', e=>{
+    let trendhtml = '';
+    // console.log(e.detail.answer);
+    for(let i=0;i<e.detail.answer.length;i++){
+        let rank = e.detail.answer[i].ranking.split(',');
+        trendhtml += `<div class="item"><div class="number">${e.detail.answer[i].number}</div><div class="imgList">`
+        for(let j=0;j<rank.length;j++){
+            trendhtml += `<img src='/images/airplane/air${rank[j]}.png'>`
+        }
+        trendhtml += '</div></div>';
+        
+    }
+    trendModalList.innerHTML = trendhtml;
+})
 function fiveNumberFn(){
     fiveHtml = "";
     fiveNumber.innerHTML = ""
@@ -818,7 +839,12 @@ function airTopThreeHTML(nowAnswer){
         topThreeAir[i].src = `/images/airplane/airRank${nowAnswer[threeArr[i]]}.png`
     }
 }
-
+openTrendModalBtn.addEventListener('click', ()=>{
+    trendModal.style.display = "flex";
+})
+closeTrendModalBtn.addEventListener('click', ()=>{
+    trendModal.style.display = "none";
+})
 openGameBtn.addEventListener('click', ()=>{
     playBoxisOpen = !playBoxisOpen;
     
