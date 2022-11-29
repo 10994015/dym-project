@@ -386,6 +386,9 @@ var trendModal = document.getElementById('trendModal');
 var closeTrendModalBtn = document.getElementById('closeTrendModalBtn');
 var openTrendModalBtn = document.getElementById('openTrendModalBtn');
 var trendModalList = document.getElementById('trendModalList');
+var openRuleModalBtn = document.getElementById('openRuleModalBtn');
+var ruleModal = document.getElementById('ruleModal');
+var closeRuleModalBtn = document.getElementById('closeRuleModalBtn');
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 window.addEventListener('setOdds', function (e) {
   setOdds = e.detail.odds;
@@ -1624,6 +1627,12 @@ openGameBtn.addEventListener('click', function () {
     playBox.style.opacity = '0';
     openGameBtn.classList.add('fa-circle-up');
   }
+});
+openRuleModalBtn.addEventListener('click', function () {
+  ruleModal.style.display = "flex";
+});
+closeRuleModalBtn.addEventListener('click', function () {
+  ruleModal.style.display = "none";
 });
 /******/ })()
 ;

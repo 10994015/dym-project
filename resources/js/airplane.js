@@ -83,6 +83,9 @@ const trendModal = document.getElementById('trendModal');
 const closeTrendModalBtn = document.getElementById('closeTrendModalBtn');
 const openTrendModalBtn = document.getElementById('openTrendModalBtn');
 const trendModalList = document.getElementById('trendModalList');
+const openRuleModalBtn = document.getElementById('openRuleModalBtn');
+const ruleModal = document.getElementById('ruleModal');
+const closeRuleModalBtn = document.getElementById('closeRuleModalBtn');
 document.getElementById(`rankingImg${chooseRank}`).src = `/images/airplane/no${chooseRank}chk.png`;
 window.addEventListener('setOdds', e=>{
     setOdds = e.detail.odds;
@@ -856,4 +859,10 @@ openGameBtn.addEventListener('click', ()=>{
         openGameBtn.classList.add('fa-circle-up');
     }
     
+})
+openRuleModalBtn.addEventListener('click', ()=>{
+    ruleModal.style.display = "flex";
+})
+closeRuleModalBtn.addEventListener('click', ()=>{
+    ruleModal.style.display = "none";
 })

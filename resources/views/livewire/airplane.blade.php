@@ -18,7 +18,7 @@
           <i class="fas fa-bars" id="bar"></i>
           <ul class="menuList" id="menuList">
             <li><a href="/"><i class="fa-solid fa-chevron-left"></i><p>回大廳</p></a></li>
-            <li><a href="javascript:;"><i class="fa-solid fa-registered"></i><p>規則</p></a></li>
+            <li id="openRuleModalBtn"><a href="javascript:;"><i class="fa-solid fa-registered"></i><p>規則</p></a></li>
             <li id="openTrendModalBtn"><a href="javascript:;"><i class="fa-solid fa-chart-line"></i><p>走勢</p></a></li>
             <li><a href="javascript:;"><i class="fa-solid fa-file-lines"></i><p>紀錄</p></a></li>
           </ul>
@@ -203,4 +203,5 @@
     </div>
   </div>
   @include('livewire.trend')
+  @include('livewire.rule')
 </div>

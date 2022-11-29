@@ -1353,7 +1353,7 @@ nav > a:hover {
   margin: 0 5px;
   width: 33.3%;
 }
-#airplane > .trendModal {
+#airplane > .trendModal, #airplane .ruleModal {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
@@ -1367,7 +1367,7 @@ nav > a:hover {
   display: none;
   animation: openModal 0.1s linear;
 }
-#airplane > .trendModal .content {
+#airplane > .trendModal .content, #airplane .ruleModal .content {
   width: 98%;
   max-width: 1200px;
   height: 800px;
@@ -1376,7 +1376,7 @@ nav > a:hover {
   padding-bottom: 5px;
   overflow: hidden;
 }
-#airplane > .trendModal .content > .header {
+#airplane > .trendModal .content > .header, #airplane .ruleModal .content > .header {
   font-size: 30px;
   font-weight: 600;
   display: flex;
@@ -1386,13 +1386,13 @@ nav > a:hover {
   height: 70px;
   position: relative;
 }
-#airplane > .trendModal .content > .header > p {
+#airplane > .trendModal .content > .header > p, #airplane .ruleModal .content > .header > p {
   color: #fff;
   height: 70px;
   line-height: 70px;
   margin-bottom: 0;
 }
-#airplane > .trendModal .content > .header > i {
+#airplane > .trendModal .content > .header > i, #airplane .ruleModal .content > .header > i {
   position: absolute;
   top: 50%;
   right: 30px;
@@ -1400,7 +1400,7 @@ nav > a:hover {
   color: #fff;
   transform: translateY(-50%);
 }
-#airplane > .trendModal .content > .list {
+#airplane > .trendModal .content > .list, #airplane .ruleModal .content > .list {
   width: 95%;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.85);
@@ -1412,17 +1412,17 @@ nav > a:hover {
   flex-direction: column;
   align-items: center;
 }
-#airplane > .trendModal .content > .list::-webkit-scrollbar {
+#airplane > .trendModal .content > .list::-webkit-scrollbar, #airplane .ruleModal .content > .list::-webkit-scrollbar {
   width: 5px;
   height: 8px;
   background-color: #aaa;
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .list::-webkit-scrollbar-thumb {
+#airplane > .trendModal .content > .list::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .list::-webkit-scrollbar-thumb {
   background: rgba(71, 45, 153, 0.85);
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .list > .item {
+#airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item {
   width: 90%;
   display: flex;
   align-items: center;
@@ -1433,43 +1433,95 @@ nav > a:hover {
   margin: 10px 0;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item {
+  #airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item {
     width: 100%;
   }
 }
-#airplane > .trendModal .content > .list > .item > .number {
+#airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #fff;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
     font-size: 20px;
   }
 }
 @media screen and (max-width: 700px) {
-  #airplane > .trendModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
     font-size: 18px;
   }
 }
 @media screen and (max-width: 500px) {
-  #airplane > .trendModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
     font-size: 14px;
   }
 }
-#airplane > .trendModal .content > .list > .item > .imgList {
+#airplane > .trendModal .content > .list > .item > .imgList, #airplane .ruleModal .content > .list > .item > .imgList {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#airplane > .trendModal .content > .list > .item > .imgList > img {
+#airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img {
   width: 9.5%;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item > .imgList > img {
+  #airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img {
     width: 10%;
   }
+}
+#airplane > .trendModal .content > .rules, #airplane .ruleModal .content > .rules {
+  width: 95%;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  overflow-y: scroll;
+  padding: 5px 50px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+}
+#airplane > .trendModal .content > .rules::-webkit-scrollbar, #airplane .ruleModal .content > .rules::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+  border-radius: 8px;
+}
+#airplane > .trendModal .content > .rules::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .rules::-webkit-scrollbar-thumb {
+  background: rgba(71, 45, 153, 0.85);
+  border-radius: 8px;
+}
+#airplane > .trendModal .content > .rules > h3, #airplane .ruleModal .content > .rules > h3 {
+  text-align: center;
+  margin: 30px 0;
+  color: #fff;
+}
+#airplane > .trendModal .content > .rules > .rule, #airplane .ruleModal .content > .rules > .rule {
+  margin-bottom: 30px;
+}
+#airplane > .trendModal .content > .rules > .rule > h4, #airplane .ruleModal .content > .rules > .rule > h4 {
+  background-color: #472d99;
+  color: #fff;
+  width: 200px;
+  height: 50px;
+  line-height: 46px;
+  font-size: 26px;
+  border-radius: 10px;
+  font-weight: 900;
+  text-align: center;
+  border: 2px #886be6 solid;
+  margin-bottom: 15px;
+}
+#airplane > .trendModal .content > .rules > .rule > p, #airplane .ruleModal .content > .rules > .rule > p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #fff;
+}
+#airplane > .trendModal .content > .rules > .warning p, #airplane .ruleModal .content > .rules > .warning p {
+  color: #E4AC01;
+  line-height: 1.6;
+  font-size: 20px;
 }
 @keyframes openModal {
   0% {
