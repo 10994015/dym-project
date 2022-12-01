@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Answer;
 use App\Models\Betlist;
 use App\Models\GameInfos;
+use App\Models\GameStatu;
 use App\Models\RiskBet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,9 @@ class Airplane extends Component
     public $accMoney;
     public $winMoney = 0;
     public $odds;
-    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend'];
+    public $statu;
+    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
+    
 
     public function sendTime(){
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
@@ -117,8 +120,13 @@ class Airplane extends Component
         $answer = Answer::whereBetween('bet_time', [$beforeTime, $nowTime])->orderBy('id', 'DESC')->take(50)->get();
         $this->dispatchBrowserEvent('updateTrendFn', ['answer'=>$answer]);
     }
+    public function watchStatu(){
+        $this->statu = GameStatu::where('gamenumber', 23)->first()->statu;
+        $this->dispatchBrowserEvent('watchStatu', ['statu' => $this->statu]);
+    }
     public function render()
     {
+        $this->watchStatu();
         $this->myDoller = Auth::user()->money;
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
@@ -134,6 +142,9 @@ class Airplane extends Component
         $betlist = Betlist::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
         $bet_count = Betlist::where('user_id', Auth::id())->count();
         $bet_sum = Betlist::where('user_id', Auth::id())->sum('money');
+
+        $this->statu = GameStatu::where('gamenumber', 23)->first()->statu;
+
         return view('livewire.airplane', ['myDoller'=>$this->myDoller, 'answer'=>$answer, 'isLoad'=>$this->isLoad, 'betlist'=>$betlist, 'bet_count'=>$bet_count, 'bet_sum'=>$bet_sum])->layout('livewire/layouts/game');
         
     }

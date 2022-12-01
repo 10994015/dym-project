@@ -36,6 +36,7 @@ var rank = document.getElementsByClassName('rank');
 var beyMoney = document.getElementById('beyMoney');
 var cycleNumber = document.getElementById('cycleNumber');
 var betListIssue = document.getElementById('betListIssue');
+var loadingDiv = document.getElementById('loading-div');
 var answer = [];
 var riskAnswerArr = [];
 var reverseanswer = [];
@@ -582,6 +583,9 @@ function timeRun() {
     reBtn.src = '/images/airplane/re.png';
     doubleBtn.src = '/images/airplane/double.png';
   }
+  if (new Date().getSeconds() > 12) {
+    window.Livewire.emit('watchStatu');
+  }
   if (new Date().getSeconds() == 15) {
     airTopThreeHTML(nowAnswer);
     airTopThree.style.opacity = "1";
@@ -639,6 +643,13 @@ window.addEventListener('updateTrendFn', function (e) {
     trendhtml += '</div></div>';
   }
   trendModalList.innerHTML = trendhtml;
+});
+window.addEventListener('watchStatu', function (e) {
+  if (e.detail.statu == 0) {
+    loadingDiv.style.display = "block";
+  } else {
+    loadingDiv.style.display = "none";
+  }
 });
 function fiveNumberFn() {
   fiveHtml = "";

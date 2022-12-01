@@ -204,4 +204,5 @@
   </div>
   @include('livewire.trend')
   @include('livewire.rule')
+  @include('livewire.layouts.loading')
 </div>

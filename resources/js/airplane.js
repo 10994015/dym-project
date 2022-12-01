@@ -1,4 +1,3 @@
-
 window.Livewire.emit('sendTime');
 let countdownNumber = 0;
 const air = document.getElementById('airplaneDiv').querySelectorAll('.air');
@@ -32,6 +31,7 @@ const rank = document.getElementsByClassName('rank');
 const beyMoney = document.getElementById('beyMoney');
 const cycleNumber = document.getElementById('cycleNumber');
 const betListIssue = document.getElementById('betListIssue');
+const loadingDiv = document.getElementById('loading-div');
 let answer = [];
 let riskAnswerArr = [];
 let reverseanswer = [];
@@ -297,6 +297,9 @@ function timeRun(){
         reBtn.src = '/images/airplane/re.png';
         doubleBtn.src = '/images/airplane/double.png';
     }
+    if(new Date().getSeconds() > 12){
+        window.Livewire.emit('watchStatu');
+    }
     if(new Date().getSeconds() == 15){
         airTopThreeHTML(nowAnswer);
         airTopThree.style.opacity = "1";
@@ -342,6 +345,8 @@ function timeRun(){
             window.Livewire.emit('isRiskFn');
         }
     }
+
+    
 }
 window.addEventListener('updateTrendFn', e=>{
     let trendhtml = '';
@@ -356,6 +361,13 @@ window.addEventListener('updateTrendFn', e=>{
         
     }
     trendModalList.innerHTML = trendhtml;
+})
+window.addEventListener('watchStatu', e=>{
+    if(e.detail.statu == 0){
+        loadingDiv.style.display = "block";
+    }else{
+        loadingDiv.style.display = "none";
+    }
 })
 function fiveNumberFn(){
     fiveHtml = "";
