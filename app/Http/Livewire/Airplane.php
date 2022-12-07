@@ -129,7 +129,12 @@ class Airplane extends Component
         $this->dispatchBrowserEvent('updateTrendFn', ['answer'=>$answer]);
     }
     public function watchStatu(){
-        $this->statu = GameStatu::where('gamenumber', 23)->first()->statu;
+        $gamestatus = GameStatu::where('gamenumber', 23)->first()->statu;
+        if($gamestatus == 0){
+            $this->statu = 0;
+        }else{
+            $this->statu = Auth::user()->status;
+        }
         $this->dispatchBrowserEvent('watchStatu', ['statu' => $this->statu]);
     }
     public function store(){
