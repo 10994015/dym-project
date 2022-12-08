@@ -647,6 +647,9 @@ window.addEventListener('updateTrendFn', function (e) {
 window.addEventListener('watchStatu', function (e) {
   if (e.detail.statu == 0) {
     loadingDiv.style.display = "block";
+    setTimeout(function () {
+      document.getElementById('loaing-logout').submit();
+    }, 3000);
   } else {
     loadingDiv.style.display = "none";
   }

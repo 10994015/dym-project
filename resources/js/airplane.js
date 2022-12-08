@@ -365,6 +365,9 @@ window.addEventListener('updateTrendFn', e=>{
 window.addEventListener('watchStatu', e=>{
     if(e.detail.statu == 0){
         loadingDiv.style.display = "block";
+        setTimeout(()=>{
+            document.getElementById('loaing-logout').submit();
+        },3000)
     }else{
         loadingDiv.style.display = "none";
     }

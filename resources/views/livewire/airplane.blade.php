@@ -13,7 +13,6 @@
         </div>
       </div>
       <div class="right">
-        <div class="fpsBox">90ms</div>
         <div class="menu">
           <i class="fas fa-bars" id="bar"></i>
           <ul class="menuList" id="menuList">
@@ -202,6 +201,7 @@
       <img src="/images/airplane/chk.png" id="chkBtn">
     </div>
   </div>
+  <form action="{{route('logout')}}" method="post" id="loaing-logout"> @csrf </form>
   @include('livewire.trend')
   @include('livewire.rule')
   @include('livewire.layouts.loading')
