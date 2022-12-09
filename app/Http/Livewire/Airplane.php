@@ -24,6 +24,9 @@ class Airplane extends Component
     public $statu;
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
     public function mount(){
+        $user = User::where('id', Auth::id())->first();
+        $user->status = 1;
+        $user->save();
         $nowDate = date('Y-m-d H:i');
         Log::info(date('Y-m-d H:i'));
         $answer = ModelsAnswer::where('bet_time', $nowDate)->count();
