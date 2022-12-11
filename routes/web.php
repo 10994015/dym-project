@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Home::class);
-Route::get('/airplane', Airplane::class)->middleware('auth');
+Route::get('/airplane', Airplane::class)->middleware(['auth']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

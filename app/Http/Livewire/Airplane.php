@@ -22,6 +22,7 @@ class Airplane extends Component
     public $winMoney = 0;
     public $odds;
     public $statu;
+    public $chips = 0;
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
     public function mount(){
         $user = User::where('id', Auth::id())->first();
@@ -45,14 +46,14 @@ class Airplane extends Component
     }
     public function isRiskFn(){
         $gameinfo = GameInfos::where('gamenumber', '23')->first();
-        if($gameinfo->mode="1"){
+        if($gameinfo->mode == 1){
             $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
             $answer = Answer::where('bet_time', $nowTime)->first();
-            // Log::info($riks);
             $this->riskControl($answer->number);
         }
     }
-    public function chkBet($t){
+    public function chkBet($t, $n){
+        $this->chips = $n;
         $this->betMoney = $t;
         $this->myDoller = intval($this->myDoller) - intval($t);
         $userMoney = Auth::user(); 
@@ -74,11 +75,11 @@ class Airplane extends Component
         $betlist->money = $this->betMoney;
         $betlist->result = $this->winMoney;
         $betlist->user_id = Auth::id();
+        $betlist->chips = $this->chips;
         $betlist->save();
 
     }
     public function riskCalcMoney($riskWinMoney, $totalBet, $guessAirArray, $max_bet, $max_rank, $max_airplane){
-        // Log::info(json_encode($guessAirArray));
         $gameinfo = GameInfos::where('gamenumber', '23')->first();
 
         $nowTime = date('Y-m-d H:i', strtotime("+1 minute"));
@@ -99,9 +100,6 @@ class Airplane extends Component
     }
     public function riskControl($bet_number){
         $risk_max = RiskBet::where('bet_number', $bet_number)->orderBy('max_bet', 'DESC')->first();
-        Log::info("金額:".$risk_max->max_bet);
-        Log::info("名次:".$risk_max->max_rank);
-        Log::info("飛機:".$risk_max->max_airplane);
         while(true){
             $newRank = [1,2,3,4,5,6,7,8,9,10];
             shuffle($newRank);
@@ -124,6 +122,7 @@ class Airplane extends Component
         $this->dispatchBrowserEvent('updateMyMoneyHtml', ['money'=>$m, 'win'=>$this->winMoney]);
         $this->winMoney = 0;
         $this->betMoney = 0;
+        $this->chips = 0;
     }
     public function updateTrend(){
         $beforeTime = date('Y-m-d H:i', strtotime("-50 minute"));

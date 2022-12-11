@@ -298,7 +298,7 @@ function timeRun(){
         doubleBtn.src = '/images/airplane/double.png';
     }
     if(new Date().getSeconds() > 12){
-        window.Livewire.emit('watchStatu');
+        // window.Livewire.emit('watchStatu');
     }
     if(new Date().getSeconds() == 15){
         airTopThreeHTML(nowAnswer);
@@ -656,11 +656,12 @@ function chkBtnFn(){
         '等待整點開獎',
         'success'
     );
+    
     chkBetBool = false;
     chkBtn.src = '/images/airplane/chkdisable.png';
     reBtn.src = '/images/airplane/redisable.png';
     doubleBtn.src = '/images/airplane/doubledisable.png';
-    window.Livewire.emit('chkBet' ,totalBet);
+    window.Livewire.emit('chkBet' ,totalBet, totalBetNumberCalc); //totalBetNumberCalc
     riskCalcBetFn(totalBet);
     totalBet = 0;
     for(let i=0;i<document.getElementsByClassName('deleteBet').length;i++){
@@ -722,7 +723,6 @@ function riskCalcBetFn(totalBet){
             }
         }
     }
-    console.log(max_bet);
     
     
     window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray, max_bet, max_rank, max_airplane );

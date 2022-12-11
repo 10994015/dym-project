@@ -584,7 +584,7 @@ function timeRun() {
     doubleBtn.src = '/images/airplane/double.png';
   }
   if (new Date().getSeconds() > 12) {
-    window.Livewire.emit('watchStatu');
+    // window.Livewire.emit('watchStatu');
   }
   if (new Date().getSeconds() == 15) {
     airTopThreeHTML(nowAnswer);
@@ -858,7 +858,7 @@ function chkBtnFn() {
   chkBtn.src = '/images/airplane/chkdisable.png';
   reBtn.src = '/images/airplane/redisable.png';
   doubleBtn.src = '/images/airplane/doubledisable.png';
-  window.Livewire.emit('chkBet', totalBet);
+  window.Livewire.emit('chkBet', totalBet, totalBetNumberCalc); //totalBetNumberCalc
   riskCalcBetFn(totalBet);
   totalBet = 0;
   for (var _i14 = 0; _i14 < document.getElementsByClassName('deleteBet').length; _i14++) {
@@ -1229,7 +1229,6 @@ function riskCalcBetFn(totalBet) {
       }
     }
   }
-  console.log(max_bet);
   window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray, max_bet, max_rank, max_airplane);
 }
 window.addEventListener('updateMyMoneyHtml', function (e) {

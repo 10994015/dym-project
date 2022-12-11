@@ -512,6 +512,7 @@ nav{
         // align-items: center;
         padding: 20px 0 10px;
         min-height: 580px;
+        max-height: 580px;
         @media screen and (max-width:1400px) {
             padding: 10px 5px;
         }
