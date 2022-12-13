@@ -21,6 +21,7 @@ class Airplane extends Component
     public $accMoney;
     public $winMoney = 0;
     public $odds;
+    public $bsodds;
     public $statu;
     public $chips = 0;
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
@@ -198,7 +199,8 @@ class Airplane extends Component
 
         $game_info = GameInfos::where('gamenumber', 23)->first();
         $this->odds = $game_info->odds;
-        $this->dispatchBrowserEvent('setOdds', ['odds'=>$this->odds]);
+        $this->bsodds = $game_info->bsodds;
+        $this->dispatchBrowserEvent('setOdds', ['odds'=>$this->odds, 'bsOdds'=>$this->bsodds]);
 
         $betlist = Betlist::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
         $bet_count = Betlist::where('user_id', Auth::id())->count();

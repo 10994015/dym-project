@@ -1040,6 +1040,17 @@ nav{
                         }
                     }
                 }
+                >.bs-btnlist{
+                    display: grid;
+                    grid-template-columns: repeat(2, 200px);
+                    grid-column-gap: 40px;
+                    grid-row-gap: 1.5em;
+                    justify-content: center;
+                    margin-top: 30px;
+                    >img{
+                        width:100%;
+                    }
+                }
                 &#game2, &#game3, &#game4, &#game5{
                     display: none;
                 }

@@ -156,7 +156,20 @@
           </div>
       </div>
       <div class="content" id="game2">冠亞二星</div>
-      <div class="content" id="game3">大小單雙</div>
+      <div class="content" id="game3">
+          <span class="odds">猜每一個名次船號的大小單雙 賠率1.96 </span>
+          <div class="rankBtnBox" id="rankBtnBox-bs">
+            @for($i=1;$i<=10;$i++)
+            <img src="/images/airplane/no{{$i}}.png" id="rankingImg{{$i}}-bs" class="rankingImg-bs clickAudio" alt="{{$i}}">
+            @endfor
+          </div>
+          <div class="bs-btnlist">
+            <img src="/images/airplane/big.png" id="bigBtn" alt='1' class='bsBtn'>
+            <img src="/images/airplane/small.png" id="smallBtn" alt='2' class='bsBtn'>
+            <img src="/images/airplane/odd.png" id="oddBtn" alt='3' class='bsBtn'>
+            <img src="/images/airplane/even.png" id="evenBtn" alt='4' class='bsBtn'>
+          </div>
+      </div>
       <div class="content" id="game4">冠亞和</div>
       <div class="content" id="game5">龍虎</div>
     </div>

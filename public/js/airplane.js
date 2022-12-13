@@ -370,6 +370,148 @@ var guessAirArray = {
     }
   }
 };
+var guessBsArray = {
+  no1: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no2: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no3: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no4: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no5: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no6: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no7: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no8: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no9: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  },
+  no10: {
+    big: {
+      money: 0
+    },
+    small: {
+      money: 0
+    },
+    odd: {
+      money: 0
+    },
+    even: {
+      money: 0
+    }
+  }
+};
 var deleteBet = null;
 var totalBetNmuber = document.getElementById('totalBetNmuber');
 var totalBetMoney = document.getElementById('totalBetMoney');
@@ -379,7 +521,9 @@ var listAllHtml = '';
 var airNum = document.getElementsByClassName('airNum');
 var topThreeAir = document.getElementsByClassName('topThreeAir');
 var chooseRank = 1;
+var bsChooseRank = 1;
 var setOdds = 0;
+var setBsOdds = 0;
 var openGameBtn = document.getElementById('openGameBtn');
 var playBoxisOpen = false;
 var bethtmlArr = [];
@@ -390,9 +534,18 @@ var trendModalList = document.getElementById('trendModalList');
 var openRuleModalBtn = document.getElementById('openRuleModalBtn');
 var ruleModal = document.getElementById('ruleModal');
 var closeRuleModalBtn = document.getElementById('closeRuleModalBtn');
+var bigBtn = document.getElementById('bigBtn');
+var smallBtn = document.getElementById('smallBtn');
+var oddBtn = document.getElementById('oddBtn');
+var evenBtn = document.getElementById('evenBtn');
+var bsBtn = document.getElementsByClassName('bsBtn');
+var bsChoose = 1;
+var rankingImgBs = document.getElementsByClassName('rankingImg-bs');
 document.getElementById("rankingImg".concat(chooseRank)).src = "/images/airplane/no".concat(chooseRank, "chk.png");
+document.getElementById("rankingImg".concat(bsChooseRank, "-bs")).src = "/images/airplane/no".concat(chooseRank, "chk.png");
 window.addEventListener('setOdds', function (e) {
   setOdds = e.detail.odds;
+  setBsOdds = e.detail.bsOdds;
 });
 var initSecondsArr = function initSecondsArr() {
   secondsArr = [[12, '1'], [12.1, '2'], [12.11, '3'], [12.12, '4'], [12.13, '5'], [12.14, '6'], [12.15, '7'], [12.16, '8'], [12.17, '9'], [12.18, '10']];
@@ -807,7 +960,7 @@ function guessFn(e) {
   bethtmlArr[bethtmlArr.length - 1].push(game_name_arr[game_name_num], "".concat(rankGuessArr[chooseRank], " - ").concat(airGuessArr[Number(e.target.alt)]), setOdds, beyMoney.value);
   listAllHtml = "";
   for (var _i12 = 0; _i12 < bethtmlArr.length; _i12++) {
-    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i12, "\">\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i12][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i12][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i12][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i12][3], "<br>\n                </div>");
+    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i12, "\" class='gametype gall'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i12][1], "' class='isrank'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i12][3], "' class='money'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i12][1], "' class='bet'>\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i12][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i12][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i12][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i12][3], "<br>\n                </div>");
   }
   listAll.innerHTML = listAllHtml;
   if (document.getElementsByClassName('deleteBet').length > 0) {
@@ -817,22 +970,42 @@ function guessFn(e) {
   }
 }
 function removeBetArr(e) {
-  var idx = Number(e.target.parentNode.querySelector('input').value);
-  var rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
-  var removeRank = rankGuessArr.indexOf(bethtmlArr[idx][1].split('-')[0].trim());
-  var removeAir = Number(bethtmlArr[idx][1].split('-')[1].trim());
-  guessAirArray["no".concat(removeRank)]["air".concat(removeAir)]['money'] -= Number(bethtmlArr[idx][3]);
-  myDoller.innerHTML = Number(myDoller.innerHTML) + Number(bethtmlArr[idx][3]);
+  var idx = Number(e.target.parentNode.querySelector('.isrank').value);
+  var rankGuessArr = {
+    '冠軍': 1,
+    '亞軍': 2,
+    '季軍': 3,
+    '第四名': 4,
+    '第五名': 5,
+    '第六名': 6,
+    '第七名': 7,
+    '第八名': 8,
+    '第九名': 9,
+    '第十名': 10
+  };
+  var removeRank = Number(rankGuessArr[e.target.parentNode.querySelector('.isrank').value.split('-')[0].trim()]); //名次
+  var whatGame = e.target.parentNode.querySelector('.gametype').classList[1];
+  if (whatGame == 'gall') {
+    var removeAir = Number(e.target.parentNode.querySelector('.bet').value.split('-')[1].trim()); //飛機
+    guessAirArray["no".concat(removeRank)]["air".concat(removeAir)]['money'] -= Number(e.target.parentNode.querySelector('.money').value);
+  } else if (whatGame == 'bs') {
+    var _removeAir = e.target.parentNode.querySelector('.bet').value.split('-')[1].trim();
+    var bsObj = {
+      '大': 'big',
+      '小': 'small',
+      '單': 'odd',
+      '雙': 'even'
+    };
+    var bs = bsObj["".concat(_removeAir)];
+    guessBsArray["no".concat(removeRank)]["".concat(bs)]['money'] -= Number(e.target.parentNode.querySelector('.money').value);
+  }
+  myDoller.innerHTML = Number(myDoller.innerHTML) + Number(e.target.parentNode.querySelector('.money').value);
   totalBetNumberCalc = totalBetNumberCalc - 1;
-  totalBet = totalBet - bethtmlArr[idx][3];
+  totalBet = totalBet - Number(e.target.parentNode.querySelector('.money').value);
   totalBetNmuber.innerHTML = totalBetNumberCalc;
   totalBetMoney.innerHTML = totalBet;
   bethtmlArr.splice(idx, 1);
-  listAllHtml = "";
-  for (var _i13 = 0; _i13 < bethtmlArr.length; _i13++) {
-    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i13, "\">\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i13][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i13][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i13][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i13][3], "<br>\n                </div>");
-  }
-  listAll.innerHTML = listAllHtml;
+  e.target.parentNode.remove();
   if (document.getElementsByClassName('deleteBet').length > 0) {
     for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
       document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
@@ -861,22 +1034,22 @@ function chkBtnFn() {
   window.Livewire.emit('chkBet', totalBet, totalBetNumberCalc); //totalBetNumberCalc
   riskCalcBetFn(totalBet);
   totalBet = 0;
-  for (var _i14 = 0; _i14 < document.getElementsByClassName('deleteBet').length; _i14++) {
-    document.getElementsByClassName('deleteBet')[_i14].removeEventListener('click', removeBetArr);
-    document.getElementsByClassName('deleteBet')[_i14].style.display = "none";
+  for (var _i13 = 0; _i13 < document.getElementsByClassName('deleteBet').length; _i13++) {
+    document.getElementsByClassName('deleteBet')[_i13].removeEventListener('click', removeBetArr);
+    document.getElementsByClassName('deleteBet')[_i13].style.display = "none";
   }
 }
 function calcBetFn() {
   var winMoney = 0;
   //賠率
   var odds = setOdds;
-  for (var _i15 = 1; _i15 <= 10; _i15++) {
+  for (var _i14 = 1; _i14 <= 10; _i14++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] > 0) {
+      if (guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] > 0) {
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-        if (j == nowAnswer[_i15 - 1]) {
-          winMoney = winMoney + guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] * odds;
+        if (j == nowAnswer[_i14 - 1]) {
+          winMoney = winMoney + guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] * odds;
         }
       }
     }
@@ -1213,18 +1386,18 @@ function riskCalcBetFn(totalBet) {
   var max_rank = 0;
   //賠率
   var riskodds = setOdds;
-  for (var _i16 = 1; _i16 <= 10; _i16++) {
+  for (var _i15 = 1; _i15 <= 10; _i15++) {
     // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 10; j++) {
-      if (guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] > 0) {
-        if (guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] > max_bet) {
-          max_bet = guessAirArray["no".concat(_i16)]["air".concat(j)]['money'];
-          max_rank = _i16;
+      if (guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] > 0) {
+        if (guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] > max_bet) {
+          max_bet = guessAirArray["no".concat(_i15)]["air".concat(j)]['money'];
+          max_rank = _i15;
           max_airplane = j;
         }
         // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-        if (j == riskAnswerArr[_i16 - 1]) {
-          riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i16)]["air".concat(j)]['money'] * riskodds;
+        if (j == riskAnswerArr[_i15 - 1]) {
+          riskWinMoney = riskWinMoney + guessAirArray["no".concat(_i15)]["air".concat(j)]['money'] * riskodds;
         }
       }
     }
@@ -1604,25 +1777,25 @@ doubleBtn.addEventListener('click', function () {
       document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
     }
   }
-  for (var _i17 = 1; _i17 <= 10; _i17++) {
-    guessAirArray["no".concat(_i17)];
+  for (var _i16 = 1; _i16 <= 10; _i16++) {
+    guessAirArray["no".concat(_i16)];
     for (var _j = 1; _j <= 10; _j++) {
-      if (guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] > 0) {
-        guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] = guessAirArray["no".concat(_i17)]["air".concat(_j)]['money'] * 2;
+      if (guessAirArray["no".concat(_i16)]["air".concat(_j)]['money'] > 0) {
+        guessAirArray["no".concat(_i16)]["air".concat(_j)]['money'] = guessAirArray["no".concat(_i16)]["air".concat(_j)]['money'] * 2;
       }
     }
   }
   Swal.fire('下注成功！', '下注金額雙倍', 'success');
 });
 function airTopTenHTML(nowAnswer) {
-  for (var _i18 = 0; _i18 < airNum.length; _i18++) {
-    airNum[_i18].src = "/images/airplane/airRank".concat(nowAnswer[_i18], ".png");
+  for (var _i17 = 0; _i17 < airNum.length; _i17++) {
+    airNum[_i17].src = "/images/airplane/airRank".concat(nowAnswer[_i17], ".png");
   }
 }
 var threeArr = [1, 0, 2];
 function airTopThreeHTML(nowAnswer) {
-  for (var _i19 = 0; _i19 < topThreeAir.length; _i19++) {
-    topThreeAir[_i19].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i19]], ".png");
+  for (var _i18 = 0; _i18 < topThreeAir.length; _i18++) {
+    topThreeAir[_i18].src = "/images/airplane/airRank".concat(nowAnswer[threeArr[_i18]], ".png");
   }
 }
 openTrendModalBtn.addEventListener('click', function () {
@@ -1647,5 +1820,122 @@ openRuleModalBtn.addEventListener('click', function () {
 closeRuleModalBtn.addEventListener('click', function () {
   ruleModal.style.display = "none";
 });
+for (var _i19 = 0; _i19 < bsBtn.length; _i19++) {
+  bsBtn[_i19].addEventListener('mousedown', downBsBtnFn);
+}
+for (var _i20 = 0; _i20 < bsBtn.length; _i20++) {
+  bsBtn[_i20].addEventListener('mouseup', upBsBtnFn);
+}
+function downBsBtnFn(e) {
+  if (e.target.alt == 1) {
+    bigBtn.src = '/images/airplane/big-chk.png';
+    return;
+  }
+  if (e.target.alt == 2) {
+    smallBtn.src = '/images/airplane/small-chk.png';
+    return;
+  }
+  if (e.target.alt == 3) {
+    oddBtn.src = '/images/airplane/odd-chk.png';
+    return;
+  }
+  if (e.target.alt == 4) {
+    evenBtn.src = '/images/airplane/even-chk.png';
+    return;
+  }
+}
+function upBsBtnFn(e) {
+  var bsArr = ['big', 'small', 'odd', 'even'];
+  guessBsFn(bsArr[Number(e.target.alt) - 1]);
+  if (e.target.alt == 1) {
+    bigBtn.src = '/images/airplane/big.png';
+    return;
+  }
+  if (e.target.alt == 2) {
+    smallBtn.src = '/images/airplane/small.png';
+    return;
+  }
+  if (e.target.alt == 3) {
+    oddBtn.src = '/images/airplane/odd.png';
+    return;
+  }
+  if (e.target.alt == 4) {
+    evenBtn.src = '/images/airplane/even.png';
+    return;
+  }
+}
+function clickBsBtnFn(e) {
+  bsChoose = Number(e.target.alt);
+  changeBsBtnFn();
+}
+function changeBsBtnFn() {
+  if (bsChoose == 1) {
+    bigBtn.src = bigBtn.src.replace('.png', '-chk.png');
+    return;
+  }
+  if (bsChoose == 2) {
+    smallBtn.src = smallBtn.src.replace('.png', '-chk.png');
+    return;
+  }
+  if (bsChoose == 3) {
+    oddBtn.src = oddBtn.src.replace('.png', '-chk.png');
+    return;
+  }
+  if (bsChoose == 4) {
+    evenBtn.src = evenBtn.src.replace('.png', '-chk.png');
+    return;
+  }
+}
+for (var _i21 = 0; _i21 < rankingImgBs.length; _i21++) {
+  rankingImgBs[_i21].addEventListener('click', chengBsRankFn);
+}
+function chengBsRankFn(e) {
+  initBsRankFn();
+  e.target.src = "/images/airplane/no".concat(e.target.alt, "chk.png");
+  bsChooseRank = e.target.alt;
+}
+function initBsRankFn() {
+  for (var _i22 = 0; _i22 < rankingImgBs.length; _i22++) {
+    rankingImgBs[_i22].src = "/images/airplane/no".concat(_i22 + 1, ".png");
+  }
+}
+function guessBsFn(g) {
+  if (Number(beyMoney.value) <= 0) {
+    Swal.fire('警告', '請選擇下注金額', 'error');
+    return;
+  }
+  var remain = Number(myDoller.innerHTML) - Number(beyMoney.value);
+  if (remain < 0) {
+    notMoneyFn();
+    return;
+  }
+  guessBsArray["no".concat(bsChooseRank)][g]['money'] = Number(guessBsArray["no".concat(bsChooseRank)][g]['money']) + Number(beyMoney.value);
+  // console.log(guessBsArray);
+  var rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+  var bsObj = {
+    'big': '大',
+    'small': '小',
+    'odd': '單',
+    'even': '雙'
+  };
+  myDoller.innerHTML = Number(myDoller.innerHTML) - Number(beyMoney.value);
+  totalBet = totalBet + Number(beyMoney.value);
+  totalBetNumberCalc++;
+  totalBetNmuber.innerHTML = totalBetNumberCalc;
+  totalBetMoney.innerHTML = totalBet;
+  // console.log(totalBet);
+  bethtmlArr.push([]);
+  bethtmlArr[bethtmlArr.length - 1].push(game_name_arr[game_name_num], "".concat(rankGuessArr[bsChooseRank], " - ").concat(bsObj["".concat(g)]), setBsOdds, beyMoney.value);
+  listAllHtml = "";
+  for (var _i23 = 0; _i23 < bethtmlArr.length; _i23++) {
+    listAllHtml += "<div class=\"item\">\n                    <i class=\"fas fa-times deleteBet\"></i>\n                    <input type=\"hidden\" value=\"".concat(_i23, "\" class='gametype bs'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i23][1], "' class='isrank'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i23][3], "' class='money'>\n                    <input type='hidden' value='").concat(bethtmlArr[_i23][1], "' class='bet'>\n                    <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                    ").concat(bethtmlArr[_i23][0], "<br>\n                    <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                    ").concat(bethtmlArr[_i23][1], "<br>\n                    <span>\u8CE0\u7387:</span>\n                    ").concat(bethtmlArr[_i23][2], "<br>\n                    <span>\u6295\u6CE8\u91D1\u984D:</span>\n                    ").concat(bethtmlArr[_i23][3], "<br>\n                </div>");
+  }
+  listAll.innerHTML = listAllHtml;
+  if (document.getElementsByClassName('deleteBet').length > 0) {
+    for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
+      document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
+    }
+  }
+}
 /******/ })()
 ;

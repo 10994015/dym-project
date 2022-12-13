@@ -1098,6 +1098,17 @@ nav > a:hover {
   width: 100%;
   cursor: default;
 }
+#airplane > .content > .betBox > .content > .bs-btnlist {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  grid-column-gap: 40px;
+  grid-row-gap: 1.5em;
+  justify-content: center;
+  margin-top: 30px;
+}
+#airplane > .content > .betBox > .content > .bs-btnlist > img {
+  width: 100%;
+}
 #airplane > .content > .betBox > .content#game2, #airplane > .content > .betBox > .content#game3, #airplane > .content > .betBox > .content#game4, #airplane > .content > .betBox > .content#game5 {
   display: none;
 }
