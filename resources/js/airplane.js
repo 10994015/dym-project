@@ -55,29 +55,18 @@ const rankingImg = document.getElementsByClassName('rankingImg');
 let chkBetBool = true;
 let isBetTime = true;
 let guessAirArray = {
-    no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-    no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+    no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+    no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
 }
-let guessBsArray = {
-    no1:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no2:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no3:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no4:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no5:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no6:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no7:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no8:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no9:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}},
-    no10:{big:{money:0}, small:{money:0}, odd:{money:0}, even:{money:0}}
-}
+let listIdx = 0;
 let deleteBet = null;
 const totalBetNmuber = document.getElementById('totalBetNmuber');
 const totalBetMoney = document.getElementById('totalBetMoney');
@@ -275,7 +264,7 @@ function timeRun(){
         chkBtn.src = '/images/airplane/chkdisable.png';
         reBtn.src = '/images/airplane/redisable.png';
         doubleBtn.src = '/images/airplane/doubledisable.png';
-
+        listIdx = 0;
         totalBet = 0;
         
         totalBetNumberCalc = 0;
@@ -428,7 +417,6 @@ function chengGameFn(e){
     id = e.target.id.split('Btn')[1]
     e.target.src = e.target.src.replace('btn', 'btnchk');
     game_name_num = Number(id) -1;
-    
     document.getElementById(`game${id}`).style.display = "block";
 }
 function initGameFn(){
@@ -567,11 +555,9 @@ function guessFn(e){
         return;
     }
     let rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
-    let airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
-
+    let airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10','大','小','單','雙'];
     totalBetNumberCalc++;
     myDoller.innerHTML = Number(myDoller.innerHTML)  -Number(beyMoney.value);
-    // console.log(e.target.alt);
     totalBet += Number(beyMoney.value);
     
     let sd = document.getElementsByClassName(`smallair${e.target.alt}`)[0];
@@ -582,29 +568,34 @@ function guessFn(e){
         sd.style.display = "none";
     },200)
     guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]['money'] += Number(beyMoney.value);
-
+    console.log(guessAirArray);
     totalBetNmuber.innerHTML = totalBetNumberCalc;
     totalBetMoney.innerHTML = totalBet;
     bethtmlArr.push([])
-    bethtmlArr[bethtmlArr.length -1].push( game_name_arr[game_name_num], `${rankGuessArr[chooseRank]} - ${airGuessArr[Number(e.target.alt)]}`, setOdds, beyMoney.value);
-    listAllHtml = "";
-    for(let i=0;i<bethtmlArr.length;i++){
-        listAllHtml += `<div class="item">
-                    <i class="fas fa-times deleteBet"></i>
-                    <input type="hidden" value="${i}" class='gametype gall'>
-                    <input type='hidden' value='${bethtmlArr[i][1]}' class='isrank'>
-                    <input type='hidden' value='${bethtmlArr[i][3]}' class='money'>
-                    <input type='hidden' value='${bethtmlArr[i][1]}' class='bet'>
-                    <span>下注項目:</span><br>
-                    ${bethtmlArr[i][0]}<br>
-                    <span>下注內容:</span><br>
-                    ${bethtmlArr[i][1]}<br>
-                    <span>賠率:</span>
-                    ${bethtmlArr[i][2]}<br>
-                    <span>投注金額:</span>
-                    ${bethtmlArr[i][3]}<br>
-                </div>`;
+    if(game_name_num == 0){
+        bethtmlArr[bethtmlArr.length -1].push( game_name_arr[game_name_num], `${rankGuessArr[chooseRank]} - ${airGuessArr[Number(e.target.alt)]}`, setOdds, beyMoney.value);
+    }else if(game_name_num == 2){
+        bethtmlArr[bethtmlArr.length -1].push( game_name_arr[game_name_num], `${rankGuessArr[bsChooseRank]} - ${airGuessArr[Number(e.target.alt)]}`, setBsOdds, beyMoney.value);
     }
+    
+    listAllHtml +=  `<div class="item">
+                    <i class="fas fa-times deleteBet"></i>
+                    <input type="hidden" value="${game_name_arr.indexOf(bethtmlArr[bethtmlArr.length -1][0])}" class='gametype'>
+                    <input type='hidden' value='${bethtmlArr[bethtmlArr.length -1][1]}' class='isrank'>
+                    <input type='hidden' value='${bethtmlArr[bethtmlArr.length -1][3]}' class='money'>
+                    <input type='hidden' value='${bethtmlArr[bethtmlArr.length -1][1]}' class='bet'>
+                    <input type='hidden' value='${listIdx}' class='idx'>
+                    <span>下注項目:</span><br>
+                    ${bethtmlArr[bethtmlArr.length -1][0]}<br>
+                    <span>下注內容:</span><br>
+                    ${bethtmlArr[bethtmlArr.length -1][1]}<br>
+                    <span>賠率:</span>
+                    ${bethtmlArr[bethtmlArr.length -1][2]}<br>
+                    <span>投注金額:</span>
+                    ${bethtmlArr[bethtmlArr.length -1][3]}<br>
+                    </div>`;
+    
+    listIdx++;
     listAll.innerHTML = listAllHtml;
     if(document.getElementsByClassName('deleteBet').length > 0){
         for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
@@ -615,32 +606,31 @@ function guessFn(e){
 }
 
 function removeBetArr(e){
-    let idx = Number(e.target.parentNode.querySelector('.isrank').value);
+    let idx = e.target.parentNode.querySelector('.idx').value;
     let rankGuessArr = {'冠軍':1, '亞軍':2,'季軍':3,'第四名':4,'第五名':5,'第六名':6,'第七名':7,'第八名':8,'第九名':9,'第十名':10}
     
     let removeRank = Number(rankGuessArr[e.target.parentNode.querySelector('.isrank').value.split('-')[0].trim()]); //名次
-    let whatGame = e.target.parentNode.querySelector('.gametype').classList[1];
-    if(whatGame == 'gall'){
+    let whatGame = e.target.parentNode.querySelector('.gametype').value;
+
+    if(whatGame == 0){
         let removeAir = Number(e.target.parentNode.querySelector('.bet').value.split('-')[1].trim()); //飛機
         guessAirArray[`no${removeRank}`][`air${removeAir}`]['money'] -= Number(e.target.parentNode.querySelector('.money').value);
-    }else if(whatGame == 'bs'){
+    }else if(whatGame == 2){
         let removeAir = e.target.parentNode.querySelector('.bet').value.split('-')[1].trim();
-        let bsObj = {'大':'big', '小':'small', '單':'odd', '雙':'even'}; 
-        let bs = bsObj[`${removeAir}`];
-        guessBsArray[`no${removeRank}`][`${bs}`]['money'] -= Number(e.target.parentNode.querySelector('.money').value);
+        let sbsObj = {'大':11, '小':12, '單':13, '雙':14}; 
+        let bs = sbsObj[`${removeAir}`];
+        guessAirArray[`no${removeRank}`][`air${bs}`]['money'] -= Number(e.target.parentNode.querySelector('.money').value);
     }
     myDoller.innerHTML = Number(myDoller.innerHTML) + Number(e.target.parentNode.querySelector('.money').value);
     
-    
-
     totalBetNumberCalc = totalBetNumberCalc-1;
     totalBet = totalBet - Number(e.target.parentNode.querySelector('.money').value);
     totalBetNmuber.innerHTML = totalBetNumberCalc;
     totalBetMoney.innerHTML = totalBet;
-    bethtmlArr.splice(idx, 1);
-
+    let arrIndex = Array.from(listAll.querySelectorAll('.item')).indexOf(e.target.parentNode);
+    bethtmlArr.splice(arrIndex, 1);
     e.target.parentNode.remove();
-
+    listAllHtml = listAll.innerHTML;
     if(document.getElementsByClassName('deleteBet').length > 0){
         for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
             document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
@@ -696,31 +686,56 @@ function calcBetFn(){
     let winMoney = 0;
     //賠率
     let odds = setOdds;
+    let bsOdds = setBsOdds;
     for(let i=1;i<=10;i++){
         // console.log(guessAirArray[`no${i}`]);
-        for(let j=1;j<=10;j++){
+        for(let j=1;j<=14;j++){
             if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
                 // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-                if(j == nowAnswer[i-1]){
-                    winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*odds);
+                if(j <=10){
+                    if(j == nowAnswer[i-1]){
+                        winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*odds);
+                    }
+                }else if(j<=14){
+                    if(j==11){
+                        if(Number(nowAnswer[i-1]) > 5){
+                            winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*bsOdds);
+                        }
+                    }
+                    if(j==12){
+                        if(Number(nowAnswer[i-1] < 6)){
+                            winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*bsOdds);
+                        }
+                    }
+                    if(j==13){
+                        if(Number(nowAnswer[i-1]%2 == 1)){
+                            winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*bsOdds);
+                        }
+                    }
+                    if(j==14){
+                        if(Number(nowAnswer[i-1]%2 == 0)){
+                            winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*bsOdds);
+                        }
+                    }
                 }
+                
             }
         }
     }
-    // console.log(winMoney);
+    console.log(winMoney);
     window.Livewire.emit('calcMoney', winMoney);
 
     guessAirArray = {
-        no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
-        no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},},
+        no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no3:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no4:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no5:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no6:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no7:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no8:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no9:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
+        no10:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
     }
 }
 function riskCalcBetFn(totalBet){
@@ -730,22 +745,47 @@ function riskCalcBetFn(totalBet){
     let max_rank = 0;
     //賠率
     let riskodds = setOdds;
+    let riskBsOdds = setBsOdds;
     for(let i=1;i<=10;i++){
         // console.log(guessAirArray[`no${i}`]);
-        for(let j=1;j<=10;j++){
+        for(let j=1;j<=14;j++){
             if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
                 if(guessAirArray[`no${i}`][`air${j}`]['money'] > max_bet){
                     max_bet = guessAirArray[`no${i}`][`air${j}`]['money'];
                     max_rank = i;
                     max_airplane = j;
                 }
-                // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
-                if(j == riskAnswerArr[i-1]){
-                    riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskodds);
+                if(j <=10){
+                    if(j == riskAnswerArr[i-1]){
+                        riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskodds);
+                    }
+                }else if(j<=14){
+                    if(j==11){
+                        if(riskAnswerArr[i-1] > 5){
+                            riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskBsOdds);
+                        }
+                    }
+                    if(j==12){
+                        if(riskAnswerArr[i-1] < 6){
+                            riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskBsOdds);
+                        }
+                    }
+                    if(j==13){
+                        if(riskAnswerArr[i-1]%2 == 1){
+                            riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskBsOdds);
+                        }
+                    }
+                    if(j==14){
+                        if(riskAnswerArr[i-1]%2 == 0){
+                            riskWinMoney = riskWinMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*riskBsOdds);
+                        }
+                    }
                 }
+                
             }
         }
     }
+    
     
     
     window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray, max_bet, max_rank, max_airplane );
@@ -828,24 +868,28 @@ doubleBtn.addEventListener('click',()=>{
     }
     myDoller.innerHTML = Number(myDoller.innerHTML) - Number(totalBet);
     totalBet = totalBet*2;
+    totalBetNumberCalc = totalBetNumberCalc*2;
     totalBetMoney.innerHTML = totalBet;
-    
-    listAllHtml = "";
-    for(let j=0;j<bethtmlArr.length;j++){
-        bethtmlArr[j][3] = Number(bethtmlArr[j][3])*2;
-        listAllHtml += `<div class="item">
-                    <i class="fas fa-times deleteBet"></i>
-                    <input type="hidden" value="${j}">
-                    <span>下注項目:</span><br>
-                    ${bethtmlArr[j][0]}<br>
-                    <span>下注內容:</span><br>
-                    ${bethtmlArr[j][1]}<br>
-                    <span>賠率:</span>
-                    ${bethtmlArr[j][2]}<br>
-                    <span>投注金額:</span>
-                    ${bethtmlArr[j][3]}<br>
-                </div>`;
-    }
+    totalBetNmuber.innerHTML = totalBetNumberCalc;
+    bethtmlArr = [...bethtmlArr, ...bethtmlArr];
+    listAllHtml += listAllHtml;
+    console.log(bethtmlArr);
+    // listAllHtml = "";
+    // for(let j=0;j<bethtmlArr.length;j++){
+    //     bethtmlArr[j][3] = Number(bethtmlArr[j][3])*2;
+    //     listAllHtml += `<div class="item">
+    //                 <i class="fas fa-times deleteBet"></i>
+    //                 <input type="hidden" value="${j}">
+    //                 <span>下注項目:</span><br>
+    //                 ${bethtmlArr[j][0]}<br>
+    //                 <span>下注內容:</span><br>
+    //                 ${bethtmlArr[j][1]}<br>
+    //                 <span>賠率:</span>
+    //                 ${bethtmlArr[j][2]}<br>
+    //                 <span>投注金額:</span>
+    //                 ${bethtmlArr[j][3]}<br>
+    //             </div>`;
+    // }
     listAll.innerHTML = listAllHtml;
     if(document.getElementsByClassName('deleteBet').length > 0){
         for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
@@ -854,7 +898,7 @@ doubleBtn.addEventListener('click',()=>{
     }
     for(let i=1;i<=10;i++){
         guessAirArray[`no${i}`]
-        for(let j=1;j<=10;j++){
+        for(let j=1;j<=14;j++){
             if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
                 guessAirArray[`no${i}`][`air${j}`]['money'] = guessAirArray[`no${i}`][`air${j}`]['money'] *2 
             }
@@ -911,41 +955,44 @@ for(let i=0;i<bsBtn.length;i++){
 for(let i=0;i<bsBtn.length;i++){
     bsBtn[i].addEventListener('mouseup',upBsBtnFn)
 }
+for(let i=0;i<bsBtn.length;i++){
+    bsBtn[i].addEventListener('click',guessFn);
+}
 function downBsBtnFn(e){
-    if(e.target.alt == 1){
+    if(e.target.alt == 11){
         bigBtn.src = '/images/airplane/big-chk.png';
         return;
     }
-    if(e.target.alt == 2){
+    if(e.target.alt == 12){
         smallBtn.src=  '/images/airplane/small-chk.png';
         return;
     }
-    if(e.target.alt == 3){
+    if(e.target.alt == 13){
         oddBtn.src =  '/images/airplane/odd-chk.png';
         return;
     }
-    if(e.target.alt == 4){
+    if(e.target.alt == 14){
         evenBtn.src =  '/images/airplane/even-chk.png';
         return;
     }
 }
 function upBsBtnFn(e){
     let bsArr = ['big', 'small', 'odd', 'even'];
-    guessBsFn(bsArr[Number(e.target.alt)-1]);
-
-    if(e.target.alt == 1){
+    // guessBsFn(bsArr[Number(e.target.alt)-1]);
+    
+    if(e.target.alt == 11){
         bigBtn.src = '/images/airplane/big.png';
         return;
     }
-    if(e.target.alt == 2){
+    if(e.target.alt == 12){
         smallBtn.src=  '/images/airplane/small.png';
         return;
     }
-    if(e.target.alt == 3){
+    if(e.target.alt == 13){
         oddBtn.src =  '/images/airplane/odd.png';
         return;
     }
-    if(e.target.alt == 4){
+    if(e.target.alt == 14){
         evenBtn.src =  '/images/airplane/even.png';
         return;
     }
@@ -988,58 +1035,6 @@ function initBsRankFn(){
     }
 }
 
-function guessBsFn(g){
-    if(Number(beyMoney.value) <= 0){
-        Swal.fire(
-            '警告',
-            '請選擇下注金額',
-            'error'
-        );
-        return;
-    }
-    let remain =  Number(myDoller.innerHTML) -  Number(beyMoney.value);
-    
-    if(remain < 0 ){
-        notMoneyFn();
-        return;
-    }
 
-    guessBsArray[`no${bsChooseRank}`][g]['money'] =  Number(guessBsArray[`no${bsChooseRank}`][g]['money']) + Number(beyMoney.value);
-    // console.log(guessBsArray);
-    let rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
-    let bsObj = {'big':'大', 'small':'小', 'odd':'單', 'even':'雙'};
-    myDoller.innerHTML = Number(myDoller.innerHTML)  -Number(beyMoney.value);
-    totalBet = totalBet + Number(beyMoney.value);
-    totalBetNumberCalc++
-    totalBetNmuber.innerHTML = totalBetNumberCalc;
-    totalBetMoney.innerHTML = totalBet;
-    // console.log(totalBet);
-    bethtmlArr.push([])
-    bethtmlArr[bethtmlArr.length -1].push( game_name_arr[game_name_num], `${rankGuessArr[bsChooseRank]} - ${bsObj[`${g}`]}`, setBsOdds, beyMoney.value);
-    listAllHtml = "";
-    for(let i=0;i<bethtmlArr.length;i++){
-        listAllHtml += `<div class="item">
-                    <i class="fas fa-times deleteBet"></i>
-                    <input type="hidden" value="${i}" class='gametype bs'>
-                    <input type='hidden' value='${bethtmlArr[i][1]}' class='isrank'>
-                    <input type='hidden' value='${bethtmlArr[i][3]}' class='money'>
-                    <input type='hidden' value='${bethtmlArr[i][1]}' class='bet'>
-                    <span>下注項目:</span><br>
-                    ${bethtmlArr[i][0]}<br>
-                    <span>下注內容:</span><br>
-                    ${bethtmlArr[i][1]}<br>
-                    <span>賠率:</span>
-                    ${bethtmlArr[i][2]}<br>
-                    <span>投注金額:</span>
-                    ${bethtmlArr[i][3]}<br>
-                </div>`;
-    }
-    listAll.innerHTML = listAllHtml;
-    if(document.getElementsByClassName('deleteBet').length > 0){
-        for(let b=0;b<document.getElementsByClassName('deleteBet').length;b++){
-            document.getElementsByClassName('deleteBet')[b].addEventListener('click', removeBetArr);
-        }
-    }
-}
 
 

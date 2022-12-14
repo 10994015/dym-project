@@ -164,10 +164,14 @@
             @endfor
           </div>
           <div class="bs-btnlist">
-            <img src="/images/airplane/big.png" id="bigBtn" alt='1' class='bsBtn'>
-            <img src="/images/airplane/small.png" id="smallBtn" alt='2' class='bsBtn'>
-            <img src="/images/airplane/odd.png" id="oddBtn" alt='3' class='bsBtn'>
-            <img src="/images/airplane/even.png" id="evenBtn" alt='4' class='bsBtn'>
+            <img src="/images/airplane/big.png" id="bigBtn" alt='11' class='bsBtn'>
+            <img src="/images/airplane/small.png" id="smallBtn" alt='12' class='bsBtn'>
+            <img src="/images/airplane/odd.png" id="oddBtn" alt='13' class='bsBtn'>
+            <img src="/images/airplane/even.png" id="evenBtn" alt='14' class='bsBtn'>
+            <img src="" class="smallDiamond smallair11">
+            <img src="" class="smallDiamond smallair12">
+            <img src="" class="smallDiamond smallair13">
+            <img src="" class="smallDiamond smallair14">
           </div>
       </div>
       <div class="content" id="game4">冠亞和</div>

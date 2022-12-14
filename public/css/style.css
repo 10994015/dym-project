@@ -1105,9 +1105,32 @@ nav > a:hover {
   grid-row-gap: 1.5em;
   justify-content: center;
   margin-top: 30px;
+  position: relative;
+}
+@media screen and (max-width: 1300px) {
+  #airplane > .content > .betBox > .content > .bs-btnlist {
+    grid-template-columns: repeat(2, 40%);
+  }
 }
 #airplane > .content > .betBox > .content > .bs-btnlist > img {
   width: 100%;
+  position: relative;
+}
+#airplane > .content > .betBox > .content > .bs-btnlist > img.smallDiamond {
+  position: absolute;
+  width: 40px;
+  opacity: 0.8;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: betDiamond 0.2s linear;
+  display: none;
+}
+@keyframes betDiamond {
+  0% {
+    top: 200px;
+    left: -100px;
+  }
 }
 #airplane > .content > .betBox > .content#game2, #airplane > .content > .betBox > .content#game3, #airplane > .content > .betBox > .content#game4, #airplane > .content > .betBox > .content#game5 {
   display: none;

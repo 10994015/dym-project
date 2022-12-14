@@ -54,8 +54,8 @@ class Airplane extends Component
         }
     }
     public function chkBet($t, $n){
-        $this->chips = $n;
         $this->betMoney = $t;
+        $this->chips = $n;
         $this->myDoller = intval($this->myDoller) - intval($t);
         $userMoney = Auth::user(); 
         $userMoney->money = $this->myDoller;
@@ -103,10 +103,34 @@ class Airplane extends Component
         $risk_max = RiskBet::where('bet_number', $bet_number)->orderBy('max_bet', 'DESC')->first();
         while(true){
             $newRank = [1,2,3,4,5,6,7,8,9,10];
-            shuffle($newRank);
-            if($newRank[$risk_max->max_rank-1] != $risk_max->max_airplane){
-                break;
+            shuffle($newRank); 
+            if($risk_max->max_airplane <=10){
+                if($newRank[$risk_max->max_rank-1] != $risk_max->max_airplane){
+                    break;
+                }
+            }elseif($risk_max->max_airplane <=14){
+                if($risk_max->max_airplane == 11){
+                    if($newRank[$risk_max->max_rank-1] < 6 ){
+                        break;
+                    }
+                }
+                if($risk_max->max_airplane == 12){
+                    if($newRank[$risk_max->max_rank-1] > 5 ){
+                        break;
+                    }
+                }
+                if($risk_max->max_airplane == 13){
+                    if($newRank[$risk_max->max_rank-1]%2 != 1 ){
+                        break;
+                    }
+                }
+                if($risk_max->max_airplane == 14){
+                    if($newRank[$risk_max->max_rank-1]%2 != 0 ){
+                        break;
+                    }
+                }
             }
+            
         }
         $newranking = implode(",",$newRank);
         Log::info($newranking);
@@ -199,7 +223,7 @@ class Airplane extends Component
 
         $game_info = GameInfos::where('gamenumber', 23)->first();
         $this->odds = $game_info->odds;
-        $this->bsodds = $game_info->bsodds;
+        $this->bsodds = $game_info->bs_odds;
         $this->dispatchBrowserEvent('setOdds', ['odds'=>$this->odds, 'bsOdds'=>$this->bsodds]);
 
         $betlist = Betlist::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
