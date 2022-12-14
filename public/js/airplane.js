@@ -1598,6 +1598,18 @@ reBtn.addEventListener('click', function () {
         },
         air10: {
           money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
+          money: 0
         }
       },
       no2: {
@@ -1629,6 +1641,18 @@ reBtn.addEventListener('click', function () {
           money: 0
         },
         air10: {
+          money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
           money: 0
         }
       },
@@ -1662,6 +1686,18 @@ reBtn.addEventListener('click', function () {
         },
         air10: {
           money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
+          money: 0
         }
       },
       no4: {
@@ -1693,6 +1729,18 @@ reBtn.addEventListener('click', function () {
           money: 0
         },
         air10: {
+          money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
           money: 0
         }
       },
@@ -1726,6 +1774,18 @@ reBtn.addEventListener('click', function () {
         },
         air10: {
           money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
+          money: 0
         }
       },
       no6: {
@@ -1757,6 +1817,18 @@ reBtn.addEventListener('click', function () {
           money: 0
         },
         air10: {
+          money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
           money: 0
         }
       },
@@ -1790,6 +1862,18 @@ reBtn.addEventListener('click', function () {
         },
         air10: {
           money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
+          money: 0
         }
       },
       no8: {
@@ -1821,6 +1905,18 @@ reBtn.addEventListener('click', function () {
           money: 0
         },
         air10: {
+          money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
           money: 0
         }
       },
@@ -1854,6 +1950,18 @@ reBtn.addEventListener('click', function () {
         },
         air10: {
           money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
+          money: 0
         }
       },
       no10: {
@@ -1885,6 +1993,18 @@ reBtn.addEventListener('click', function () {
           money: 0
         },
         air10: {
+          money: 0
+        },
+        air11: {
+          money: 0
+        },
+        air12: {
+          money: 0
+        },
+        air13: {
+          money: 0
+        },
+        air14: {
           money: 0
         }
       }
