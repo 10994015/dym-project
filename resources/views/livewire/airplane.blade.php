@@ -3,7 +3,7 @@
   <div class="header" >
       <div class="left">
         <div class="userBox">
-          <img src="/images/airplane/w644.jpg">
+          <img src="/images/airplane/head{{$level}}.png">
           <div class="userNameBox">{{Auth::user()->name}}</div>
         </div>
         <div class="moneyBox">
@@ -19,7 +19,7 @@
             <li><a href="/"><i class="fa-solid fa-chevron-left"></i><p>回大廳</p></a></li>
             <li id="openRuleModalBtn"><a href="javascript:;"><i class="fa-solid fa-registered"></i><p>規則</p></a></li>
             <li id="openTrendModalBtn"><a href="javascript:;"><i class="fa-solid fa-chart-line"></i><p>走勢</p></a></li>
-            <li><a href="javascript:;"><i class="fa-solid fa-file-lines"></i><p>紀錄</p></a></li>
+            <li id="openRecordModalBtn"><a href="javascript:;"><i class="fa-solid fa-file-lines"></i><p>紀錄</p></a></li>
           </ul>
         </div>
       </div>
@@ -155,7 +155,7 @@
             @endfor
           </div>
       </div>
-      <div class="content" id="game2">冠亞二星</div>
+      <div class="content maintain" id="game2"><img src="/images/airplane/maintain.png"></div>
       <div class="content" id="game3">
           <span class="odds">猜每一個名次船號的大小單雙 賠率1.96 </span>
           <div class="rankBtnBox" id="rankBtnBox-bs">
@@ -174,8 +174,8 @@
             <img src="" class="smallDiamond smallair14">
           </div>
       </div>
-      <div class="content" id="game4">冠亞和</div>
-      <div class="content" id="game5">龍虎</div>
+      <div class="content maintain" id="game4"><img src="/images/airplane/maintain.png"></div>
+      <div class="content maintain" id="game5"><img src="/images/airplane/maintain.png"></div>
     </div>
     <div class="betList">
         <div class="header">注單列表</div>
@@ -221,5 +221,6 @@
   <form action="{{route('logout')}}" method="post" id="loaing-logout"> @csrf </form>
   @include('livewire.trend')
   @include('livewire.rule')
+  @include('livewire.record')
   @include('livewire.layouts.loading')
 </div>

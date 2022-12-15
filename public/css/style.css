@@ -138,13 +138,26 @@ nav > a:hover {
   width: 100%;
   height: 100vh;
   z-index: 999999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: none;
+}
+#loading-div > img.exit {
+  width: 500px;
+  display: none;
+}
+@media screen and (max-width: 550px) {
+  #loading-div > img.exit {
+    width: 95%;
+  }
 }
 #loading-div .middle {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
+  z-index: -1;
 }
 #loading-div .middle .bar {
   width: 10px;
@@ -1037,6 +1050,15 @@ nav > a:hover {
   color: #fff;
   padding-top: 60px;
 }
+#airplane > .content > .betBox > .content.maintain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#airplane > .content > .betBox > .content.maintain > img {
+  width: 90%;
+  max-width: 300px;
+}
 #airplane > .content > .betBox > .content > span.odds {
   margin-top: 25px;
   display: block;
@@ -1298,6 +1320,9 @@ nav > a:hover {
   z-index: 9999;
   width: 100%;
 }
+#airplane > .content #countdownSec_md img {
+  margin-top: 40px;
+}
 #airplane > .content #countdownSec_md p {
   margin-top: 20px;
   color: #C8E1FF;
@@ -1456,7 +1481,7 @@ nav > a:hover {
   margin: 0 5px;
   width: 33.3%;
 }
-#airplane > .trendModal, #airplane .ruleModal {
+#airplane > .trendModal, #airplane .ruleModal, #airplane .recordModal {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
@@ -1470,7 +1495,7 @@ nav > a:hover {
   display: none;
   animation: openModal 0.1s linear;
 }
-#airplane > .trendModal .content, #airplane .ruleModal .content {
+#airplane > .trendModal .content, #airplane .ruleModal .content, #airplane .recordModal .content {
   width: 98%;
   max-width: 1200px;
   height: 800px;
@@ -1479,7 +1504,7 @@ nav > a:hover {
   padding-bottom: 5px;
   overflow: hidden;
 }
-#airplane > .trendModal .content > .header, #airplane .ruleModal .content > .header {
+#airplane > .trendModal .content > .header, #airplane .ruleModal .content > .header, #airplane .recordModal .content > .header {
   font-size: 30px;
   font-weight: 600;
   display: flex;
@@ -1489,13 +1514,13 @@ nav > a:hover {
   height: 70px;
   position: relative;
 }
-#airplane > .trendModal .content > .header > p, #airplane .ruleModal .content > .header > p {
+#airplane > .trendModal .content > .header > p, #airplane .ruleModal .content > .header > p, #airplane .recordModal .content > .header > p {
   color: #fff;
   height: 70px;
   line-height: 70px;
   margin-bottom: 0;
 }
-#airplane > .trendModal .content > .header > i, #airplane .ruleModal .content > .header > i {
+#airplane > .trendModal .content > .header > i, #airplane .ruleModal .content > .header > i, #airplane .recordModal .content > .header > i {
   position: absolute;
   top: 50%;
   right: 30px;
@@ -1503,7 +1528,7 @@ nav > a:hover {
   color: #fff;
   transform: translateY(-50%);
 }
-#airplane > .trendModal .content > .list, #airplane .ruleModal .content > .list {
+#airplane > .trendModal .content > .list, #airplane .ruleModal .content > .list, #airplane .recordModal .content > .list {
   width: 95%;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.85);
@@ -1515,17 +1540,17 @@ nav > a:hover {
   flex-direction: column;
   align-items: center;
 }
-#airplane > .trendModal .content > .list::-webkit-scrollbar, #airplane .ruleModal .content > .list::-webkit-scrollbar {
+#airplane > .trendModal .content > .list::-webkit-scrollbar, #airplane .ruleModal .content > .list::-webkit-scrollbar, #airplane .recordModal .content > .list::-webkit-scrollbar {
   width: 5px;
   height: 8px;
   background-color: #aaa;
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .list::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .list::-webkit-scrollbar-thumb {
+#airplane > .trendModal .content > .list::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .list::-webkit-scrollbar-thumb, #airplane .recordModal .content > .list::-webkit-scrollbar-thumb {
   background: rgba(71, 45, 153, 0.85);
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item {
+#airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item, #airplane .recordModal .content > .list > .item {
   width: 90%;
   display: flex;
   align-items: center;
@@ -1536,45 +1561,70 @@ nav > a:hover {
   margin: 10px 0;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item {
+  #airplane > .trendModal .content > .list > .item, #airplane .ruleModal .content > .list > .item, #airplane .recordModal .content > .list > .item {
     width: 100%;
   }
 }
-#airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
+#airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number, #airplane .recordModal .content > .list > .item > .number {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #fff;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number, #airplane .recordModal .content > .list > .item > .number {
     font-size: 20px;
   }
 }
 @media screen and (max-width: 700px) {
-  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number, #airplane .recordModal .content > .list > .item > .number {
     font-size: 18px;
   }
 }
 @media screen and (max-width: 500px) {
-  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number {
+  #airplane > .trendModal .content > .list > .item > .number, #airplane .ruleModal .content > .list > .item > .number, #airplane .recordModal .content > .list > .item > .number {
     font-size: 14px;
   }
 }
-#airplane > .trendModal .content > .list > .item > .imgList, #airplane .ruleModal .content > .list > .item > .imgList {
+#airplane > .trendModal .content > .list > .item > .imgList, #airplane .ruleModal .content > .list > .item > .imgList, #airplane .recordModal .content > .list > .item > .imgList {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img {
+#airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img, #airplane .recordModal .content > .list > .item > .imgList > img {
   width: 9.5%;
 }
 @media screen and (max-width: 1000px) {
-  #airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img {
+  #airplane > .trendModal .content > .list > .item > .imgList > img, #airplane .ruleModal .content > .list > .item > .imgList > img, #airplane .recordModal .content > .list > .item > .imgList > img {
     width: 10%;
   }
 }
-#airplane > .trendModal .content > .rules, #airplane .ruleModal .content > .rules {
+#airplane > .trendModal .content > .list > .betitem, #airplane .ruleModal .content > .list > .betitem, #airplane .recordModal .content > .list > .betitem {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 8px 4px;
+  margin: 10px 0;
+  border-bottom: 2px rgba(154, 133, 226, 0.35) solid;
+}
+#airplane > .trendModal .content > .list > .betitem.title, #airplane .ruleModal .content > .list > .betitem.title, #airplane .recordModal .content > .list > .betitem.title {
+  border-bottom: 2px #9a85e2 solid;
+}
+#airplane > .trendModal .content > .list > .betitem.title > p, #airplane .ruleModal .content > .list > .betitem.title > p, #airplane .recordModal .content > .list > .betitem.title > p {
+  font-size: 18px;
+}
+@media screen and (max-width: 1000px) {
+  #airplane > .trendModal .content > .list > .betitem, #airplane .ruleModal .content > .list > .betitem, #airplane .recordModal .content > .list > .betitem {
+    width: 100%;
+  }
+}
+#airplane > .trendModal .content > .list > .betitem > p, #airplane .ruleModal .content > .list > .betitem > p, #airplane .recordModal .content > .list > .betitem > p {
+  width: 20%;
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+}
+#airplane > .trendModal .content > .rules, #airplane .ruleModal .content > .rules, #airplane .recordModal .content > .rules {
   width: 95%;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.85);
@@ -1585,25 +1635,25 @@ nav > a:hover {
   display: flex;
   flex-direction: column;
 }
-#airplane > .trendModal .content > .rules::-webkit-scrollbar, #airplane .ruleModal .content > .rules::-webkit-scrollbar {
+#airplane > .trendModal .content > .rules::-webkit-scrollbar, #airplane .ruleModal .content > .rules::-webkit-scrollbar, #airplane .recordModal .content > .rules::-webkit-scrollbar {
   width: 5px;
   height: 8px;
   background-color: #aaa;
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .rules::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .rules::-webkit-scrollbar-thumb {
+#airplane > .trendModal .content > .rules::-webkit-scrollbar-thumb, #airplane .ruleModal .content > .rules::-webkit-scrollbar-thumb, #airplane .recordModal .content > .rules::-webkit-scrollbar-thumb {
   background: rgba(71, 45, 153, 0.85);
   border-radius: 8px;
 }
-#airplane > .trendModal .content > .rules > h3, #airplane .ruleModal .content > .rules > h3 {
+#airplane > .trendModal .content > .rules > h3, #airplane .ruleModal .content > .rules > h3, #airplane .recordModal .content > .rules > h3 {
   text-align: center;
   margin: 30px 0;
   color: #fff;
 }
-#airplane > .trendModal .content > .rules > .rule, #airplane .ruleModal .content > .rules > .rule {
+#airplane > .trendModal .content > .rules > .rule, #airplane .ruleModal .content > .rules > .rule, #airplane .recordModal .content > .rules > .rule {
   margin-bottom: 30px;
 }
-#airplane > .trendModal .content > .rules > .rule > h4, #airplane .ruleModal .content > .rules > .rule > h4 {
+#airplane > .trendModal .content > .rules > .rule > h4, #airplane .ruleModal .content > .rules > .rule > h4, #airplane .recordModal .content > .rules > .rule > h4 {
   background-color: #472d99;
   color: #fff;
   width: 200px;
@@ -1616,12 +1666,12 @@ nav > a:hover {
   border: 2px #886be6 solid;
   margin-bottom: 15px;
 }
-#airplane > .trendModal .content > .rules > .rule > p, #airplane .ruleModal .content > .rules > .rule > p {
+#airplane > .trendModal .content > .rules > .rule > p, #airplane .ruleModal .content > .rules > .rule > p, #airplane .recordModal .content > .rules > .rule > p {
   font-size: 20px;
   line-height: 1.6;
   color: #fff;
 }
-#airplane > .trendModal .content > .rules > .warning p, #airplane .ruleModal .content > .rules > .warning p {
+#airplane > .trendModal .content > .rules > .warning p, #airplane .ruleModal .content > .rules > .warning p, #airplane .recordModal .content > .rules > .warning p {
   color: #E4AC01;
   line-height: 1.6;
   font-size: 20px;

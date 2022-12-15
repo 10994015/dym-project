@@ -517,6 +517,9 @@ var closeTrendModalBtn = document.getElementById('closeTrendModalBtn');
 var openTrendModalBtn = document.getElementById('openTrendModalBtn');
 var trendModalList = document.getElementById('trendModalList');
 var openRuleModalBtn = document.getElementById('openRuleModalBtn');
+var openRecordModalBtn = document.getElementById('openRecordModalBtn');
+var recordModal = document.getElementById('recordModal');
+var closeRecordModalBtn = document.getElementById('closeRecordModalBtn');
 var ruleModal = document.getElementById('ruleModal');
 var closeRuleModalBtn = document.getElementById('closeRuleModalBtn');
 var bigBtn = document.getElementById('bigBtn');
@@ -573,7 +576,7 @@ window.addEventListener('startRun', function (e) {
   });
   if (screen.width <= 1000) {
     if (new Date().getSeconds() <= 20) {
-      countdownSec_md.innerHTML = "<p>開獎中</p>";
+      countdownSec_md.innerHTML = "<img src='/images/airplane/lottery.png' width='200' />";
       openGameBtn.style.display = "block";
       playBox.style.display = 'block';
       playBoxisOpen = true;
@@ -653,7 +656,7 @@ function timeRun() {
     countdownSec_md.innerHTML = "<p>00:0" + countdownNumber + "</p>";
   } else {
     if (countdownNumber > 40 && countdownNumber != 60) {
-      countdownSec_md.innerHTML = "<p>開獎中</p>";
+      countdownSec_md.innerHTML = "<img src='/images/airplane/lottery.png' width='200' />";
       openGameBtn.style.display = "block";
       if (screen.width <= 1000) {
         playBox.style.display = 'block';
@@ -723,7 +726,7 @@ function timeRun() {
     doubleBtn.src = '/images/airplane/double.png';
   }
   if (new Date().getSeconds() > 12) {
-    // window.Livewire.emit('watchStatu');
+    window.Livewire.emit('watchStatu');
   }
   if (new Date().getSeconds() == 15) {
     airTopThreeHTML(nowAnswer);
@@ -785,10 +788,13 @@ window.addEventListener('updateTrendFn', function (e) {
 });
 window.addEventListener('watchStatu', function (e) {
   if (e.detail.statu == 0) {
-    loadingDiv.style.display = "block";
+    loadingDiv.style.display = "flex";
+    setTimeout(function () {
+      document.getElementById('exitModal').style.display = "block";
+    }, 3000);
     setTimeout(function () {
       document.getElementById('loaing-logout').submit();
-    }, 3000);
+    }, 4000);
   } else {
     loadingDiv.style.display = "none";
   }
@@ -809,7 +815,11 @@ function chengGameFn(e) {
   id = e.target.id.split('Btn')[1];
   e.target.src = e.target.src.replace('btn', 'btnchk');
   game_name_num = Number(id) - 1;
-  document.getElementById("game".concat(id)).style.display = "block";
+  if (id == 1 || id == 3) {
+    document.getElementById("game".concat(id)).style.display = "block";
+  } else {
+    document.getElementById("game".concat(id)).style.display = "flex";
+  }
 }
 function initGameFn() {
   for (var i = 1; i <= 5; i++) {
@@ -2047,23 +2057,6 @@ doubleBtn.addEventListener('click', function () {
   totalBetNmuber.innerHTML = totalBetNumberCalc;
   bethtmlArr = [].concat(_toConsumableArray(bethtmlArr), _toConsumableArray(bethtmlArr));
   listAllHtml += listAllHtml;
-  console.log(bethtmlArr);
-  // listAllHtml = "";
-  // for(let j=0;j<bethtmlArr.length;j++){
-  //     bethtmlArr[j][3] = Number(bethtmlArr[j][3])*2;
-  //     listAllHtml += `<div class="item">
-  //                 <i class="fas fa-times deleteBet"></i>
-  //                 <input type="hidden" value="${j}">
-  //                 <span>下注項目:</span><br>
-  //                 ${bethtmlArr[j][0]}<br>
-  //                 <span>下注內容:</span><br>
-  //                 ${bethtmlArr[j][1]}<br>
-  //                 <span>賠率:</span>
-  //                 ${bethtmlArr[j][2]}<br>
-  //                 <span>投注金額:</span>
-  //                 ${bethtmlArr[j][3]}<br>
-  //             </div>`;
-  // }
   listAll.innerHTML = listAllHtml;
   if (document.getElementsByClassName('deleteBet').length > 0) {
     for (var b = 0; b < document.getElementsByClassName('deleteBet').length; b++) {
@@ -2196,5 +2189,11 @@ function initBsRankFn() {
     rankingImgBs[_i22].src = "/images/airplane/no".concat(_i22 + 1, ".png");
   }
 }
+openRecordModalBtn.addEventListener('click', function (e) {
+  recordModal.style.display = "flex";
+});
+closeRecordModalBtn.addEventListener('click', function (e) {
+  recordModal.style.display = "none";
+});
 /******/ })()
 ;

@@ -27,7 +27,7 @@ class Airplane extends Component
     protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
     public function mount(){
         $user = User::where('id', Auth::id())->first();
-        $user->status = 1;
+        // $user->status = 1;
         $user->save();
         $nowDate = date('Y-m-d H:i');
         Log::info(date('Y-m-d H:i'));
@@ -231,8 +231,22 @@ class Airplane extends Component
         $bet_sum = Betlist::where('user_id', Auth::id())->sum('money');
 
         $this->statu = GameStatu::where('gamenumber', 23)->first()->statu;
+        if($this->myDoller >= 200000){
+            $level = 6;
+        }elseif($this->myDoller >= 100000){
+            $level = 5;
+        }elseif($this->myDoller >= 10000){
+            $level = 4;
+        }elseif($this->myDoller >= 1000){
+            $level = 3;
+        }elseif($this->myDoller >= 100){
+            $level = 2;
+        }else{
+            $level = 1;
+        }
+        
 
-        return view('livewire.airplane', ['myDoller'=>$this->myDoller, 'answer'=>$answer, 'isLoad'=>$this->isLoad, 'betlist'=>$betlist, 'bet_count'=>$bet_count, 'bet_sum'=>$bet_sum])->layout('livewire/layouts/game');
+        return view('livewire.airplane', ['myDoller'=>$this->myDoller, 'answer'=>$answer, 'isLoad'=>$this->isLoad, 'betlist'=>$betlist, 'bet_count'=>$bet_count, 'bet_sum'=>$bet_sum, 'level'=>$level])->layout('livewire/layouts/game');
         
     }
 }
