@@ -1,5 +1,5 @@
 <div id="airplane" wire:ignore>
-  <!-- <div id="loading" wire:loading><p>DYM Loading...</p></div> -->
+ <div id="loading"><img src="/images/logo.png" width="250"></div>
   <div class="header" >
       <div class="left">
         <div class="userBox">

@@ -24,19 +24,25 @@ class Airplane extends Component
     public $bsodds;
     public $statu;
     public $chips = 0;
-    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu'];
+    public $is_beted_guess;
+    protected $listeners  = ['sendTime'=>'sendTime', 'noneLoad'=>'noneLoad', 'chkBet'=>'chkBet', 'calcMoney'=>'calcMoney', 'updateMyMoney'=>'updateMyMoney', 'riskCalcMoney'=>'riskCalcMoney', 'isRiskFn'=>'isRiskFn', 'updateTrend'=>'updateTrend', 'watchStatu'=>'watchStatu', 'isBeted'=>'isBeted'];
     public function mount(){
         $user = User::where('id', Auth::id())->first();
-        // $user->status = 1;
         $user->save();
         $nowDate = date('Y-m-d H:i');
-        Log::info(date('Y-m-d H:i'));
         $answer = ModelsAnswer::where('bet_time', $nowDate)->count();
         if($answer < 1){
             $this->store();
         }
     }
-
+    public function isBeted(){
+        $rb = RiskBet::where([['created_at', '>=', date('Y-m-d H:i:00')], ['created_at', '<=', date('Y-m-d H:i:59')], ['user_id', Auth::id()]])->get();
+        if($rb->count() > 0){
+            $game_info = GameInfos::where('gamenumber', '23')->first();
+            $this->is_beted_guess = json_decode(json_encode($rb[0]->guess));
+            $this->dispatchBrowserEvent('isbetedFn', ['is_bet'=>true, 'is_beted_guess'=> json_decode(json_encode($rb[0]->guess)), 'totalmoney'=>$rb[0]->money, 'odds'=>$game_info->odds, 'bs_odds'=>$game_info->bs_odds]);
+        }
+    }
     public function sendTime(){
         $beforeTime = date('Y-m-d H:i', strtotime("-4 minute"));
         $nowTime = date('Y-m-d H:i');
@@ -95,9 +101,6 @@ class Airplane extends Component
         $riskbet->max_airplane = $max_airplane;
         $riskbet->user_id = Auth::id();
         $riskbet->save();
-        // if($gameinfo->mode == '1'){
-        //     $this->riskControl($answer->number);
-        // }
     }
     public function riskControl($bet_number){
         $risk_max = RiskBet::where('bet_number', $bet_number)->orderBy('max_bet', 'DESC')->first();
@@ -133,14 +136,13 @@ class Airplane extends Component
             
         }
         $newranking = implode(",",$newRank);
-        Log::info($newranking);
+        // Log::info($newranking);
         $answer = Answer::where('number', $bet_number)->first();
         $answer->ranking = $newranking;
         $answer->save();
     }
 
     public function updateMyMoney(){
-       
         $this->myDoller = Auth::user()->money;
         // $this->myDoller->save();
         $m = $this->myDoller;
@@ -244,6 +246,7 @@ class Airplane extends Component
         }else{
             $level = 1;
         }
+        
         
 
         return view('livewire.airplane', ['myDoller'=>$this->myDoller, 'answer'=>$answer, 'isLoad'=>$this->isLoad, 'betlist'=>$betlist, 'bet_count'=>$bet_count, 'bet_sum'=>$bet_sum, 'level'=>$level])->layout('livewire/layouts/game');

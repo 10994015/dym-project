@@ -54,6 +54,7 @@ const myDoller = document.getElementById('myDoller');
 const rankingImg = document.getElementsByClassName('rankingImg');
 let chkBetBool = true;
 let isBetTime = true;
+let isBeted = false;
 let guessAirArray = {
     no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
     no2:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
@@ -122,16 +123,11 @@ const initSecondsArr = ()=>{
 }
 window.addEventListener('sendAnswer', e=>{
     answer = e.detail.answer;
-    // console.log(answer);
     nowAnswer = answer[4].ranking.split(',');
-    // console.log(e.detail.riskAnswer[0].ranking);
     
     riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
-    // console.log(riskAnswerArr);
-    // console.log(e.detail.riskAnswer[0].number);
     cycleNumber.innerHTML = `期號: ${e.detail.riskAnswer[0].number}`;
     betListIssue.innerHTML = `期號: ${e.detail.riskAnswer[0].number}`;
-    // console.log("now:", nowAnswer);
     initSecondsArr();
     secondsArr.forEach((item, key)=>{
         item[1] = nowAnswer[key];
@@ -145,7 +141,6 @@ function sortFn(){
     secondsArr.sort((a, b)=>{
         return a[1] - b[1];
     })
-    // console.log(secondsArr);
 }
 let fiveHtml = '';
 
@@ -231,8 +226,8 @@ window.addEventListener('startRun', e=>{
     }
     
 })
-
 window.Livewire.emit('updateTrend');
+
 function timeRun(){
     countdownNumber = 60 - new Date().getSeconds();
     
@@ -308,6 +303,7 @@ function timeRun(){
         }
         isBetTime = true;
         chkBetBool = true;
+        isBeted = false;
         chkBtn.src = '/images/airplane/chk.png';
         reBtn.src = '/images/airplane/re.png';
         doubleBtn.src = '/images/airplane/double.png';
@@ -355,7 +351,7 @@ function timeRun(){
             air[a].style.animation = 'none';
         }
     }
-    if(new Date().getSeconds() == 57){
+    if(new Date().getSeconds() == 58){
         if(!chkBetBool){
             window.Livewire.emit('isRiskFn');
         }
@@ -365,7 +361,6 @@ function timeRun(){
 }
 window.addEventListener('updateTrendFn', e=>{
     let trendhtml = '';
-    // console.log(e.detail.answer);
     for(let i=0;i<e.detail.answer.length;i++){
         let rank = e.detail.answer[i].ranking.split(',');
         trendhtml += `<div class="item"><div class="number">${e.detail.answer[i].number}</div><div class="imgList">`
@@ -411,8 +406,6 @@ function fiveNumberFn(){
                 </div>
               </div>
         `
-        // console.log(item.ranking.split(','));
-        
     })
     fiveNumber.innerHTML = fiveHtml;
 }
@@ -480,7 +473,6 @@ const logoutFn = ()=>{
         }
     })
 };
-// document.getElementById('logout').addEventListener('click',logoutFn);
 bar.addEventListener('mousedown', ()=>{
     bar.style.transform = 'scale(.9)';
 })
@@ -578,7 +570,6 @@ function guessFn(e){
         sd.style.display = "none";
     },200)
     guessAirArray[`no${chooseRank}`][`air${e.target.alt}`]['money'] += Number(beyMoney.value);
-    console.log(guessAirArray);
     totalBetNmuber.innerHTML = totalBetNumberCalc;
     totalBetMoney.innerHTML = totalBet;
     bethtmlArr.push([])
@@ -649,6 +640,14 @@ function removeBetArr(e){
 }
 chkBtn.addEventListener('click',chkBtnFn);
 function chkBtnFn(){
+    if(isBeted){
+        Swal.fire(
+            '警告',
+            '請勿重複下注！',
+            'error'
+        );
+        return;
+    }
     if(!isBetTime){
         Swal.fire(
             '警告',
@@ -698,10 +697,8 @@ function calcBetFn(){
     let odds = setOdds;
     let bsOdds = setBsOdds;
     for(let i=1;i<=10;i++){
-        // console.log(guessAirArray[`no${i}`]);
         for(let j=1;j<=14;j++){
             if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
-                // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
                 if(j <=10){
                     if(j == nowAnswer[i-1]){
                         winMoney = winMoney + (guessAirArray[`no${i}`][`air${j}`]['money']*odds);
@@ -732,7 +729,6 @@ function calcBetFn(){
             }
         }
     }
-    console.log(winMoney);
     window.Livewire.emit('calcMoney', winMoney);
 
     guessAirArray = {
@@ -757,7 +753,6 @@ function riskCalcBetFn(totalBet){
     let riskodds = setOdds;
     let riskBsOdds = setBsOdds;
     for(let i=1;i<=10;i++){
-        // console.log(guessAirArray[`no${i}`]);
         for(let j=1;j<=14;j++){
             if(guessAirArray[`no${i}`][`air${j}`]['money'] > 0){
                 if(guessAirArray[`no${i}`][`air${j}`]['money'] > max_bet){
@@ -795,18 +790,20 @@ function riskCalcBetFn(totalBet){
             }
         }
     }
-    
-    
-    
     window.Livewire.emit('riskCalcMoney', riskWinMoney, totalBet, guessAirArray, max_bet, max_rank, max_airplane );
-
-    
 }
 window.addEventListener('updateMyMoneyHtml', e=>{
     myDoller.innerHTML = e.detail.money;
     winMessage.innerHTML = `恭喜您贏得了${Math.round(e.detail.win)}元`
 });
 reBtn.addEventListener('click',()=>{
+    if(isBeted){
+        Swal.fire(
+            '警告',
+            '您已下注！請等待下次下注',
+            'error'
+        );
+    }
     if(chkBetBool){
         guessAirArray = {
             no1:{ air1:{money:0},air2:{money:0},air3:{money:0},air4:{money:0},air5:{money:0},air6:{money:0},air7:{money:0},air8:{money:0},air9:{money:0},air10:{money:0},air11:{money:0},air12:{money:0},air13:{money:0},air14:{money:0}},
@@ -843,6 +840,14 @@ reBtn.addEventListener('click',()=>{
 
 })
 doubleBtn.addEventListener('click',()=>{
+    if(isBeted){
+        Swal.fire(
+            '警告',
+            '您已下注！請等待下次下注',
+            'error'
+        );
+        return;
+    }
     if(!isBetTime){
         Swal.fire(
             '警告',
@@ -1036,3 +1041,66 @@ openRecordModalBtn.addEventListener('click', e=>{
 closeRecordModalBtn.addEventListener('click' , e=>{
     recordModal.style.display = "none";
 })
+
+window.Livewire.emit('isBeted');
+
+window.addEventListener('isbetedFn', e=>{
+    if(e.detail.is_bet){
+        isBeted = true;
+        chkBetBool = false;
+        chkBtn.src = '/images/airplane/chkdisable.png';
+        reBtn.src = '/images/airplane/redisable.png';
+        doubleBtn.src = '/images/airplane/doubledisable.png';
+        console.log("guess=>", JSON.parse(e.detail.is_beted_guess));
+        guessAirArray = JSON.parse(e.detail.is_beted_guess);
+        let rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+        let airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10','大','小','單','雙'];
+        let idx = 0;
+        let g_type = '';
+        let g_type_name = '';
+        let g_odd = '';
+        for(let i=1;i<=10;i++){
+            for(let j=1;j<=14;j++){
+                if(Number(guessAirArray[`no${i}`][`air${j}`]['money']) > 0){
+                    let g_money = Number(guessAirArray[`no${i}`][`air${j}`]['money'])
+                    if(j <= 10){
+                        g_type = 0;
+                        g_type_name = '定位膽'
+                        g_odd = e.detail.odds;
+                    }else if(j <= 14){
+                        g_type = 2;
+                        g_type_name = '大小單雙'
+                        g_odd = e.detail.bs_odds;;
+                    }
+                    listAllHtml += `<div class="item">
+                        <input type="hidden" value="${g_type_name}" class='gametype'>
+                        <input type='hidden' value='${rankGuessArr[j]} - ${airGuessArr[j]}' class='isrank'>
+                        <input type='hidden' value='${g_money}' class='money'>
+                        <input type='hidden' value='${rankGuessArr[j]} - ${airGuessArr[j]}' class='bet'>
+                        <input type='hidden' value='${idx}' class='idx'>
+                        <span>下注項目:</span><br>
+                        ${g_type_name}<br>
+                        <span>下注內容:</span><br>
+                        ${rankGuessArr[j]} - ${airGuessArr[j]}<br>
+                        <span>賠率:</span>
+                        ${g_odd}<br>
+                        <span>投注金額:</span>
+                        ${g_money}<br>
+                        </div>`
+                    idx ++;
+                }
+            }
+        }
+        listAll.innerHTML = listAllHtml;
+        
+    }else{
+        isBeted = false;
+    }
+})
+
+
+window.onload = ()=>{
+    setTimeout(()=>{
+        document.getElementById('loading').style.display = "none";
+    }, 1000)
+}

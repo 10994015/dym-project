@@ -54,6 +54,7 @@ var myDoller = document.getElementById('myDoller');
 var rankingImg = document.getElementsByClassName('rankingImg');
 var chkBetBool = true;
 var isBetTime = true;
+var isBeted = false;
 var guessAirArray = {
   no1: {
     air1: {
@@ -540,16 +541,10 @@ var initSecondsArr = function initSecondsArr() {
 };
 window.addEventListener('sendAnswer', function (e) {
   answer = e.detail.answer;
-  // console.log(answer);
   nowAnswer = answer[4].ranking.split(',');
-  // console.log(e.detail.riskAnswer[0].ranking);
-
   riskAnswerArr = e.detail.riskAnswer[0].ranking.split(',');
-  // console.log(riskAnswerArr);
-  // console.log(e.detail.riskAnswer[0].number);
   cycleNumber.innerHTML = "\u671F\u865F: ".concat(e.detail.riskAnswer[0].number);
   betListIssue.innerHTML = "\u671F\u865F: ".concat(e.detail.riskAnswer[0].number);
-  // console.log("now:", nowAnswer);
   initSecondsArr();
   secondsArr.forEach(function (item, key) {
     item[1] = nowAnswer[key];
@@ -562,9 +557,7 @@ function sortFn() {
   secondsArr.sort(function (a, b) {
     return a[1] - b[1];
   });
-  // console.log(secondsArr);
 }
-
 var fiveHtml = '';
 window.addEventListener('startRun', function (e) {
   answer = e.detail.answer;
@@ -721,6 +714,7 @@ function timeRun() {
     }
     isBetTime = true;
     chkBetBool = true;
+    isBeted = false;
     chkBtn.src = '/images/airplane/chk.png';
     reBtn.src = '/images/airplane/re.png';
     doubleBtn.src = '/images/airplane/double.png';
@@ -767,7 +761,7 @@ function timeRun() {
       air[a].style.animation = 'none';
     }
   }
-  if (new Date().getSeconds() == 57) {
+  if (new Date().getSeconds() == 58) {
     if (!chkBetBool) {
       window.Livewire.emit('isRiskFn');
     }
@@ -775,7 +769,6 @@ function timeRun() {
 }
 window.addEventListener('updateTrendFn', function (e) {
   var trendhtml = '';
-  // console.log(e.detail.answer);
   for (var i = 0; i < e.detail.answer.length; i++) {
     var _rank = e.detail.answer[i].ranking.split(',');
     trendhtml += "<div class=\"item\"><div class=\"number\">".concat(e.detail.answer[i].number, "</div><div class=\"imgList\">");
@@ -804,9 +797,7 @@ function fiveNumberFn() {
   fiveNumber.innerHTML = "";
   answer.forEach(function (item) {
     fiveHtml += "\n            <div class=\"item\">\n                <p class=\"num\">".concat(item.number, "</p>\n                <div class=\"rankBox\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[0], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[1], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[2], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[3], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[4], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[5], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[6], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[7], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[8], ".png\" class=\"number\">\n                    <img src=\"/images/airplane/num").concat(item.ranking.split(',')[9], ".png\" class=\"number\">\n                </div>\n              </div>\n        ");
-    // console.log(item.ranking.split(','));
   });
-
   fiveNumber.innerHTML = fiveHtml;
 }
 function chengGameFn(e) {
@@ -865,7 +856,6 @@ var logoutFn = function logoutFn() {
     }
   });
 };
-// document.getElementById('logout').addEventListener('click',logoutFn);
 bar.addEventListener('mousedown', function () {
   bar.style.transform = 'scale(.9)';
 });
@@ -949,7 +939,6 @@ function guessFn(e) {
     sd.style.display = "none";
   }, 200);
   guessAirArray["no".concat(chooseRank)]["air".concat(e.target.alt)]['money'] += Number(beyMoney.value);
-  console.log(guessAirArray);
   totalBetNmuber.innerHTML = totalBetNumberCalc;
   totalBetMoney.innerHTML = totalBet;
   bethtmlArr.push([]);
@@ -1014,6 +1003,10 @@ function removeBetArr(e) {
 }
 chkBtn.addEventListener('click', chkBtnFn);
 function chkBtnFn() {
+  if (isBeted) {
+    Swal.fire('警告', '請勿重複下注！', 'error');
+    return;
+  }
   if (!isBetTime) {
     Swal.fire('警告', '現在非下注時間', 'error');
     return;
@@ -1045,10 +1038,8 @@ function calcBetFn() {
   var odds = setOdds;
   var bsOdds = setBsOdds;
   for (var _i13 = 1; _i13 <= 10; _i13++) {
-    // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 14; j++) {
       if (guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] > 0) {
-        // console.log(guessAirArray[`no${i}`][`air${nowAnswer[i-1]}`]);
         if (j <= 10) {
           if (j == nowAnswer[_i13 - 1]) {
             winMoney = winMoney + guessAirArray["no".concat(_i13)]["air".concat(j)]['money'] * odds;
@@ -1078,7 +1069,6 @@ function calcBetFn() {
       }
     }
   }
-  console.log(winMoney);
   window.Livewire.emit('calcMoney', winMoney);
   guessAirArray = {
     no1: {
@@ -1532,7 +1522,6 @@ function riskCalcBetFn(totalBet) {
   var riskodds = setOdds;
   var riskBsOdds = setBsOdds;
   for (var _i14 = 1; _i14 <= 10; _i14++) {
-    // console.log(guessAirArray[`no${i}`]);
     for (var j = 1; j <= 14; j++) {
       if (guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] > 0) {
         if (guessAirArray["no".concat(_i14)]["air".concat(j)]['money'] > max_bet) {
@@ -1576,6 +1565,9 @@ window.addEventListener('updateMyMoneyHtml', function (e) {
   winMessage.innerHTML = "\u606D\u559C\u60A8\u8D0F\u5F97\u4E86".concat(Math.round(e.detail.win), "\u5143");
 });
 reBtn.addEventListener('click', function () {
+  if (isBeted) {
+    Swal.fire('警告', '您已下注！請等待下次下注', 'error');
+  }
   if (chkBetBool) {
     guessAirArray = {
       no1: {
@@ -2033,6 +2025,10 @@ reBtn.addEventListener('click', function () {
   }
 });
 doubleBtn.addEventListener('click', function () {
+  if (isBeted) {
+    Swal.fire('警告', '您已下注！請等待下次下注', 'error');
+    return;
+  }
   if (!isBetTime) {
     Swal.fire('警告', '現在非下注時間', 'error');
     return;
@@ -2195,5 +2191,50 @@ openRecordModalBtn.addEventListener('click', function (e) {
 closeRecordModalBtn.addEventListener('click', function (e) {
   recordModal.style.display = "none";
 });
+window.Livewire.emit('isBeted');
+window.addEventListener('isbetedFn', function (e) {
+  if (e.detail.is_bet) {
+    isBeted = true;
+    chkBetBool = false;
+    chkBtn.src = '/images/airplane/chkdisable.png';
+    reBtn.src = '/images/airplane/redisable.png';
+    doubleBtn.src = '/images/airplane/doubledisable.png';
+    console.log("guess=>", JSON.parse(e.detail.is_beted_guess));
+    guessAirArray = JSON.parse(e.detail.is_beted_guess);
+    var rankGuessArr = ['無', '冠軍', '亞軍', '季軍', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+    var airGuessArr = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '大', '小', '單', '雙'];
+    var idx = 0;
+    var g_type = '';
+    var g_type_name = '';
+    var g_odd = '';
+    for (var _i23 = 1; _i23 <= 10; _i23++) {
+      for (var j = 1; j <= 14; j++) {
+        if (Number(guessAirArray["no".concat(_i23)]["air".concat(j)]['money']) > 0) {
+          var g_money = Number(guessAirArray["no".concat(_i23)]["air".concat(j)]['money']);
+          if (j <= 10) {
+            g_type = 0;
+            g_type_name = '定位膽';
+            g_odd = e.detail.odds;
+          } else if (j <= 14) {
+            g_type = 2;
+            g_type_name = '大小單雙';
+            g_odd = e.detail.bs_odds;
+            ;
+          }
+          listAllHtml += "<div class=\"item\">\n                        <input type=\"hidden\" value=\"".concat(g_type_name, "\" class='gametype'>\n                        <input type='hidden' value='").concat(rankGuessArr[j], " - ").concat(airGuessArr[j], "' class='isrank'>\n                        <input type='hidden' value='").concat(g_money, "' class='money'>\n                        <input type='hidden' value='").concat(rankGuessArr[j], " - ").concat(airGuessArr[j], "' class='bet'>\n                        <input type='hidden' value='").concat(idx, "' class='idx'>\n                        <span>\u4E0B\u6CE8\u9805\u76EE:</span><br>\n                        ").concat(g_type_name, "<br>\n                        <span>\u4E0B\u6CE8\u5167\u5BB9:</span><br>\n                        ").concat(rankGuessArr[j], " - ").concat(airGuessArr[j], "<br>\n                        <span>\u8CE0\u7387:</span>\n                        ").concat(g_odd, "<br>\n                        <span>\u6295\u6CE8\u91D1\u984D:</span>\n                        ").concat(g_money, "<br>\n                        </div>");
+          idx++;
+        }
+      }
+    }
+    listAll.innerHTML = listAllHtml;
+  } else {
+    isBeted = false;
+  }
+});
+window.onload = function () {
+  setTimeout(function () {
+    document.getElementById('loading').style.display = "none";
+  }, 1000);
+};
 /******/ })()
 ;
