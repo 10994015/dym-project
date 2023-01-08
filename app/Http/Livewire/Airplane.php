@@ -10,6 +10,7 @@ use App\Models\RiskBet;
 use App\Models\Answer as ModelsAnswer;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 class Airplane extends Component
@@ -32,8 +33,10 @@ class Airplane extends Component
         $nowDate = date('Y-m-d H:i');
         $answer = ModelsAnswer::where('bet_time', $nowDate)->count();
         if($answer < 1){
+            $this->removeBeforeAnswer();
             $this->store();
         }
+       
     }
     public function isBeted(){
         $rb = RiskBet::where([['created_at', '>=', date('Y-m-d H:i:00')], ['created_at', '<=', date('Y-m-d H:i:59')], ['user_id', Auth::id()]])->get();
@@ -172,7 +175,7 @@ class Airplane extends Component
         $month = date('m');
         $nowTime = date("H");
         $twoHour = date("H", strtotime("+2 hour"));
-
+        
         $date_number = $year."-".$month."-".$date."-".$nowTime."-".$twoHour;
         // Log::info($date_number);
         $minute = 0;
@@ -211,6 +214,11 @@ class Airplane extends Component
             $answer->bet_time = $bet_time;
             $answer->save();
         }
+    }
+    public function removeBeforeAnswer(){
+
+        $before = date("Y-m-d", strtotime("-2 day"));
+        Answer::where('created_at', '<=', $before)->delete();
     }
     public function render()
     {
